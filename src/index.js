@@ -1,14 +1,19 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
+import React , { StrictMode } from 'react';
+import {createRoot} from 'react-dom/client';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import './assets/scss/style.scss'
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+// 👇️ IMPORTANT: use correct ID of your root element
+// this is the ID of the div in your index.html file
+const rootElement = document.getElementById('root');
+const root = createRoot(rootElement);
+
+// 👇️ if you use TypeScript, add non-null (!) assertion operator
+// const root = createRoot(rootElement!);
+
 root.render(
-  <React.StrictMode>
     <App />
-  </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

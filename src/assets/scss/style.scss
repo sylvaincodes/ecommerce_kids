@@ -1,1 +1,11 @@
+// Bootstrap scss
 @import '../../../node_modules/bootstrap/scss/bootstrap.scss';
+@import '../../../node_modules/bootstrap/scss/mixins/grid';
+
+// Load icons
+@import '../icons/icons.min.css';
+
+// Customs scss
+@import '../scss/variables';
+@import '../scss/reset';
+@import '../scss/header';
