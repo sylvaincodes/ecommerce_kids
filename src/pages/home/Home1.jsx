@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react'
 import { Helmet } from "react-helmet";
 import Layout from '../../layouts/Layout';
+import HeroSlider from '../../wrappers/hero-slider/HeroSlider';
 
 const Home1 = () => {
   return (
@@ -12,7 +13,7 @@ const Home1 = () => {
       </Helmet>
 
       <Layout>
-          
+          <HeroSlider/>
       </Layout>
 
     </Fragment>

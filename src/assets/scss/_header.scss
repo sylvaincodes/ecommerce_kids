@@ -45,4 +45,208 @@
             }
         }
     }
+
+    .sticky-bar{
+        // padding: 20px 0;
+
+        .row{
+                align-items: center;
+                .same-style
+                {
+                    margin-right: 18px;
+                    button
+                    {
+                        background: none;
+                        border:none;
+                    }
+                    a{
+                        position: relative;
+                    }
+                    .count-style
+                    {
+                    position: absolute;
+                    background: black;
+                    border-radius: 100%;
+                    color: white;
+                    width: 21px;
+                    text-align: center;
+                    top: -20px;
+                    right: -13px;
+                    }
+                    i{
+                        font-size: 24px;
+                        color: #000;
+                    }
+                }
+
+                .col-8{
+                    .wrapper{
+                        display: flex;
+                        align-items: center;
+                        justify-content: flex-end;
+                        position: relative;
+                        .search-content{
+                            position: absolute;
+                            padding: 20px 25px;
+                            background: white;
+                            box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.1);
+                            top: 50px;
+                            right: 0;
+                            width: 500px;
+                            transition: all 0.5s ease 0s;
+                            transform: rotateX(90deg);
+                            transform-origin: top;
+                            &.active{
+                                transform: rotateX(0deg);
+                            }
+                            form{
+                                display: flex;
+                                flex-direction: row;
+                                position: relative;
+                                input{
+                                    background: transparent;
+                                    border: 1px solid #d3d3d3;
+                                    padding: 0 90px 0 20px;
+                                }
+                                .search-button{
+                                    position: absolute;
+                                    top: 0;
+                                    right: 0;
+                                    background: $theme-color;
+                                    width: 70px;
+                                    height: 100%;
+                                    i{
+                                        color: $bg-white;
+                                    }
+                                    &:hover{
+                                        background: $bg-black;
+                                        color: $bg-white;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .main-menu{
+                    ul{
+                        display: flex;
+                        gap: 20px;
+                        justify-content: flex-end;
+                        li{
+                            display: flex;
+                            gap: 10px;
+                            align-items: center;
+                            a{
+                                font-size: 16px;
+                                font-weight: 100;   
+                                i{
+                                    margin-left: 10px;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .header-account{
+                    position: relative;
+                    .account-content{
+                    position: absolute;
+                    background-color: $bg-white;
+                    box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.1);
+                    padding: 15px;
+                    top: 50px;
+                    left: -93px;
+                    width: 120px;
+                    transform: rotateX(90deg);
+                    transition: all 0.5s ease;
+                    transform-origin: top;
+                    &.active{
+                        transform: rotateX(0);
+                    }
+                    ul{
+                        display: flex;
+                        flex-direction: column;
+                        gap: 10px;
+                        a{
+                            font-size: 12px;
+                        }
+                    }
+                }
+            }
+
+            .header-cart{
+                position: relative;
+                &.active{
+
+                }
+                .cart-content{
+                    position: absolute;
+                    background: #ffffff;
+                    box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.1);
+                    color: #000000;
+                    padding: 15px;
+                    top: 50px;
+                    right: 0;
+                    width: 350px;
+                    transform: rotateX(90deg);
+                    transition: all 0.5s ease 0s;
+                    transform-origin: top;
+
+                    &.active{
+                        transform: rotateX(0deg);
+                    }
+                    .cart-list{
+                        overflow: auto;
+                        max-height: 300px;
+                        width: 100%;
+                        display: flex;
+                        flex-direction: column;
+                        padding-right: 10px;
+                        .cart-item{
+                            display: flex;
+                            flex-direction: row;
+                            justify-content: space-between;
+                            border-bottom: 1px solid #ddd8d8;
+                            padding: 15px 0;
+                            img{
+                                width: 100px;
+                            }
+                            .cart-item-desc li{
+                                text-transform: capitalize;
+                            }
+                            .cart-delete-btn button{
+                                background: $theme-color;
+                                i{
+                                    font-size: 15px;
+                                    color: $bg-white;
+                                }
+                            }
+                        }
+                    }
+                    .cart-total{
+                        margin-block: 15px;
+                        ul{
+                            display: flex;
+                            justify-content: space-between;
+                            li{
+                                text-transform: capitalize;
+                            }
+                        }
+                    }
+                    .cart-buttons{
+                        margin-block: 15px;
+                            a{
+                                border-radius: 0;
+                                text-transform: uppercase;
+                                font-size: 12px;
+                            }
+                        
+                    }
+                }
+            }
+        }
+
+    }
 }
+

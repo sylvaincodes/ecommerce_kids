@@ -25,7 +25,8 @@ $bg-purple: #f0e0ff;
 $heading-color: #000000;
 
 // Theme Color
-$theme-color: #a749ff;
+$theme-color: #1849a1;
+// $theme-color: #a749ff;
 
 // Responsive Variables
 $xx-layout: "only screen and (min-width: 1366px) and (max-width: 1600px)";
@@ -41,11 +42,10 @@ $sm-min-breakpoint : "575px";
 $md-min-breakpoint : "768px";
 $lg-min-breakpoint : "992px";
 $xl-min-breakpoint : "1200px";
-$xl-min-breakpoint : "1366px";
+
 
 $xs-max-breakpoint : "574px";
 $sm-max-breakpoint : "767px";
 $md-max-breakpoint : "991px";
 $lg-max-breakpoint : "1199px";
 $xl-max-breakpoint : "1365px";
-$xl-max-breakpoint : "1600px";

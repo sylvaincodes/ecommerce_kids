@@ -1,6 +1,5 @@
 // Bootstrap scss
 @import '../../../node_modules/bootstrap/scss/bootstrap.scss';
-@import '../../../node_modules/bootstrap/scss/mixins/grid';
 
 // Load icons
 @import '../icons/icons.min.css';
@@ -9,3 +8,4 @@
 @import '../scss/variables';
 @import '../scss/reset';
 @import '../scss/header';
+@import '../scss/helper';
