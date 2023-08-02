@@ -1,5 +1,10 @@
 // Bootstrap scss
 @import '../../../node_modules/bootstrap/scss/bootstrap.scss';
+@import '../../../node_modules/bootstrap/scss/helpers/';
+
+
+//Autres css
+@import '../../../node_modules/animate.css/animate.min.css';
 
 // Load icons
 @import '../icons/icons.min.css';
@@ -9,3 +14,5 @@
 @import '../scss/reset';
 @import '../scss/header';
 @import '../scss/helper';
+@import '../scss/hero';
+@import '../scss/banner';

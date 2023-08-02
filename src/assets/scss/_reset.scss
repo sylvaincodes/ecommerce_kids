@@ -1355,9 +1355,7 @@ input {
 
 select {
   font-size: 14px;
-
   width: 100%;
-
   color: #333;
   border: 0 solid #eceff8;
   background: transparent;
@@ -1366,7 +1364,6 @@ select {
 
 option {
   font-size: 14px;
-
   padding-left: 10px;
 
   border: 0 solid #626262;
@@ -1796,6 +1793,23 @@ a.default-btn {
   }
 }
 
+.fadeInUp {
+  animation: fadeInUp 1s ease-in;
+}
+
+@keyframes fadeInUp {
+  from {
+      opacity: 0;
+      transform: translate3d(0,40px,0);
+  }
+
+  to {
+      transform: translate3d(0,0,0);
+      opacity: 1;   
+  }
+}
+
+
 @keyframes bounce-img {
   0% {
     transform: translateY(0);
@@ -1935,6 +1949,11 @@ a.default-btn {
 
 // Display
 
-.d-lg-block{
-  
+.icon{
+    background: $theme-color none repeat scroll 0 0;
+    border-radius: 50%;
+    height: 7px;
+    top: 13px;
+    transition: all .3s ease-in-out 0s;
+    width: 7px;
 }

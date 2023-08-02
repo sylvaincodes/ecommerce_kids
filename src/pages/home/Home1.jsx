@@ -2,6 +2,7 @@ import React, { Fragment } from 'react'
 import { Helmet } from "react-helmet";
 import Layout from '../../layouts/Layout';
 import HeroSlider from '../../wrappers/hero-slider/HeroSlider';
+import Banner from '../../wrappers/banner/Banner';
 
 const Home1 = () => {
   return (
@@ -14,6 +15,7 @@ const Home1 = () => {
 
       <Layout>
           <HeroSlider/>
+          <Banner/>
       </Layout>
 
     </Fragment>
