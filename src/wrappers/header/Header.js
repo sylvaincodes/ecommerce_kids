@@ -74,7 +74,7 @@ const Header = () => {
                                         <ul className='sub-menu-list row'>
                                             <li className='sub-menu-item'>
                                                 <Link className='fw-light'>
-                                                    <div className='icon'></div>
+                                                    <div className='icon d-none'></div>
                                                     <span>
                                                     jeux vidéos & consoles
                                                     </span>
@@ -101,7 +101,7 @@ const Header = () => {
                                             </li>
                                             <li className='sub-menu-item'>
                                                 <Link className='fw-light'>
-                                                <div className='icon'></div>
+                                                <div className='icon d-none'></div>
                                                      <span>
                                                      Musique
                                                      </span>
@@ -159,7 +159,7 @@ const Header = () => {
                                                 </li>
                                                 <li className='sub-menu-item'>
                                                     <Link>
-                                                        dernières nouveautés 
+                                                        nouvelles arrivages
                                                     </Link>
                                                     <div className='sub-content'>
                                                         <ul>
@@ -192,7 +192,7 @@ const Header = () => {
                                 <div className='search-content'>
                                     <form className='row'>
                                         <input ref={focusSearchInput} className='search' type='text'></input>
-                                        <button class="search-button" title='Rechecher'>
+                                        <button className="search-button" title='Rechecher'>
                                             <i className='pe-7s-search'></i>
                                         </button>
                                     </form>

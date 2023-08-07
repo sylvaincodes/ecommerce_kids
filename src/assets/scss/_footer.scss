@@ -1,0 +1,46 @@
+.footer-area{
+    position: relative;
+    padding-block: 50px;
+    .wrapper{
+        @media  only screen and (min-width : $xs-min-breakpoint)  and ( max-width : $xs-max-breakpoint) {
+            display: grid;
+            grid-template-rows: auto;
+            gap: 30px;
+        }
+        @media  only screen and (min-width : $sm-min-breakpoint)  and ( max-width : $md-max-breakpoint) {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 40px;
+        }
+        @media  only screen and (min-width : $md-min-breakpoint)  {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            text-align: center;
+        }
+        .logo{
+            display: flex;
+            flex-direction: column;
+        }
+
+        .footer-widget{
+            .title{
+                font-size: 20px;
+                text-transform: capitalize;
+            }
+
+            .footer-content{
+                ul{
+                    display: grid;
+                    grid-template-rows: auto;
+                    gap: 10px;
+                    a{
+                        text-transform: capitalize;
+                    }
+                }
+            }
+        }
+
+    }
+}

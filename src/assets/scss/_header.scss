@@ -178,9 +178,11 @@
                                             position: relative;
                                             padding-left: inherit;
                                             width: auto;
-                                            &:hover i{
-                                                font-weight: 900;
-                                                font-size: 20px;
+                                            padding: 12px;
+                                            &:hover .icon{
+                                                display: block !important;
+                                                transform: display;
+                                                transition: all 0.4s ease;
                                             }
                                             a{
                                                 display: flex;
@@ -236,27 +238,27 @@
                         }
                     }
           
-                    .sub-menu-item{
-                        transition: all 0.5s ease;
-                        transform: translateX(0);
-                        &:hover{
-                            transition: all 0.5s ease;
-                            transform: translateX(20px);
-                        }
+                    // .sub-menu-item{
+                    //     transition: all 0.5s ease;
+                    //     transform: translateX(0);
+                    //     &:hover{
+                    //         transition: all 0.5s ease;
+                    //         transform: translateX(20px);
+                    //     }
                         
-                        &:hover a{
-                            font-weight: 900; 
-                            color: $theme-color;
-                        }
+                    //     &:hover a{
+                    //         font-weight: 900; 
+                    //         color: $theme-color;
+                    //     }
 
-                        a{
-                        font-size: 13px;
-                        text-transform: capitalize;
-                        font-weight: 100; 
-                        transform: translateX(0);
-                        transition: all 0.5s ease;
-                    }
-                    }
+                    //     a{
+                    //     font-size: 13px;
+                    //     text-transform: capitalize;
+                    //     font-weight: 100; 
+                    //     transform: translateX(0);
+                    //     transition: all 0.5s ease;
+                    // }
+                    // }
                     
 
                 }

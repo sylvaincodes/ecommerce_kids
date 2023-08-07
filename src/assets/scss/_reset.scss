@@ -1710,12 +1710,13 @@ textarea:focus {
 .btn-hover {
   a,
   button {
-    position: relative;
-
+    position: relative; 
+    color: #fff;
     transition: all 0.5s ease-in-out 0s;
+
     &:hover {
-      color: #fff;
-      border: 1px solid $theme-color;
+      color: #fff !important;
+      border: 1px solid $white !important ;
     }
     &::before,
     &::after {
@@ -1758,6 +1759,34 @@ textarea:focus {
     }
   }
 }
+
+
+.custom-btn{   
+  
+ 
+  a{
+      font-size: 25px;
+      line-height: 1;
+      display: inline-block;
+      padding: 19px 50px 21px;
+      text-transform: uppercase;
+      color: #ffffff;
+      border: 1px solid #ffffff;
+      &.outline{
+        color: $black;
+        background-color: $white;
+        border-color: $black;
+        &:hover{
+          color: #fff !important;
+          border: 1px solid $theme-color !important;
+          background-color: $theme-color !important;
+        }
+      }   
+
+      &:hover a {
+    }
+  }   
+  }
 
 a.default-btn {
   font-size: 16px;

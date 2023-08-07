@@ -1,0 +1,29 @@
+.testimonial-area{
+    padding-block: 50px;
+    .wrapper-testimonial{
+        display: flex;
+        scroll-snap-type: x mandatory;
+        width: 100%;
+        overflow: auto;
+        .wrapper-content{
+        display: grid;
+        grid-template-rows: repeat(3, 1fr);
+        justify-items: center;
+        align-items: center;
+        scroll-snap-align: center;
+        p{
+            text-align: center;
+        }
+
+        .content{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+    }
+    &::-webkit-scrollbar{
+        display: none;
+    }
+    }
+}
