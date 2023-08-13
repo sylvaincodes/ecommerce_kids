@@ -1,15 +1,16 @@
-import React, { Fragment } from 'react'
+import React, {
+    Fragment
+} from 'react'
 import Header from '../wrappers/header/Header'
 import Footer from '../wrappers/footer/Footer'
-
 const Layout = ({ children }) => {
-  return (
-    <Fragment>
+    return (
+        <Fragment>
         <Header></Header>
         { children }
         <Footer></Footer>
-    </Fragment>
-  )
-}
-
-export default Layout
+        </Fragment>
+        )
+    }
+    
+    export default Layout

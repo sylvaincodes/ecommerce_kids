@@ -11,6 +11,7 @@
         justify-items: center;
         align-items: center;
         scroll-snap-align: center;
+        overflow: auto;
         p{
             text-align: center;
         }
@@ -22,8 +23,6 @@
             gap: 5px;
         }
     }
-    &::-webkit-scrollbar{
-        display: none;
-    }
+   
     }
 }

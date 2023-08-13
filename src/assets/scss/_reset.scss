@@ -1999,7 +1999,7 @@ a.default-btn {
 ::-webkit-scrollbar
 {
   width: 6px;
-  height: 20px;
+  height: 5px;
   background-color: #F5F5F5;
   overflow-x: auto;
 }
@@ -2008,7 +2008,7 @@ a.default-btn {
 {
   border-radius: 10px;
   -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-  background-color: $theme-color;
+  background-color: gray;
   overflow-x: auto;
 }
 

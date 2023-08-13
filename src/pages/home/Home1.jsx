@@ -15,6 +15,7 @@ const Home1 = () => {
       <Helmet>
         <meta charSet="utf-8" />
         <title> Page d'acceuil </title>
+        <meta name="description" content="Page d'acceuil du site web - Ecommerce - Produits de tout genre" />
       </Helmet>
 
       <Layout>

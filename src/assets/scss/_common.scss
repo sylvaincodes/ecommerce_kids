@@ -17,8 +17,10 @@
         display: flex;
         flex-direction: column;
         gap: 10px;
-        a{
-            font-size: 12px;
+        button{
+            border: none;
+            background: none;
+            text-transform: capitalize;
         }
     }
 }

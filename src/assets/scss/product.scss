@@ -3,9 +3,14 @@
 .product-area{
     padding-block: 50px;
     
+    .rec-arrow{
+        margin-bottom: 100px;
+    }
+
     .product-top-bar{
         display:flex;
         position: relative;
+        
         @media  only screen and (min-width : $xs-min-breakpoint)  and ( max-width : $sm-max-breakpoint) {
             flex-wrap: wrap;
             justify-content: center;

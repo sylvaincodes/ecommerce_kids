@@ -18,6 +18,13 @@
                 justify-content: center;
                 flex-wrap: wrap;
                 row-gap: 10px;
+
+                .same-language-currency:hover{
+                    
+                    .dropdown-content{
+                        transform: rotateX(0);
+                    }
+                }
                 .same-language-currency:not(:nth-child(3)){
                     position: relative;
                     margin-right: 3rem;
@@ -33,10 +40,11 @@
                         top: 35%;
                         right: -25px;
                     }
-                    .langue{
+                    .langue
+                        {
                                 right: -25px;
                                 top: 42px;
-                                a{
+                                button{
                                     text-transform: capitalize;
                                     &.active{
                                         color: $s-theme-color;
@@ -46,9 +54,9 @@
                         }
 
                         .currency{
-                            right: -75px;
+                            right: -25px;
                                 top: 42px;
-                                a{
+                                button{
                                     text-transform: capitalize;
                                     &.active{
                                         color: $s-theme-color;
