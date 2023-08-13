@@ -3,6 +3,26 @@ import { Link } from 'react-router-dom'
 
 const Header = () => {
 
+    const menuExpand = document.querySelectorAll('.menu-expand')
+    const showMobileMenu = () =>{
+       document.querySelector('.mobile-menu').classList.add('active');
+    }
+    
+    const hideMobileMenu = () =>{
+       document.querySelector('.mobile-menu').classList.remove('active');
+    }
+    
+    const sideSubMenu  = (e) => {
+        e.currentTarget.parentElement.classList.toggle('active');
+    }
+    
+    for (let i = 0; i < menuExpand.length; i++) {
+         menuExpand[i].addEventListener('click' ,  e => {
+             sideSubMenu(e)
+            }
+         ); 
+    }
+
     const focusSearchInput = useRef()
     const handleClick = (e) => {
         e.currentTarget.nextSibling.classList.toggle("active");
@@ -11,6 +31,19 @@ const Header = () => {
 
     const handleAccountClick =(e) => {
         e.currentTarget.nextSibling.classList.toggle("active");
+    }
+
+    const changeLanguageTrigger =(e) => {
+       const langCode = e.target.value;
+       e.currentTarget.nextSibling.classList.toggle("active");
+       //Todo
+        //action here
+    }
+    
+    const changeCurrencyTrigger =(e) => {
+       const currencyCode = e.target.value;
+       //Todo
+        //action here
     }
 
     const handleCartClick =(e) => {
@@ -25,13 +58,59 @@ const Header = () => {
                 <div className='wrapper'>
                     <div className='language-currency-wrap'>
                         <div className='same-language-currency'>
-                            <span>Français</span>
-                            <i className="fa fa-angle-down" />
+                                <Link className='d-flex gap-2 align-items-center' onClick={ e => { changeLanguageTrigger(e) }}>            
+                                    <span>Français</span>
+                                    <i className="fa fa-angle-down" />
+                                </Link>
+                            
+                                <div className='dropdown-content langue active'>
+                                            <ul>
+                                                <li>
+                                                    <Link to="/" className='active'>
+                                                        <span>
+                                                            français
+                                                        </span>
+                                                    </Link>
+                                                </li>
+                                                <li>
+                                                    <Link to="/">
+                                                        <span>
+                                                            anglais
+                                                        </span>
+                                                    </Link>
+                                                </li>
+                                                
+                                            </ul>
+                                </div>    
+                                  
                         </div>
                         
                         <div className='same-language-currency'>
-                            <span>EUR</span>
-                            <i className="fa fa-angle-down" />
+                                <Link className='d-flex gap-2 align-items-center' onClick={ e => { changeCurrencyTrigger(e) }}>            
+                                    <span>EUR</span>
+                                    <i className="fa fa-angle-down" />
+                                </Link>
+
+                                <div className='dropdown-content currency active'>
+                                            <ul>
+                                                <li>
+                                                    <Link to="/" className='active'>
+                                                        <span>
+                                                            euro
+                                                        </span>
+                                                    </Link>
+                                                </li>
+                                                <li>
+                                                    <Link to="/">
+                                                        <span>
+                                                            usd
+                                                        </span>
+                                                    </Link>
+                                                </li>
+                                                
+                                            </ul>
+                                </div>    
+
                         </div>
                         
                         <div className='same-language-currency'>
@@ -202,7 +281,7 @@ const Header = () => {
                                 <button onClick={e => handleAccountClick(e)}>
                                     <i className='pe-7s-user-female'></i>
                                 </button>
-                                <div className='account-content'>
+                                <div className='dropdown-content account'>
                                     <ul>
                                         <li>
                                             <Link to="/">
@@ -333,12 +412,138 @@ const Header = () => {
                             </div>
 
                             <div className='same-style header-menu d-lg-none'>
-                                <button>
+                                <button onClick={ e => showMobileMenu(e)}>
                                     <i className='pe-7s-menu'></i>
                                 </button>
                             </div>
                         </div>
                     </div>
+
+                </div>
+
+                <div className='mobile-menu'>
+
+                        <div className='mobile-top'>
+                            
+                            <button className='mobile-button-close' onClick={ (e) => hideMobileMenu(e) }>
+                                <i className='pe-7s-close'></i>
+                            </button>
+
+                            <div className='mobile-search'>
+                                <input type='text' placeholder='recherche' />
+                                <button className='btn btn-secondary mobile-button-close' type="submit">
+                                    <i className="fa fa-search" />
+                                </button>
+                            </div>
+
+                        </div>
+
+                        <div className='mobile-nav' id='mobile-nav'>
+                                <nav>
+                                    <ul>
+                                        <li className='menu-item'>
+                                            <Link to={process.env.PUBLIC_URL + "/"}>acceuil</Link>
+                                        </li>
+
+                                        <li className='menu-item-has-children'>
+                                            <Link to={process.env.PUBLIC_URL + "/"}>categories</Link>
+                                            <span className="menu-expand"><i className='fa fa-plus'></i></span>
+                                            <span className="menu-expand"><i className='fa fa-minus'></i></span>
+                                            <ul className='sub-menu'>
+                                                <li className='menu-item-has-children'>
+                                                       
+                                                        <ul className='sub-menu'>
+                                                            <li>
+                                                                <Link to="/">jeux vidéos & consoles</Link>
+                                                            </li>
+                                                            <li>
+                                                                <Link to="/">music</Link>
+                                                            </li>
+                                                            <li>
+                                                                <Link to="/">livres</Link>
+                                                            </li>
+                                                        </ul>
+                                                </li>
+                                            </ul>
+                                        </li>
+
+                                        <li className='menu-item-has-children'>
+                                            <Link to={process.env.PUBLIC_URL + "/"}>collections</Link>
+                                            <span className="menu-expand"><i className='fa fa-plus'></i></span>
+                                            <span className="menu-expand"><i className='fa fa-minus'></i></span>
+                                            <ul className='sub-menu'>
+                                                <li className='menu-item-has-children'> 
+                                                        <ul className='sub-menu'>
+                                                            <li>
+                                                                <Link to="/">meilleures ventes</Link>
+                                                            </li>
+                                                            <li>
+                                                                <Link to="/">nouvelles arrivages</Link>
+                                                            </li>
+                                                        </ul>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        
+                                    </ul>
+                                </nav>
+                        </div>
+
+                        <div className='mobile-lang'>
+                            <div className='wrapper'>
+                                <div className='lang-widget'>
+                                    <span className='title'>
+                                        selectionner la langue
+                                    </span>
+                                    <select value="fr" onChange={ e => {
+                                            changeLanguageTrigger(e);
+                                            hideMobileMenu();
+                                    }}>
+                                        <option value="fr">français</option>
+                                        <option value="fr">anglais</option>
+                                    </select>
+                                </div>
+                                <div className='lang-widget'>
+                                    <span className='title'>
+                                        selectionner la devise
+                                    </span>
+                                    <select value="fr" onChange={ e => {
+                                            changeCurrencyTrigger(e);
+                                            hideMobileMenu();
+                                    }}>
+                                        <option value="usd">usd</option>
+                                        <option value="xof">cfa</option>
+                                        <option value="euro">euro</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className='mobile-contact'>
+                            <div className='wrapper'>
+                                <div className='contact-widget'>
+                                   
+                                        <Link tel="tel://12452456012">
+                                            <i className='fa fa-phone'></i>
+                                             <span>
+                                                 +1 232 222 080
+                                            </span>
+                                        </Link>
+                                    
+                                </div>
+                                <div className='contact-widget'>
+                                    
+                                        <Link href="mailto:info@yourdomain.com">
+                                            <i className='fa fa-envelope'></i>
+                                            <span>
+                                                 info@yourdomain.com
+                                            </span>
+                                        </Link>
+                                    
+                                </div>
+                            </div>
+                        </div>
+
                 </div>
             </div>
         </div>

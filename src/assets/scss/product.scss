@@ -1,3 +1,4 @@
+
 // TAB PRODUCT
 .product-area{
     padding-block: 50px;
@@ -9,7 +10,7 @@
             flex-wrap: wrap;
             justify-content: center;
         }
-
+  
         @media  only screen and (min-width : $lg-min-breakpoint)  and ( max-width : $lg-max-breakpoint) {
             justify-content: space-between;        
         }
@@ -17,7 +18,7 @@
         @media  only screen and (min-width : $xl-min-breakpoint)   {
             justify-content: space-between;        
         }
-
+  
         .section-title{
             text-transform: capitalize;
             .title{
@@ -30,7 +31,7 @@
             }
             
         }
-
+  
         .product-list-nav{
                 display: grid;
                 grid-template-columns: auto auto;
@@ -49,17 +50,24 @@
                 }
         }
     }
-
+  
     .product-list-grid{
+        cursor: grab;
         padding: 10px;
         display: flex;
         flex-direction: row;
         gap: 20px;
         overflow: auto;
         scroll-snap-type: x mandatory;
+        
         &::-webkit-scrollbar {
-            display: none;
-          }
+            @media  only screen and (min-width : $xs-min-breakpoint) and (max-width : $md-max-breakpoint) {
+                display: none !important;
+            }
+            @media  only screen and (min-width : $lg-min-breakpoint)  {
+            }
+        }
+  
         .wrapper{
             scroll-snap-align: center;
             .product-img{
@@ -81,21 +89,26 @@
                     left: 38%;
                     display: flex;
                     gap: 10px;
+
+                    
                     @media  only screen and (min-width : $sm-min-breakpoint)  {
                         left: 28%;
                     }
             
                     .btn{
                         background: $theme-color;
-                        color: $white;
+                        color: $white !important;
                         border: none;
+                        & > i {
+                            color: $white !important;
+                        }
                     }
                     .btn:hover{
-                        background: $bg-red;
+                        background: $s-theme-color;
                         border: none;
                     }
                 }
-
+  
                 &:hover .product-action{
                     visibility: visible !important;
                     transform: translateX(0);
@@ -124,4 +137,4 @@
             }
         }
     }
-}
+  }

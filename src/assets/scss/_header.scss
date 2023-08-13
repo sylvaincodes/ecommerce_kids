@@ -33,6 +33,30 @@
                         top: 35%;
                         right: -25px;
                     }
+                    .langue{
+                                right: -25px;
+                                top: 42px;
+                                a{
+                                    text-transform: capitalize;
+                                    &.active{
+                                        color: $s-theme-color;
+                                        font-weight: 500;
+                                    }
+                                }
+                        }
+
+                        .currency{
+                            right: -75px;
+                                top: 42px;
+                                a{
+                                    text-transform: capitalize;
+                                    &.active{
+                                        color: $s-theme-color;
+                                        font-weight: 500;
+                                    }
+                                }
+                        }
+         
                 }
             }
             .header-offer{
@@ -265,7 +289,7 @@
 
                 .header-account{
                     position: relative;
-                    .account-content{
+                    .dropdown-content{
                     position: absolute;
                     background-color: $bg-white;
                     box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.1);
@@ -366,3 +390,270 @@
     }
 }
 
+
+.mobile-menu{
+
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 999999;
+    height: 100vh;
+    transform: translateX(100%);
+    transition: all 0.5s ease;
+    background: $white;
+
+    &.active{
+        transform: translateX(0);
+        transition: all 0.5s ease;
+    }
+
+    .mobile-top{
+        display: flex;
+        flex-direction: row;
+
+        .mobile-button-close{
+            width: 60px;
+            background: #343538;
+            border: none;
+            color: $bg-white;
+            height: 65px;
+            i
+            {
+                font-size: 30px;
+                color: $bg-white;
+            }
+        }
+
+        .mobile-search{
+            position: relative;
+            width: 300px;
+
+            input{
+                height: 65px;
+                background: revert;
+            }
+            button{
+                position: absolute;
+                right: 0;
+                top: 0;
+                background: transparent;
+                i{
+                    font-size: 18px;
+                    color: gray;
+                }
+            }
+        }
+    }
+
+    .mobile-nav{
+        padding: 30px;
+        box-shadow: $shadow;
+        background: $white;
+        height: auto;
+
+        nav{
+            a{
+                text-transform: uppercase;
+            }   
+           & > ul{
+                li{
+                    padding-bottom: 10px;
+                    &.menu-item-has-children 
+                    {
+                        & > a{
+                            font-weight: 600;
+                        }
+                        position: relative;
+                        &.active{
+                            .sub-menu{
+                                visibility: visible !important;
+                                height: 100%;
+                                opacity: 1;
+
+                                & > .sub-menu-has-children{
+                                    &.active{
+                                        .sub-sub-menu{
+                                            visibility: visible !important;
+                                            height: 100%;
+                                            opacity: 1;
+                                            padding: 10px 30px;
+                                        }
+
+                                        .menu-expand{
+                                            position: absolute;
+                                            cursor: pointer;
+                                            right: 0;
+                                            top: 25px;
+                                            & > .fa-minus{
+                                                display: block;
+                                            }
+                                            & > .fa-plus{
+                                                display: none;
+                                            }
+                                        }
+                                    }
+                                    .sub-sub-menu{
+                                        visibility: hidden ;
+                                        height:0;
+                                        opacity: 0;
+                                    }
+                                }
+
+                                & > .menu-expand{
+                                    position: absolute;
+                                    cursor: pointer;
+                                    right: 0;
+                                    top: 0;
+                                    & > .fa-minus{
+                                        display: block;
+                                    }
+                                    & > .fa-plus{
+                                        display: none;
+                                    }
+                                }
+
+                                &.active{
+                                    & > .sub-sub-menu{
+                                        visibility: visible;
+                                        height: 100%;
+                                        opacity: 1;
+                                    }
+                                    & > .menu-expand{
+                                        position: absolute;
+                                        cursor: pointer;
+                                        right: 0;
+                                        top: 0;
+                                        & > .fa-minus{
+                                            display: none;
+                                        }
+                                    }
+
+                                }
+
+                                .sub-sub-menu{
+                                    visibility: hidden;
+                                    height: 0;
+                                    transition: 0.3s;
+                                    opacity: 0;
+                                }
+                            }
+
+                            & > .menu-expand{
+                                position: absolute;
+                                cursor: pointer;
+                                right: 0;
+                                top: 0;
+                                & > .fa-minus{
+                                    display: block;
+                                }
+                                & > .fa-plus{
+                                    display: none;
+                                }
+                            }
+                        }
+                        .sub-menu{
+
+                            visibility: hidden;
+                            height: 0;
+                            transition: 0.3s;
+                            opacity: 0;
+                            padding-left: 20px;
+                            padding-top: 10px;
+                            
+                            & > .menu-expand{
+                                position: absolute;
+                                cursor: pointer;
+                                right: 0;
+                                top: 0;
+                                & > .fa-minus{
+                                    display: none;
+                                }
+                            }
+
+                            & > .sub-sub-menu{
+                                visibility: hidden;
+                                height: 0;
+                                transition: 0.3s;
+                                opacity: 0;
+                                padding-left: 20px;
+                                padding-top: 10px;
+                            }
+                           
+                        }
+                        &  .menu-expand{
+                            position: absolute;
+                            cursor: pointer;
+                            right: 0;
+                            top: 0;
+                            & > .fa-minus{
+                                display: none;
+                            }
+                        }
+                    }
+
+                    &.menu-item{
+                        
+                            padding-bottom: 20px;
+                            a{
+                                font-weight: 600;
+                            }
+                    }
+                }
+            }
+        }
+
+    }
+
+    .mobile-lang{
+        padding: 30px;
+        box-shadow: $shadow;
+        background: $white;
+        height: auto;
+
+        & > .wrapper{
+            display: grid;
+            grid-template-rows: auto auto;
+            gap: 20px;
+
+            .lang-widget{
+
+                .title{
+                    font-size: 15px;
+                    font-weight: 600;
+                    
+                  }
+                select{
+                    padding: 5px 0;
+                    border: 1px solid #ddd;
+                    margin-top: 15px;
+                    option{
+                    text-transform: capitalize;
+                    }
+                }
+            }
+
+
+        }
+    }
+    
+    .mobile-contact{
+        padding: 30px;
+        box-shadow: $shadow;
+        background: $white;
+        height: auto;
+
+        & > .wrapper{
+            display: grid;
+            grid-template-rows: auto auto;
+            gap: 10px;
+
+            & .contact-widget{
+                span{
+                    margin-left: 10px;
+                    font-size: 13px;
+                }
+            }
+        }
+    }
+
+}

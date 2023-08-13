@@ -76,12 +76,15 @@ const product_tabs = [{
 
 const TabProduct = () => {
 
+   
+    
     return (
         <Fragment>
         <div className='product-area bg-gray-3'>
         <div className='container'>
         <div className='wrapper'>
         <Tab.Container defaultActiveKey="newarrivals">
+        
         <div className='product-top-bar section-border'>
             <div className='section-title'>
                 <h3 className='title'>produits populaires</h3>
@@ -98,6 +101,14 @@ const TabProduct = () => {
                     </Nav.Link>
                 </Nav.Item>
             </Nav>
+            <div className='d-flex gap-2'>
+                <button className='btn btn-outline-secondary '>
+                    <i className='pe-7s-angle-left '></i>
+                </button>
+                <button className='btn btn-outline-secondary'>
+                    <i className='pe-7s-angle-right'></i>
+                </button>
+            </div>
         </div>
         
         <Tab.Content>
@@ -107,7 +118,6 @@ const TabProduct = () => {
             const discountedPrice = getDiscountPrice(product.price, product.discount);
             
             if (product.collection == "newarrivals") {
-
             return <div key={i} className='col-12 col-sm-6 col-md-4 col-lg-3'>
             <div className='wrapper' >
             <div className='product-img'>

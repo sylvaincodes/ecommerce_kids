@@ -1,0 +1,25 @@
+//Dropdowns
+
+.dropdown-content{
+    position: absolute;
+    background-color: $bg-white;
+    box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    width: 120px;
+    transform: rotateX(90deg);
+    transition: all 0.5s ease;
+    transform-origin: top;
+    z-index: 2;
+    &.active{
+        transform: rotateX(0);
+    }
+    ul{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        a{
+            font-size: 12px;
+        }
+    }
+}
+
