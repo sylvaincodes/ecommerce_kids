@@ -25,3 +25,16 @@
     }
 }
 
+
+select{
+    option{
+        &:first-child{
+            text-transform: capitalize;
+        }
+    }
+}
+
+button{
+    border: none;
+    background: none;
+}

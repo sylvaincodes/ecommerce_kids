@@ -1,0 +1,21 @@
+.breadcrumb-area{
+    .row{
+        .breadcrumb{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-block:10px;
+            margin: 0;
+            gap: 20px;
+            li{
+                a{
+                    text-transform:capitalize ;
+                    font-size: 18px;
+                }
+                &:last-child{
+                    font-weight: 300;
+                }
+            }
+        }
+    }
+}

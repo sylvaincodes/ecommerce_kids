@@ -1,11 +1,8 @@
 import React, { Fragment, useState } from "react";
-import { Tab, Nav, Row, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Tab, Nav } from "react-bootstrap";
 import { getDiscountPrice } from "../../helpers/product";
 import ProductSingle from "../../components/product/ProductSingle";
 import Carousel from 'react-elastic-carousel';
-
-
 
 const TabProduct = () => {
 

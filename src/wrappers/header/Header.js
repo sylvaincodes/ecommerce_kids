@@ -1,4 +1,4 @@
-import React from "react";
+import React , { useState,useEffect} from "react";
 import LanguageCurrency from "../../components/header/LanguageCurrency";
 import Logo from "../../components/header/Logo";
 import IconGroups from "../../components/header/IconGroups";
@@ -6,6 +6,23 @@ import MainNav from "../../components/header/MainNav";
 import MobileMenu from "../../components/header/MobileMenu";
 
 const Header = () => {
+
+  const [scroll, setScroll] = useState(0);
+  const [headerTop, setHeaderTop] = useState(0);
+
+  useEffect(() => {
+    const header = document.querySelector('.sticky-bar');
+    
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    }
+  }, [])
+  const handleScroll =() =>{
+    setScroll(window.scrollY);
+  }
+
   return (
     <header className="header-area">
 
@@ -21,7 +38,7 @@ const Header = () => {
         </div>
       </div>
 
-      <div className="sticky-bar">
+      <div className={`sticky-bar  ${ scroll > headerTop ? "stick" : "" }`} >
         <div className="container">
           <div className="row">
             {/* Logo */}

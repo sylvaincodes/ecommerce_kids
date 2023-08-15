@@ -1,10 +1,14 @@
 
 // TAB PRODUCT
 .product-area{
-    padding-block: 50px;
+    padding-block: 40px;
     
     .rec-arrow{
         margin-bottom: 100px;
+        &:hover{
+            background: $theme-color !important;
+            color: white !important;
+        }
     }
 
     .product-top-bar{
@@ -57,7 +61,6 @@
     }
   
     .product-list-grid{
-        cursor: grab;
         padding: 10px;
         display: flex;
         flex-direction: row;
@@ -91,13 +94,13 @@
                     transform: translateX(100%);
                     position: absolute;
                     top: 43%;
-                    left: 38%;
+                    left: 33%;
                     display: flex;
                     gap: 10px;
 
-                    
-                    @media  only screen and (min-width : $sm-min-breakpoint)  {
-                        left: 28%;
+
+                    @media  only screen and (min-width : $md-min-breakpoint)  {
+                        left: 33%;
                     }
             
                     .btn{
@@ -125,9 +128,10 @@
                 .pe-7s-like{
                     font-size: 24px;
                     color: $black;
-                    font-weight: 900;
+                    font-weight: 100;
                     &.active{
                         color: $theme-color;
+                        font-weight: 800;
                     }
                 }
                 .title{

@@ -1,5 +1,6 @@
 .header-area{
     .header-top-area{
+        position: relative;
         padding-block:1rem;
         border-bottom: 1px solid #d5d4d4;
         .wrapper{
@@ -79,6 +80,18 @@
     }
 
     .sticky-bar{
+        // transform: rotateX(90deg);
+        &.stick{
+            position:fixed;
+            top:0;
+            left: 0;z-index: 9999999;
+            width: 100%;
+            box-shadow: $shadow-2;
+            background: #ffffff;
+            transition: all 1s ease 0s;
+                            transform: translateX(0);
+                            transform-origin: top;
+        }
         .row{
                 align-items: center;
                 .same-style
@@ -120,7 +133,7 @@
                             padding: 20px 25px;
                             background: white;
                             box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.1);
-                            top: 50px;
+                            top: 65px;
                             right: 0;
                             width: 500px;
                             transition: all 0.5s ease 0s;
@@ -302,7 +315,7 @@
                     background-color: $bg-white;
                     box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.1);
                     padding: 15px;
-                    top: 50px;
+                    top: 65px;
                     left: -93px;
                     width: 120px;
                     transform: rotateX(90deg);
@@ -334,7 +347,7 @@
                     box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.1);
                     color: #000000;
                     padding: 15px;
-                    top: 50px;
+                    top: 64px;
                     right: 0;
                     width: 350px;
                     transform: rotateX(90deg);

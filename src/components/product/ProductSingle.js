@@ -1,11 +1,18 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const ProductSingle = ({ key, data, discountedPrice }) => {
+const ProductSingle = ({ key, data, discountedPrice, colClass }) => {
+
+  const likeProduct = (e) => {
+    console.log(e);
+    e.target.classList.toggle('active')
+  }
+
   return (
+    
     <div
     key={key}
-    className="col-11 col-sm-11 col-md-10 col-lg-10"
+    className={ colClass ? colClass : "col-11 col-sm-11 col-md-10 col-lg-10" }
   >
     <div className="wrapper">
       <div className="product-img">
@@ -63,9 +70,9 @@ const ProductSingle = ({ key, data, discountedPrice }) => {
               )}
             </div>
           </div>
-          <div>
-            <i className="pe-7s-like active"></i>
-          </div>
+          <Link to="/" onClick={ e => likeProduct(e)}>
+            <i className="pe-7s-like"></i>
+          </Link>
         </div>
       </div>
     </div>

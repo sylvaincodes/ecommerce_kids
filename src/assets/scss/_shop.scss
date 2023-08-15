@@ -1,0 +1,122 @@
+.shop-area{
+padding-bottom: 40px;
+
+.shop-top-area{
+    .container{
+        // padding-inline: 0 !important;
+    }
+    padding-top: 40px;
+    .wrapper{
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: center;
+        .shop-select{
+            border:1px solid silver;
+            padding: 5px 2px;
+        }
+        p{
+            margin: 0 !important;
+            font-size: 15px;
+        }
+        .shop-tabs{
+            display: grid;
+            grid-template-columns: auto auto auto;
+            align-content: center;
+            border:1px solid silver;
+            button {
+                &.active{
+                    color:$theme-color;
+                }
+            }
+
+            @media  only screen and (min-width : $xs-min-breakpoint)  and ( max-width : $xs-max-breakpoint) {
+                margin:0 !important ;
+            }
+        }
+    }
+}
+
+.shop-product-area{
+
+    @media  only screen and (min-width : $lg-min-breakpoint)  {
+        background: $bg-gray-3;
+        margin-top: 40px;
+    }
+
+    .product-list-grid{
+
+        @media  only screen and (min-width : $lg-min-breakpoint)  {
+            flex-wrap: wrap;
+            gap: 35px;
+            justify-content: center;
+        }
+     
+    }
+}
+
+.shop-sidebar-area{
+    display: grid;
+    grid-template-rows: auto auto;
+    gap: 30px;
+    padding-top: 50px;
+    .sidebar-widget{
+        .sidebar-search{
+            .sidebar-search-form{
+                margin-block: 20px;
+                position: relative;
+                input{
+                    padding-inline: 20px 40px;
+                    background: transparent;
+                    line-height: 30px;
+                }
+                button{
+                    position: absolute;
+                    right: 0;
+                    top: 5px;
+                    border: none;
+                    background: none;
+                    border-left: 1px solid $bg-gray-4;
+                    border-radius: inherit;
+                }
+            }
+        }
+
+        .sidebar-widget-wrapper{
+            margin-block: 20px;
+            ul{
+                li{
+                padding-bottom: 10px;
+                button{
+                    &.active{
+                        .checkmark{
+                            background: $theme-color;
+                            border: 1px solid $bg-gray-4
+                        }
+                    }
+                    position: relative;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    .checkmark{
+                        position: absolute;
+                        width: 16px;
+                        height: 16px;
+                        border-radius: 5px;
+                        border: 1px solid $bg-gray-4;
+                        left: 0;
+                    }
+                    .category-title{
+                        padding-left: 20px;
+                        color: $bg-black;
+                        font-weight: 100;
+                    }
+                }
+                }
+            }
+        }
+    }
+}
+
+    
+}
