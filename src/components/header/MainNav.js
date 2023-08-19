@@ -132,7 +132,7 @@ const MainNav = () => {
               </li>
             </ul>
             <div className="mega-menu-img">
-              <img src="./assets/img/banner/banner-4.png" alt="banner" />
+              <img src={process.env.REACT_APP_PUBLIC_URL + `./assets/img/banner/banner-4.png`}  alt="banner" />
             </div>
           </div>
         </li>

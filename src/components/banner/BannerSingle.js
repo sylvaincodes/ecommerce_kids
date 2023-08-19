@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const BannerSingle = ({ key, data }) => {
+const BannerSingle = ({ i, data }) => {
   return (
-    <div key={key} className="col-12 col-md-4">
+    <div key={i} className="col-12 col-md-4">
       <div className="single-banner">
         <Link to="/" className="img-holder">
           <img src={data.img} className="img-fluid"/>

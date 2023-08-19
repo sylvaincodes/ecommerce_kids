@@ -15,8 +15,8 @@ const CountdownNow = ({ dateTime }) => {
                                 offre du jour
                             </h3> 
                             <Countdown date={new Date(dateTime)} renderer={Renderer} />                        
-                            <div className='fadeInUp custom-btn btn-hover'>
-                                <Link className='animated rounden-btn'>
+                            <div className='custom-btn btn-hover'>
+                                <Link className=' rounden-btn'>
                                     acheter 
                                 </Link>
                             </div>

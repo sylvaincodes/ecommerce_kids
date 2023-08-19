@@ -34,7 +34,7 @@ const Footer = () => {
                     <img
                       width={100}
                       className="img-fluid"
-                      src="./assets/img/logo.jpg"
+                      src={process.env.REACT_APP_PUBLIC_URL + `./assets/img/logo.jpg`}
                       alt="logo"
                     />
                   </Link>

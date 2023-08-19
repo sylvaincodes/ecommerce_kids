@@ -7,8 +7,12 @@ import TabProduct from '../../wrappers/product/TabProduct';
 import CountdownNow from '../../wrappers/countdown/CountdownNow';
 import Testimonial from '../../wrappers/testimonial/Testimonial';
 import Newsletter from '../../wrappers/newsletter/Newsletter';
+import { useSelector } from 'react-redux'
 
 const Home1 = () => {
+
+  const products = useSelector(  (state) => state.productData.products );
+
   return (
     <Fragment>
 
@@ -21,7 +25,7 @@ const Home1 = () => {
       <Layout>
           <HeroSlider/>
           <Banner/>
-          <TabProduct/>
+          <TabProduct products={products}/>
           <CountdownNow dateTime="5000"/>
           <Testimonial/>
           <Newsletter/>

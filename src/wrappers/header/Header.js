@@ -43,7 +43,7 @@ const Header = () => {
           <div className="row">
             {/* Logo */}
             <div className="col-lg-2 col-4">
-              <Logo img="/assets/img/logo.jpg" alt="logo-image" />
+              <Logo img={process.env.REACT_APP_PUBLIC_URL + `./assets/img/logo.jpg`} alt="logo-image" />
             </div>
 
             {/* menu de navigation */}

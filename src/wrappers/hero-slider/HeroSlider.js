@@ -51,7 +51,7 @@ const HeroSlider = () => {
                       {item.subtitle}
                       </h1>
                       <div className="fadeInUp slider-btn btn-hover">
-                        <Link to="/tous-les-produits" className="animated rounden-btn">
+                        <Link to="/tous-les-produits" className="rounden-btn">
                         {item.action}
                         </Link>
                       </div>
