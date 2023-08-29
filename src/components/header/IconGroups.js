@@ -87,7 +87,7 @@ const IconGroups = () => {
             <li className="cart-item">
               <img
                 className="img-fluid"
-                src="./assets/img/product/fashion/1.jpg"
+                src={ process.env.REACT_APP_PUBLIC_URL + "./assets/img/product/fashion/1.jpg" }
                 alt="produit"
               />
               <div className="cart-item-desc">
@@ -100,7 +100,7 @@ const IconGroups = () => {
                 </ul>
               </div>
               <div className="cart-delete-btn">
-                <button title="supprimer">
+                <button title="supprimer" className="btn-hover-2">
                   <i className="fa fa-close"></i>
                 </button>
               </div>
@@ -108,7 +108,7 @@ const IconGroups = () => {
             <li className="cart-item">
               <img
                 className="img-fluid"
-                src="./assets/img/product/fashion/1.jpg"
+                src={ process.env.REACT_APP_PUBLIC_URL + "./assets/img/product/fashion/2.jpg" }
                 alt="produit"
               />
               <div className="cart-item-desc">
@@ -135,10 +135,10 @@ const IconGroups = () => {
           </div>
           <div className="cart-buttons">
             <div className="d-grid gap-2">
-              <Link to="/" className="btn btn-outline-dark btn-lg w-100">
+              <Link to="/cart" className="btn btn-outline-dark btn-lg w-100">
                 panier
               </Link>
-              <Link to="/" className="btn btn-outline-dark btn-lg w-100">
+              <Link to="/checkout" className="btn btn-outline-dark btn-lg w-100">
                 payer
               </Link>
             </div>

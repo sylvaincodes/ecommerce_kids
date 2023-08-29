@@ -87,7 +87,7 @@ const ProductModal = ({ product, discountedPrice, show, onHide }) => {
                       <div key={key}>
                         <div className="single-image">
                           <img
-                            src={imagePreview ? imagePreview :process.env.PUBLIC_URL + single}
+                            src={imagePreview ? imagePreview :process.env.REACT_APP_PUBLIC_URL + single}
                             className="w-100"
                             alt=""
                           />
@@ -105,7 +105,7 @@ const ProductModal = ({ product, discountedPrice, show, onHide }) => {
                       <div key={key}>
                         <div className="single-image">
                           <img onClick={(e) => handleImagePreview(e)}
-                            src={process.env.PUBLIC_URL + single}
+                            src={process.env.REACT_APP_PUBLIC_URL + single}
                             className="img-thumbnail"
                             alt="product"
                           />

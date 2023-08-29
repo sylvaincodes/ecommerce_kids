@@ -4,7 +4,7 @@ import { getDiscountPrice } from "../../helpers/product";
 import ProductSingle from "../../components/product/ProductSingle";
 import Carousel from "react-elastic-carousel";
 
-const TabProduct = ({ products }) => {
+const TabProduct = ({ products,category }) => {
   const [width, setWidth] = useState(window.innerWidth);
   return (
     <Fragment>

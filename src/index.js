@@ -1,5 +1,5 @@
 import React, { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
+import { createRoot } from "react-dom";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { createStore, applyMiddleware } from "redux";
@@ -100,7 +100,7 @@ const products = [
       },
     ],
     saleCount: 54,
-    category: ["fashion", "men"],
+    category: "fashion",
     tag: ["fashion", "men", "jacket", "full sleeve"],
   },
   {
@@ -183,7 +183,7 @@ const products = [
       },
     ],
     saleCount: 54,
-    category: ["fashion", "men"],
+    category: "fashion",
     tag: ["fashion", "men", "jacket", "full sleeve"],
   },
   {
@@ -266,7 +266,7 @@ const products = [
       },
     ],
     saleCount: 54,
-    category: ["fashion", "men"],
+    category: "fashion",
     tag: ["fashion", "men", "jacket", "full sleeve"],
   },
   {
@@ -349,7 +349,7 @@ const products = [
       },
     ],
     saleCount: 54,
-    category: ["fashion", "men"],
+    category: "fashion",
     tag: ["fashion", "men", "jacket", "full sleeve"],
   },
   {
@@ -432,7 +432,7 @@ const products = [
       },
     ],
     saleCount: 54,
-    category: ["fashion", "men"],
+    category: "fashion",
     tag: ["fashion", "men", "jacket", "full sleeve"],
   },
   {
@@ -514,7 +514,7 @@ const products = [
       },
     ],
     saleCount: 54,
-    category: ["fashion", "men"],
+    category: "fashion",
     tag: ["fashion", "men", "jacket", "full sleeve"],
   },
   {
@@ -597,7 +597,7 @@ const products = [
       },
     ],
     saleCount: 54,
-    category: ["fashion", "men"],
+    category: "fashion",
     tag: ["fashion", "men", "jacket", "full sleeve"],
   },
   ,
@@ -681,7 +681,7 @@ const products = [
       },
     ],
     saleCount: 54,
-    category: ["fashion", "men"],
+    category: "fashion",
     tag: ["fashion", "men", "jacket", "full sleeve"],
   },
   ,
@@ -765,7 +765,7 @@ const products = [
       },
     ],
     saleCount: 54,
-    category: ["fashion", "men"],
+    category: "women",
     tag: ["fashion", "men", "jacket", "full sleeve"],
   },
 ];

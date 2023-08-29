@@ -1,0 +1,143 @@
+import React, { useState, Fragment } from "react";
+import { Link } from "react-router-dom";
+import ProductModal from "../../wrappers/product/ProductModal";
+import { fetchProduct } from "../../redux/actions/productActions";
+import { useDispatch} from 'react-redux'
+
+const ProductGridSingle = ({product, discountedPrice, sliderClassName }) => {
+
+  const dispatch = useDispatch();
+  const likeProduct = (e) => {
+    e.target.classList.toggle("active");
+  };
+
+  const [modal, setModalShow] = useState(false);
+  const handleProduct = (product) => {
+    dispatch(fetchProduct(product));
+  };
+
+  return (
+    <Fragment>
+      <div
+        className={`col-xl-3 col-md-6 col-lg-4 col-sm-6 ${
+          sliderClassName ? sliderClassName : ""
+        }`}
+      >
+        <div
+          className={`product-wrap`}
+        >
+          <div className="product-img">
+            <Link to={process.env.PUBLIC_URL + "/product/" + product.id}>
+              <img
+                className="default-img"
+                src={process.env.REACT_APP_PUBLIC_URL + product.image[0]}
+                alt=""
+              />
+              {product.image.length > 1 ? (
+                <img
+                  className="hover-img"
+                  src={process.env.REACT_APP_PUBLIC_URL + product.image[1]}
+                  alt=""
+                />
+              ) : (
+                ""
+              )}
+            </Link>
+            {product.discount || product.new ? (
+              <div className="product-img-badges">
+                {product.discount ? (
+                  <span className="pink">-{product.discount}%</span>
+                ) : (
+                  ""
+                )}
+                {product.new ? <span className="purple">New</span> : ""}
+              </div>
+            ) : (
+              ""
+            )}
+
+            <div className="product-action">
+              <div className="pro-same-action pro-wishlist">
+                <button
+                  
+                 
+                >
+                  <i className="pe-7s-like" />
+                </button>
+              </div>
+              <div className="pro-same-action pro-cart">
+                {/* {product.affiliateLink ? (
+                  <a
+                    href={product.affiliateLink}
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    {" "}
+                    Buy now{" "}
+                  </a>
+                ) : product.variation && product.variation.length >= 1 ? (
+                  <Link to={`${process.env.PUBLIC_URL}/product/${product.id}`}>
+                    Select Option
+                  </Link>
+                ) : product.stock && product.stock > 0 ? (
+                  <button
+                   
+                  >
+                    {" "}
+                    <i className="pe-7s-cart"></i>{" "}
+                    {cartItem !== undefined && cartItem.quantity > 0
+                      ? "Added"
+                      : "Add to cart"}
+                  </button>
+                ) : (
+                  <button disabled className="active">
+                    Out of Stock
+                  </button>
+                )} */}
+              </div>
+              <div className="pro-same-action pro-quickview">
+                <button onClick={() => setModalShow(true)} title="Quick View">
+                  <i className="pe-7s-look" />
+                </button>
+              </div>
+            </div>
+          </div>
+          <div className="product-content text-center">
+            <h3>
+              <Link to={process.env.PUBLIC_URL + "/product/" + product.id}>
+                {product.name}
+              </Link>
+            </h3>
+            {product.rating && product.rating > 0 ? (
+              <div className="product-rating">
+                {/* <Rating ratingValue={product.rating} /> */}
+              </div>
+            ) : (
+              ""
+            )}
+            <div className="product-price">
+              {/* {discountedPrice !== null ? (
+                <Fragment>
+                  <span>{currency.currencySymbol + finalDiscountedPrice}</span>{" "}
+                  <span className="old">
+                    {currency.currencySymbol + finalProductPrice}
+                  </span>
+                </Fragment>
+              ) : (
+                <span>{currency.currencySymbol + finalProductPrice} </span>
+              )} */}
+            </div>
+          </div>
+        </div>
+      </div>
+      <ProductModal
+        show={modal}
+        onHide={() => setModalShow(false)}
+        product={product}
+        discountedPrice={discountedPrice}
+      />
+    </Fragment>
+  );
+};
+
+export default ProductGridSingle;

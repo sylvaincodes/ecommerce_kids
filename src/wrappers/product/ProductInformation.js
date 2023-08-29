@@ -19,8 +19,8 @@ const ProductInformation = () => {
         });
 
         e.currentTarget.classList.toggle('active');
-        const eventKey = e.currentTarget.getAttribute('eventKey');
-        document.querySelector('.'+eventKey).classList.add('active')
+        const eventkey = e.currentTarget.getAttribute('eventkey');
+        document.querySelector('.'+eventkey).classList.add('active')
 
     }
 
@@ -29,11 +29,11 @@ const ProductInformation = () => {
       <div className="product-review-wrapper">
         <div className="description-review-wrapper">
           <ul className="description-review-topbar">
-            <li eventKey="aditionnalInfo" className="tab-description  active" onClick={e => handleDescActive(e)}>
+            <li eventkey="aditionnalInfo" className="tab-description  active" onClick={e => handleDescActive(e)}>
               Informations additionnelles
             </li>
-            <li eventKey="description" className="tab-description " onClick={e => handleDescActive(e)}>Description</li>
-            <li eventKey="avis" className="tab-description" onClick={e => handleDescActive(e)}>Avis</li>
+            <li eventkey="description" className="tab-description " onClick={e => handleDescActive(e)}>Description</li>
+            <li eventkey="avis" className="tab-description" onClick={e => handleDescActive(e)}>Avis (3)</li>
           </ul>
           <div  className="description-review-content">
             <div className="tab-content aditionnalInfo">

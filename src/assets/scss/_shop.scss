@@ -233,7 +233,7 @@
             & li{
                 cursor: pointer;
                 margin-inline: 20px;
-                font-size: 25px;
+                font-size: 15px;
                 padding-block: 15px;
                 border-bottom: 3px solid transparent;
                 color: #666;
@@ -249,7 +249,8 @@
                 }
             }
             
-            
+         
+        
             .description-review-topbar{
                 
             }
@@ -270,6 +271,10 @@
             
             padding-block: 30px;
             
+            .ratting-form-wrapper{
+                display: inline;
+            }
+
             .tab-content-wrapper{
                 ul{
                     display: grid;

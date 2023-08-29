@@ -9,6 +9,9 @@ import {useSelector} from 'react-redux';
 import { getDiscountPrice } from "../../helpers/product";
 import { Link } from "react-router-dom";
 import ProductInformation from "../../wrappers/product/ProductInformation";
+import RelatedProduct from "../../components/product/RelatedProduct";
+import ScrollToTop from "../../components/sub-componenets/ScrollToTop";
+
 
 const ProductDetail = () => {
 
@@ -17,8 +20,6 @@ const ProductDetail = () => {
     product.price,
     product.discount
   );
-
-  // console.log(process.env);
 
   const [gallerySwiper, getGallerySwiper] = useState(null);
   const [imagePreview, setImagePreview] = useState("");
@@ -52,7 +53,8 @@ const ProductDetail = () => {
     getSwiper: getGallerySwiper,
     spaceBetween: 10,
     loopedSlides: 4,
-    loop: true
+    loop: true,
+    effect: "fade"
   };
 
   const thumbnailSwiperParams = {
@@ -97,6 +99,8 @@ const ProductDetail = () => {
       </Helmet>
 
       <Layout>
+
+        <ScrollToTop/>
         {/* breadcrumb */}
 
         <div className="breadcrumb-area bg-gray-3">
@@ -319,12 +323,7 @@ const ProductDetail = () => {
                      <ul>
                         <li>Catégories : </li>
                         {
-                          product.category.map((cat,i) =>{
-
-                            return (
-                                <li key={i}>{ cat}</li>
-                            )
-                          })
+                          product.category
                         }
                      </ul>
                      <ul>
@@ -363,6 +362,12 @@ const ProductDetail = () => {
 
             <div className="row">  
               <ProductInformation/>
+            </div>
+
+            <div className="row">
+              <RelatedProduct
+                category={product.category}
+              />
             </div>
 
           </div>

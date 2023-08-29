@@ -1,7 +1,7 @@
 // Bootstrap scss
 @import '../../../node_modules/bootstrap/scss/bootstrap.scss';
 @import '../../../node_modules/bootstrap/scss/helpers/';
-
+@import '../../../node_modules/swiper/swiper.scss';
 
 //Autres css
 @import '../../../node_modules/animate.css/animate.min.css';
@@ -26,3 +26,4 @@
 @import '../scss/shop';
 @import '../scss/modal';
 @import '../scss/preloader';
+@import '../scss/cart';

@@ -42,3 +42,67 @@ button{
 .yellow{
     color: $bg-yellow;
 }
+
+
+.btn-style{
+    background: $theme-color;
+    border-radius: 50px;
+    padding: 10px 20px;
+    text-transform: uppercase;
+    color: $white;
+    margin-block: 20px;
+}
+
+.btn-style-3{
+    background: $theme-color;
+    padding: 15px 50px;
+    text-transform: uppercase;
+    color: $white;
+    margin-block: 20px;
+}
+
+
+.hover-style{
+    font-size: 20px;
+    &:hover{
+        background: $theme-color !important;
+        color: $white;
+    }
+}
+
+.hover-style-2{
+    font-size: 20px;
+    &:hover{
+        background: $black !important;
+        color: $white;
+    }
+}
+
+.flex-row{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    &.left{
+        justify-content: left;
+    }
+    &.center{
+        justify-content: center;
+    }
+}
+
+.checkbox,.radio{
+    width: 43px;
+    height: 20px;
+}
+
+label{
+    span{
+        margin-left: 20px;
+        cursor: pointer;
+    }
+}
+
+.btn-hover-2{
+    background: black;
+    color: white;
+}
