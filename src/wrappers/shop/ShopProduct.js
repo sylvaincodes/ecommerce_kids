@@ -2,7 +2,7 @@ import React from "react";
 import { getDiscountPrice } from "../../helpers/product";
 import ProductSingle from "../../components/product/ProductSingle";
 
-const ShopProduct = ({ layout, products }) => {
+const ShopProduct = ({ layout, products, strings }) => {
   return (
     <div className="shop-product-area product-area">
       <div className="row">
@@ -14,6 +14,7 @@ const ShopProduct = ({ layout, products }) => {
             );
             return (
               <ProductSingle
+                strings={strings}
                 key={i}
                 data={product}
                 discountedPrice={discountedPrice}

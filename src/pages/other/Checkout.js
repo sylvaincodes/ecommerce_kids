@@ -5,16 +5,18 @@ import BreadcrumbItem from "../../components/breadcrumb/BreadcrumbItem";
 import { Helmet } from "react-helmet";
 import LoginModal from "../../components/auth/LoginModal";
 import Register from "../../components/auth/Register";
-import Adresse from "../../components/auth/Adresse";
+import { multilanguage } from 'redux-multilanguage'
 
-const Checkout = () => {
+const Checkout = ({strings}) => {
+
   const [modalLogin, setModalLogin] = useState(false);
 
   return (
     <Fragment>
+   
       <Helmet>
         <meta charSet="utf-8" />
-        <title> Ecommerce - Paiement du panier </title>
+        <title> { process.env.REACT_APP_SITE_NAME } - Paiement du panier </title>
         <meta
           name="description"
           content="Page d'affichage du panier des articles"
@@ -29,7 +31,7 @@ const Checkout = () => {
               <ul className="breadcrumb">
                 <BreadcrumbItem
                   link="/tous-les-produits"
-                  title="boutique"
+                  title={strings['shop']}
                 ></BreadcrumbItem>
                 <BreadcrumbItem link="#" title="/"></BreadcrumbItem>
                 <BreadcrumbItem link="#" title="paiement"></BreadcrumbItem>
@@ -42,7 +44,7 @@ const Checkout = () => {
           <div className="container">
             <div className="row">
               <div className="col-lg-12">
-                <Register setModalLogin={setModalLogin} />
+                <Register setModalLogin={setModalLogin} strings={strings} />
               </div>
             </div>
           </div>
@@ -50,9 +52,9 @@ const Checkout = () => {
 
       </Layout>
 
-      <LoginModal show={modalLogin} onHide={() => setModalLogin(false)} />
+      <LoginModal show={modalLogin} onHide={() => setModalLogin(false)} strings={strings} />
     </Fragment>
   );
 };
 
-export default Checkout;
+export default multilanguage(Checkout);

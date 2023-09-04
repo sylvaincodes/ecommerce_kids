@@ -19,11 +19,19 @@
                 justify-content: center;
                 flex-wrap: wrap;
                 row-gap: 10px;
-
+                
                 .same-language-currency:hover{
                     
                     .dropdown-content{
                         transform: rotateX(0);
+                        li{
+                            &:hover{
+                                button{
+                                    color: $theme-color;
+                                    font-weight: 900;
+                                }
+                            }
+                        }
                     }
                 }
                 .same-language-currency:not(:nth-child(3)){
@@ -42,30 +50,30 @@
                         right: -25px;
                     }
                     .langue
-                        {
-                                right: -25px;
-                                top: 42px;
-                                button{
-                                    text-transform: capitalize;
-                                    &.active{
-                                        color: $s-theme-color;
-                                        font-weight: 500;
-                                    }
-                                }
+                    {
+                        right: -25px;
+                        top: 42px;
+                        button{
+                            text-transform: capitalize;
+                            &.active{
+                                color: $s-theme-color;
+                                font-weight: 500;
+                            }
                         }
-
-                        .currency{
-                            right: -25px;
-                                top: 42px;
-                                button{
-                                    text-transform: capitalize;
-                                    &.active{
-                                        color: $s-theme-color;
-                                        font-weight: 500;
-                                    }
-                                }
+                    }
+                    
+                    .currency{
+                        right: -25px;
+                        top: 42px;
+                        button{
+                            text-transform: capitalize;
+                            &.active{
+                                color: $s-theme-color;
+                                font-weight: 500;
+                            }
                         }
-         
+                    }
+                    
                 }
             }
             .header-offer{
@@ -78,7 +86,7 @@
             }
         }
     }
-
+    
     .sticky-bar{
         // transform: rotateX(90deg);
         &.stick{
@@ -89,24 +97,24 @@
             box-shadow: $shadow-2;
             background: #ffffff;
             transition: all 1s ease 0s;
-                            transform: translateX(0);
-                            transform-origin: top;
+            transform: translateX(0);
+            transform-origin: top;
         }
         .row{
-                align-items: center;
-                .same-style
+            align-items: center;
+            .same-style
+            {
+                margin-right: 18px;
+                button
                 {
-                    margin-right: 18px;
-                    button
-                    {
-                        background: none;
-                        border:none;
-                    }
-                    a{
-                        position: relative;
-                    }
-                    .count-style
-                    {
+                    background: none;
+                    border:none;
+                }
+                a{
+                    position: relative;
+                }
+                .count-style
+                {
                     position: absolute;
                     background: black;
                     border-radius: 100%;
@@ -115,570 +123,624 @@
                     text-align: center;
                     top: -20px;
                     right: -13px;
-                    }
-                    i{
-                        font-size: 24px;
-                        color: #000;
-                    }
                 }
-
-                .col-8{
-                    .wrapper{
-                        display: flex;
-                        align-items: center;
-                        justify-content: flex-end;
-                        position: relative;
-                        .search-content{
-                            position: absolute;
-                            padding: 20px 25px;
-                            background: white;
-                            box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.1);
-                            top: 65px;
-                            right: 0;
-                            width: 500px;
-                            transition: all 0.5s ease 0s;
-                            transform: rotateX(90deg);
-                            transform-origin: top;
-                            z-index: 2;
-                            &.active{
-                                transform: rotateX(0deg);
-                            }
-                            form{
-                                display: flex;
-                                flex-direction: row;
-                                position: relative;
-                                input{
-                                    background: transparent;
-                                    border: 1px solid #d3d3d3;
-                                    padding: 0 90px 0 20px;
-                                }
-                                .search-button{
-                                    position: absolute;
-                                    top: 0;
-                                    right: 0;
-                                    background: $theme-color;
-                                    width: 70px;
-                                    height: 100%;
-                                    i{
-                                        color: $bg-white;
-                                    }
-                                    &:hover{
-                                        background: $bg-black;
-                                        color: $bg-white;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-
-                .main-menu{
-                    position: relative;
-                    .main-menu-list{
-                        display: flex;
-                        gap: 20px;
-                        justify-content: flex-end;
-                        .menu-item{
-                            display: flex;
-                            gap: 10px;
-                            align-items: center;
-                            // position: relative;
-                            &:hover{
-                                font-weight: 800;
-                            }
-                            &:hover .sub-menu-content{
-                                transform: rotateX(0deg);
-                                transition: all 0.5s ease;
-                            }
-                            a{
-                                font-size: 16px;
-                                font-weight: 100;   
-                                i{
-                                    margin-left: 10px;
-                                }
-                            }
-                            .sub-menu-content{
-                                display: grid;
-                                transform: rotateX(90deg);
-                                transform-origin: top;
-                                transition: all 0.5s ease;
-                                position: absolute;
-                                padding: 20px 20px 10px 20px;
-                                box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.1);
-                                z-index: 2;
-                                top: 40px;
-                                right: 0;
-                                background: $bg-white;
-                                display: grid;
-                                grid-template-columns: 1fr 1fr;
-                                
-
-                                    .sub-menu-list{
-                                        display: flex;
-                                        flex-direction: row;
-                                        gap: 20px;
-                                        width: max-content;
-                                        align-items: flex-start;
-                                        .sub-menu-item{
-                                            position: relative;
-                                            padding-left: inherit;
-                                            width: auto;
-                                            padding: 12px;
-                                            &:hover .icon{
-                                                display: block !important;
-                                                transform: display;
-                                                transition: all 0.4s ease;
-                                            }
-                                            a{
-                                                display: flex;
-                                                gap: 10px;
-                                                align-items: center;
-                                            }
-                                            .sub-sub{
-                                                display: block;
-                                                padding-left: 10px;
-                                                ul{
-                                                    gap: 5px !important;
-                                                }
-                                            }
-                                            .sub-content{
-                                                margin-top: 20px;
-                                                ul
-                                                {
-                                                    display: flex;
-                                                    flex-direction: column;
-                                                    gap: 20px;
-                                                    li{
-                                                        transition: all 0.8s ease;
-                                                        transform: translateX(0);
-                                                        &:hover{
-                                                            transition: all 0.8s ease;
-                                                            transform: translateX(20px);
-                                                        }
-                                                        
-                                                        &:hover a{
-                                                            font-weight: 900; 
-                                                            color: $theme-color;
-                                                        }
-
-                                                        a{
-                                                        font-size: 13px;
-                                                        text-transform: capitalize;
-                                                        font-weight: 100; 
-                                                        transform: translateX(0);
-                                                        transition: all 0.5s ease;
-                                                    }
-                                                    }
-                                                }
-                                            }
-                                            a{
-                                                font-size: 15px;
-                                                text-transform: capitalize;
-                                                font-weight: 600;
-                                            }
-                                        }
-                                    }
-                                
-                            }
-                        }
-                    }
-          
-                    // .sub-menu-item{
-                    //     transition: all 0.5s ease;
-                    //     transform: translateX(0);
-                    //     &:hover{
-                    //         transition: all 0.5s ease;
-                    //         transform: translateX(20px);
-                    //     }
-                        
-                    //     &:hover a{
-                    //         font-weight: 900; 
-                    //         color: $theme-color;
-                    //     }
-
-                    //     a{
-                    //     font-size: 13px;
-                    //     text-transform: capitalize;
-                    //     font-weight: 100; 
-                    //     transform: translateX(0);
-                    //     transition: all 0.5s ease;
-                    // }
-                    // }
-                    
-
-                }
-
-                .header-account{
-                    position: relative;
-                    .dropdown-content{
-                    position: absolute;
-                    background-color: $bg-white;
-                    box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.1);
-                    padding: 15px;
-                    top: 65px;
-                    left: -93px;
-                    width: 120px;
-                    transform: rotateX(90deg);
-                    transition: all 0.5s ease;
-                    transform-origin: top;
-                    z-index: 2;
-                    &.active{
-                        transform: rotateX(0);
-                    }
-                    ul{
-                        display: flex;
-                        flex-direction: column;
-                        gap: 10px;
-                        a{
-                            font-size: 12px;
-                        }
-                    }
+                i{
+                    font-size: 24px;
+                    color: #000;
                 }
             }
-
-            .header-cart{
-                position: relative;
-                &.active{
-
-                }
-                .cart-content{
-                    position: absolute;
-                    background: #ffffff;
-                    box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.1);
-                    color: #000000;
-                    padding: 15px;
-                    top: 64px;
-                    right: 0;
-                    width: 350px;
-                    transform: rotateX(90deg);
-                    transition: all 0.5s ease 0s;
-                    transform-origin: top;
-                    z-index: 2;
-                    &.active{
-                        transform: rotateX(0deg);
-                    }
-                    .cart-list{
-                        overflow: auto;
-                        max-height: 300px;
-                        width: 100%;
-                        display: flex;
-                        flex-direction: column;
-                        padding-right: 10px;
-                        .cart-item{
+            
+            .col-8{
+                .wrapper{
+                    display: flex;
+                    align-items: center;
+                    justify-content: flex-end;
+                    position: relative;
+                    .search-content{
+                        position: absolute;
+                        padding: 20px 25px;
+                        background: white;
+                        box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.1);
+                        top: 65px;
+                        right: 0;
+                        width: 500px;
+                        transition: all 0.5s ease 0s;
+                        transform: rotateX(90deg);
+                        transform-origin: top;
+                        z-index: 2;
+                        &.active{
+                            transform: rotateX(0deg);
+                        }
+                        form{
                             display: flex;
                             flex-direction: row;
-                            justify-content: space-between;
-                            border-bottom: 1px solid #ddd8d8;
-                            padding: 15px 0;
-                            img{
-                                width: 100px;
+                            position: relative;
+                            .MuiAutocomplete-root{
+                                // width: 100%;
+                                .MuiInputBase-input{
+                                    border: none !important;
+                                }
+
+                                .MuiFormLabel-root{
+                                    top: -5px !important;
+                                }
+                                
+                                .MuiFormLabel-asterisk{
+                                    margin: 0px;
+                                }
+
                             }
-                            .cart-item-desc li{
-                                text-transform: capitalize;
+
+                            input{
+                                background: transparent;
+                                border: 1px solid #d3d3d3;
+                                padding: 0 90px 0 20px;
                             }
-                            .cart-delete-btn button{
+                            .search-button{
+                                position: absolute;
+                                top: 0;
+                                right: 0;
                                 background: $theme-color;
+                                width: 70px;
+                                height: 100%;
                                 i{
-                                    font-size: 15px;
                                     color: $bg-white;
                                 }
                                 &:hover{
-                                    background-color: $black;
-                                    color: $white;
+                                    background: $bg-black;
+                                    color: $bg-white;
                                 }
                             }
                         }
                     }
-                    .cart-total{
-                        margin-block: 15px;
-                        ul{
-                            display: flex;
-                            justify-content: space-between;
-                            li{
+                }
+            }
+            
+            .main-menu{
+                position: relative;
+                .main-menu-list{
+                    display: flex;
+                    gap: 20px;
+                    justify-content: flex-end;
+                    .menu-item{
+                        display: flex;
+                        gap: 10px;
+                        align-items: center;
+                        // position: relative;
+                        &:hover{
+                            font-weight: 800;
+                        }
+                        &:hover .sub-menu-content{
+                            transform: rotateX(0deg);
+                            transition: all 0.5s ease;
+                        }
+                        a{
+                            font-size: 16px;
+                            font-weight: 100;   
+                            i{
+                                margin-left: 10px;
+                            }
+                            span{
                                 text-transform: capitalize;
                             }
                         }
-                    }
-                    .cart-buttons{
-                        margin-block: 15px;
-                            a{
-                                border-radius: 0;
-                                text-transform: uppercase;
-                                font-size: 12px;
+                        .sub-menu-content{
+                            display: grid;
+                            transform: rotateX(90deg);
+                            transform-origin: top;
+                            transition: all 0.5s ease;
+                            position: absolute;
+                            padding: 20px 20px 10px 20px;
+                            box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.1);
+                            z-index: 2;
+                            top: 40px;
+                            right: 0;
+                            background: $bg-white;
+                            display: grid;
+                            grid-template-columns: 1fr 1fr;
+                            
+                            
+                            .sub-menu-list{
+                                display: flex;
+                                flex-direction: row;
+                                gap: 20px;
+                                width: max-content;
+                                align-items: flex-start;
+                                .sub-menu-item{
+                                    position: relative;
+                                    padding-left: inherit;
+                                    width: auto;
+                                    padding: 12px;
+                                    &:hover .icon{
+                                        display: block !important;
+                                        transform: display;
+                                        transition: all 0.4s ease;
+                                    }
+                                    a{
+                                        display: flex;
+                                        gap: 10px;
+                                        align-items: center;
+                                    }
+                                    .sub-sub{
+                                        display: block;
+                                        padding-left: 10px;
+                                        ul{
+                                            gap: 5px !important;
+                                        }
+                                    }
+                                    .sub-content{
+                                        margin-top: 20px;
+                                        ul
+                                        {
+                                            display: flex;
+                                            flex-direction: column;
+                                            gap: 20px;
+                                            li{
+                                                transition: all 0.8s ease;
+                                                transform: translateX(0);
+                                                &:hover{
+                                                    transition: all 0.8s ease;
+                                                    transform: translateX(20px);
+                                                }
+                                                
+                                                &:hover a{
+                                                    font-weight: 900; 
+                                                    color: $theme-color;
+                                                }
+                                                
+                                                a{
+                                                    font-size: 13px;
+                                                    text-transform: capitalize;
+                                                    font-weight: 100; 
+                                                    transform: translateX(0);
+                                                    transition: all 0.5s ease;
+                                                }
+                                            }
+                                        }
+                                    }
+                                    a{
+                                        font-size: 15px;
+                                        text-transform: capitalize;
+                                        font-weight: 600;
+                                    }
+                                }
                             }
+                            
+                        }
+                    }
+                }
+                
+                // .sub-menu-item{
+                    //     transition: all 0.5s ease;
+                    //     transform: translateX(0);
+                    //     &:hover{
+                        //         transition: all 0.5s ease;
+                        //         transform: translateX(20px);
+                        //     }
+                        
+                        //     &:hover a{
+                            //         font-weight: 900; 
+                            //         color: $theme-color;
+                            //     }
+                            
+                            //     a{
+                                //     font-size: 13px;
+                                //     text-transform: capitalize;
+                                //     font-weight: 100; 
+                                //     transform: translateX(0);
+                                //     transition: all 0.5s ease;
+                                // }
+                                // }
+                                
+                                
+                            }
+                            
+                            .header-account{
+                                position: relative;
+                                .dropdown-content{
+                                    position: absolute;
+                                    background-color: $bg-white;
+                                    box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.1);
+                                    padding: 15px;
+                                    top: 65px;
+                                    left: -93px;
+                                    width: 120px;
+                                    transform: rotateX(90deg);
+                                    transition: all 0.5s ease;
+                                    transform-origin: top;
+                                    z-index: 2;
+                                    &.active{
+                                        transform: rotateX(0);
+                                    }
+                                    ul{
+                                        display: flex;
+                                        flex-direction: column;
+                                        gap: 10px;
+                                        a{
+                                            font-size: 12px;
+                                        }
+                                    }
+                                    li{
+                                        &:hover{
+                                            button{
+                                                color: $theme-color;
+                                                font-weight: 900;
+                                            }
+                                        }
+                                        span{
+                                            text-transform: capitalize;
+                                        }
+                                    }
+                                    
+                                }
+                            }
+                            
+                            .header-cart{
+                                position: relative;
+                                &.active{
+                                    
+                                }
+                                .cart-content{
+                                    position: absolute;
+                                    background: #ffffff;
+                                    box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.1);
+                                    color: #000000;
+                                    padding: 15px;
+                                    top: 64px;
+                                    right: 0;
+                                    width: 350px;
+                                    transform: rotateX(90deg);
+                                    transition: all 0.5s ease 0s;
+                                    transform-origin: top;
+                                    z-index: 2;
+                                    &.active{
+                                        transform: rotateX(0deg);
+                                    }
+                                    .cart-list{
+                                        overflow: auto;
+                                        max-height: 300px;
+                                        width: 100%;
+                                        display: flex;
+                                        flex-direction: column;
+                                        padding-right: 10px;
+                                        .cart-item{
+                                            display: flex;
+                                            flex-direction: row;
+                                            justify-content: space-between;
+                                            border-bottom: 1px solid #ddd8d8;
+                                            padding: 15px 0;
+                                            img{
+                                                width: 100px;
+                                            }
+                                            .cart-item-desc li{
+                                                text-transform: capitalize;
+                                            }
+                                            .cart-delete-btn button{
+                                                background: $theme-color;
+                                                i{
+                                                    font-size: 15px;
+                                                    color: $bg-white;
+                                                }
+                                                &:hover{
+                                                    background-color: $black;
+                                                    color: $white;
+                                                }
+                                            }
+                                        }
+                                    }
+                                    .cart-total{
+                                        margin-block: 15px;
+                                        ul{
+                                            display: flex;
+                                            justify-content: space-between;
+                                            li{
+                                                text-transform: capitalize;
+                                            }
+                                        }
+                                    }
+                                    .cart-buttons{
+                                        margin-block: 15px;
+                                        a{
+                                            border-radius: 0;
+                                            text-transform: uppercase;
+                                            font-size: 12px;
+                                        }
+                                        
+                                    }
+                                }
+                            }
+                        }
                         
                     }
-                }
-            }
-        }
-
-    }
-}
-
-
-.mobile-menu{
-
-    position: fixed;
-    top: 0;
-    right: 0;
-    z-index: 999999;
-    height: 100vh;
-    transform: translateX(100%);
-    transition: all 0.5s ease;
-    background: $white;
-
-    &.active{
-        transform: translateX(0);
-        transition: all 0.5s ease;
-    }
-
-    .mobile-top{
-        display: flex;
-        flex-direction: row;
-
-        .mobile-button-close{
-            width: 60px;
-            background: #343538;
-            border: none;
-            color: $bg-white;
-            height: 65px;
-            i
-            {
-                font-size: 30px;
-                color: $bg-white;
-            }
-        }
-
-        .mobile-search{
-            position: relative;
-            width: 300px;
-
-            input{
-                height: 65px;
-                background: revert;
-            }
-            button{
-                position: absolute;
-                right: 0;
-                top: 0;
-                background: transparent;
-                i{
-                    font-size: 18px;
-                    color: gray;
-                }
-            }
-        }
-    }
-
-    .mobile-nav{
-        padding: 30px;
-        box-shadow: $shadow;
-        background: $white;
-        height: auto;
-
-        nav{
-            a{
-                text-transform: uppercase;
-            }   
-           & > ul{
-                li{
-                    padding-bottom: 10px;
-                    &.menu-item-has-children 
-                    {
-                        & > a{
-                            font-weight: 600;
+                    
+                    .search-results-container{
+                        border: 1px solid #eee;
+                        padding-block: 10px;
+                        animation: opacity 1s ease;
+                        .search-results{
+                            //    
+                            ul{
+                                li{
+                                    padding-bottom: 10px;
+                                }
+                            }
                         }
-                        position: relative;
-                        &.active{
-                            .sub-menu{
-                                visibility: visible !important;
-                                height: 100%;
-                                opacity: 1;
-
-                                & > .sub-menu-has-children{
-                                    &.active{
-                                        .sub-sub-menu{
-                                            visibility: visible !important;
-                                            height: 100%;
-                                            opacity: 1;
-                                            padding: 10px 30px;
+                    }
+                    
+                    @keyframes opacity {
+                        from{
+                            opacity: 0;
+                        }
+                        to{
+                            opacity: 1;
+                        }
+                    }
+                }
+                
+                
+                .mobile-menu{
+                    
+                    position: fixed;
+                    top: 0;
+                    right: 0;
+                    z-index: 999999;
+                    height: 100vh;
+                    transform: translateX(100%);
+                    transition: all 0.5s ease;
+                    background: $white;
+                    
+                    &.active{
+                        transform: translateX(0);
+                        transition: all 0.5s ease;
+                    }
+                    
+                    .mobile-top{
+                        display: flex;
+                        flex-direction: row;
+                        
+                        .mobile-button-close{
+                            width: 60px;
+                            background: #343538;
+                            border: none;
+                            color: $bg-white;
+                            height: 65px;
+                            i
+                            {
+                                font-size: 30px;
+                                color: $bg-white;
+                            }
+                        }
+                        
+                        .mobile-search{
+                            position: relative;
+                            width: 300px;
+                            
+                            input{
+                                height: 65px;
+                                background: revert;
+                            }
+                            button{
+                                position: absolute;
+                                right: 0;
+                                top: 0;
+                                background: transparent;
+                                i{
+                                    font-size: 18px;
+                                    color: gray;
+                                }
+                            }
+                        }
+                    }
+                    
+                    .mobile-nav{
+                        padding: 30px;
+                        box-shadow: $shadow;
+                        background: $white;
+                        height: auto;
+                        
+                        nav{
+                            a{
+                                text-transform: uppercase;
+                            }   
+                            & > ul{
+                                li{
+                                    padding-bottom: 10px;
+                                    &.menu-item-has-children 
+                                    {
+                                        & > a{
+                                            font-weight: 600;
                                         }
-
-                                        .menu-expand{
+                                        position: relative;
+                                        &.active{
+                                            .sub-menu{
+                                                visibility: visible !important;
+                                                height: 100%;
+                                                opacity: 1;
+                                                
+                                                & > .sub-menu-has-children{
+                                                    &.active{
+                                                        .sub-sub-menu{
+                                                            visibility: visible !important;
+                                                            height: 100%;
+                                                            opacity: 1;
+                                                            padding: 10px 30px;
+                                                        }
+                                                        
+                                                        .menu-expand{
+                                                            position: absolute;
+                                                            cursor: pointer;
+                                                            right: 0;
+                                                            top: 25px;
+                                                            & > .fa-minus{
+                                                                display: block;
+                                                            }
+                                                            & > .fa-plus{
+                                                                display: none;
+                                                            }
+                                                        }
+                                                    }
+                                                    .sub-sub-menu{
+                                                        visibility: hidden ;
+                                                        height:0;
+                                                        opacity: 0;
+                                                    }
+                                                }
+                                                
+                                                & > .menu-expand{
+                                                    position: absolute;
+                                                    cursor: pointer;
+                                                    right: 0;
+                                                    top: 0;
+                                                    & > .fa-minus{
+                                                        display: block;
+                                                    }
+                                                    & > .fa-plus{
+                                                        display: none;
+                                                    }
+                                                }
+                                                
+                                                &.active{
+                                                    & > .sub-sub-menu{
+                                                        visibility: visible;
+                                                        height: 100%;
+                                                        opacity: 1;
+                                                    }
+                                                    & > .menu-expand{
+                                                        position: absolute;
+                                                        cursor: pointer;
+                                                        right: 0;
+                                                        top: 0;
+                                                        & > .fa-minus{
+                                                            display: none;
+                                                        }
+                                                    }
+                                                    
+                                                }
+                                                
+                                                .sub-sub-menu{
+                                                    visibility: hidden;
+                                                    height: 0;
+                                                    transition: 0.3s;
+                                                    opacity: 0;
+                                                }
+                                            }
+                                            
+                                            & > .menu-expand{
+                                                position: absolute;
+                                                cursor: pointer;
+                                                right: 0;
+                                                top: 0;
+                                                & > .fa-minus{
+                                                    display: block;
+                                                }
+                                                & > .fa-plus{
+                                                    display: none;
+                                                }
+                                            }
+                                        }
+                                        .sub-menu{
+                                            
+                                            visibility: hidden;
+                                            height: 0;
+                                            transition: 0.3s;
+                                            opacity: 0;
+                                            padding-left: 20px;
+                                            padding-top: 10px;
+                                            
+                                            & > .menu-expand{
+                                                position: absolute;
+                                                cursor: pointer;
+                                                right: 0;
+                                                top: 0;
+                                                & > .fa-minus{
+                                                    display: none;
+                                                }
+                                            }
+                                            
+                                            & > .sub-sub-menu{
+                                                visibility: hidden;
+                                                height: 0;
+                                                transition: 0.3s;
+                                                opacity: 0;
+                                                padding-left: 20px;
+                                                padding-top: 10px;
+                                            }
+                                            
+                                        }
+                                        &  .menu-expand{
                                             position: absolute;
                                             cursor: pointer;
                                             right: 0;
-                                            top: 25px;
+                                            top: 0;
                                             & > .fa-minus{
-                                                display: block;
-                                            }
-                                            & > .fa-plus{
                                                 display: none;
                                             }
                                         }
                                     }
-                                    .sub-sub-menu{
-                                        visibility: hidden ;
-                                        height:0;
-                                        opacity: 0;
-                                    }
-                                }
-
-                                & > .menu-expand{
-                                    position: absolute;
-                                    cursor: pointer;
-                                    right: 0;
-                                    top: 0;
-                                    & > .fa-minus{
-                                        display: block;
-                                    }
-                                    & > .fa-plus{
-                                        display: none;
-                                    }
-                                }
-
-                                &.active{
-                                    & > .sub-sub-menu{
-                                        visibility: visible;
-                                        height: 100%;
-                                        opacity: 1;
-                                    }
-                                    & > .menu-expand{
-                                        position: absolute;
-                                        cursor: pointer;
-                                        right: 0;
-                                        top: 0;
-                                        & > .fa-minus{
-                                            display: none;
+                                    
+                                    &.menu-item{
+                                        
+                                        padding-bottom: 20px;
+                                        a{
+                                            font-weight: 600;
                                         }
                                     }
-
-                                }
-
-                                .sub-sub-menu{
-                                    visibility: hidden;
-                                    height: 0;
-                                    transition: 0.3s;
-                                    opacity: 0;
-                                }
-                            }
-
-                            & > .menu-expand{
-                                position: absolute;
-                                cursor: pointer;
-                                right: 0;
-                                top: 0;
-                                & > .fa-minus{
-                                    display: block;
-                                }
-                                & > .fa-plus{
-                                    display: none;
                                 }
                             }
                         }
-                        .sub-menu{
-
-                            visibility: hidden;
-                            height: 0;
-                            transition: 0.3s;
-                            opacity: 0;
-                            padding-left: 20px;
-                            padding-top: 10px;
-                            
-                            & > .menu-expand{
-                                position: absolute;
-                                cursor: pointer;
-                                right: 0;
-                                top: 0;
-                                & > .fa-minus{
-                                    display: none;
-                                }
-                            }
-
-                            & > .sub-sub-menu{
-                                visibility: hidden;
-                                height: 0;
-                                transition: 0.3s;
-                                opacity: 0;
-                                padding-left: 20px;
-                                padding-top: 10px;
-                            }
-                           
-                        }
-                        &  .menu-expand{
-                            position: absolute;
-                            cursor: pointer;
-                            right: 0;
-                            top: 0;
-                            & > .fa-minus{
-                                display: none;
-                            }
-                        }
-                    }
-
-                    &.menu-item{
                         
-                            padding-bottom: 20px;
-                            a{
-                                font-weight: 600;
-                            }
                     }
-                }
-            }
-        }
-
-    }
-
-    .mobile-lang{
-        padding: 30px;
-        box-shadow: $shadow;
-        background: $white;
-        height: auto;
-
-        & > .wrapper{
-            display: grid;
-            grid-template-rows: auto auto;
-            gap: 20px;
-
-            .lang-widget{
-
-                .title{
-                    font-size: 15px;
-                    font-weight: 600;
                     
-                  }
-                select{
-                    padding: 5px 0;
-                    border: 1px solid #ddd;
-                    margin-top: 15px;
-                    option{
-                    text-transform: capitalize;
+                    .mobile-lang{
+                        padding: 30px;
+                        box-shadow: $shadow;
+                        background: $white;
+                        height: auto;
+                        
+                        & > .wrapper{
+                            display: grid;
+                            grid-template-rows: auto auto;
+                            gap: 20px;
+                            
+                            .lang-widget{
+                                
+                                .title{
+                                    font-size: 15px;
+                                    font-weight: 600;
+                                    
+                                }
+                                select{
+                                    padding: 5px 0;
+                                    border: 1px solid #ddd;
+                                    margin-top: 15px;
+                                    option{
+                                        text-transform: capitalize;
+                                    }
+                                }
+                            }
+                            
+                            
+                        }
                     }
+                    
+                    .mobile-contact{
+                        padding: 30px;
+                        box-shadow: $shadow;
+                        background: $white;
+                        height: auto;
+                        
+                        & > .wrapper{
+                            display: grid;
+                            grid-template-rows: auto auto;
+                            gap: 10px;
+                            
+                            & .contact-widget{
+                                span{
+                                    margin-left: 10px;
+                                    font-size: 13px;
+                                }
+                            }
+                        }
+                    }
+                    
                 }
-            }
-
-
-        }
-    }
-    
-    .mobile-contact{
-        padding: 30px;
-        box-shadow: $shadow;
-        background: $white;
-        height: auto;
-
-        & > .wrapper{
-            display: grid;
-            grid-template-rows: auto auto;
-            gap: 10px;
-
-            & .contact-widget{
-                span{
-                    margin-left: 10px;
-                    font-size: 13px;
-                }
-            }
-        }
-    }
-
-}

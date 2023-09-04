@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { multilanguage } from "redux-multilanguage";
 
-const MainNav = () => {
+const MainNav = ({strings}) => {
   const menuExpand = document.querySelectorAll(".menu-expand");
 
   const sideSubMenu = (e) => {
@@ -19,12 +20,12 @@ const MainNav = () => {
       <ul className="main-menu-list">
         <li className="menu-item">
           <Link to="/">
-            <span>Acceuil</span>
+            <span>{strings['home']}</span>
           </Link>
         </li>
         <li className="menu-item">
           <Link to="/">
-            <span>Catégories</span>
+            <span>{strings['category']}</span>
             <i className="fa fa-angle-down"></i>
           </Link>
           <div className="sub-menu-content ">
@@ -32,18 +33,30 @@ const MainNav = () => {
               <li className="sub-menu-item">
                 <Link className="fw-light">
                   <div className="icon d-none"></div>
-                  <span>jeux vidéos & consoles</span>
+                  <span>{strings['gaming']}</span>
                 </Link>
                 <div className="sub-content sub-sub">
                   <ul>
                     <li className="">
-                      <a className="">playstation 5</a>
+                      <Link className="" to="/produit-detail/2/blazer-man">PC</Link>
+                    </li>{" "}
+                    <li className="">
+                      <Link className="" to="/produit-detail/2/blazer-man">xbox 360</Link>
                     </li>
                     <li className="">
-                      <a className="">playstation 4</a>
+                      <Link className="" to="/produit-detail/2/blazer-man">playstation 5</Link>
                     </li>
                     <li className="">
-                      <a className="">xbox 360</a>
+                      <Link className="" to="/produit-detail/2/blazer-man">playstation 4</Link>
+                    </li>
+                    <li className="">
+                      <Link className="" to="/produit-detail/2/blazer-man">Réalité virtuelle</Link>
+                    </li>
+                    <li className="">
+                      <Link className="" to="/produit-detail/2/blazer-man">Nitendo Switch</Link>
+                    </li>{" "}
+                    <li className="">
+                      <Link className="" to="/produit-detail/2/blazer-man">Xbox Series X</Link>
                     </li>
                   </ul>
                 </div>
@@ -51,88 +64,141 @@ const MainNav = () => {
               <li className="sub-menu-item">
                 <Link className="fw-light">
                   <div className="icon d-none"></div>
-                  <span>Musique</span>
+                  <span>{strings['beauty']}</span>
                 </Link>
                 <div className="sub-content sub-sub">
                   <ul>
                     <li className="">
-                      <a className="">pop</a>
+                      <Link className="" to="/produit-detail/2/blazer-man">Santé et soins du corps</Link>
                     </li>
                     <li className="">
-                      <a className="">rnb</a>
+                      <Link className="" to="/produit-detail/2/blazer-man">Homme</Link>
                     </li>
                     <li className="">
-                      <a className="">classic country</a>
+                      <Link className="" to="/produit-detail/2/blazer-man">Bio</Link>
+                    </li>
+                    <li className="">
+                      <Link className="" to="/produit-detail/2/blazer-man">Cosmétiques</Link>
+                    </li>
+                    <li className="">
+                      <Link className="" to="/produit-detail/2/blazer-man">Pharmacetique</Link>
                     </li>
                   </ul>
                 </div>
               </li>
               <li className="sub-menu-item">
-                <Link className="fw-light">Livres</Link>
+                <Link className="fw-light">
+                  <div className="icon d-none"></div>
+                  <span>{strings['high-tech']}</span>
+                </Link>
+                <div className="sub-content sub-sub">
+                  <ul>
+                    <li className="">
+                      <Link className="" to="/produit-detail/2/blazer-man">ordinateurs portables</Link>
+                    </li>
+                    <li className="">
+                      <Link className="" to="/produit-detail/2/blazer-man">tablettes</Link>
+                    </li>
+                    <li className="">
+                      <Link className="" to="/produit-detail/2/blazer-man">réseaux</Link>
+                    </li>
+                    <li className="">
+                      <Link className="" to="/produit-detail/2/blazer-man">ogiciels</Link>
+                    </li>
+                    <li className="">
+                      <Link className="" to="/produit-detail/2/blazer-man">accésoires</Link>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+              <li className="sub-menu-item">
+                <Link className="fw-light">
+                  <div className="icon d-none"></div>
+                  <span>{strings['books']}</span>
+                </Link>
+                <div className="sub-content sub-sub">
+                  <ul>
+                    <li className="">
+                      <Link className="" to="/produit-detail/2/blazer-man">Ebook Kindle</Link>
+                    </li>
+                    <li className="">
+                      <Link className="" to="/produit-detail/2/blazer-man">Prime Reading</Link>
+                    </li>
+                    <li className="">
+                      <Link className="" to="/produit-detail/2/blazer-man">manuels scolaires</Link>
+                    </li>
+                  </ul>
+                </div>
               </li>
             </ul>
           </div>
         </li>
         <li className="menu-item">
           <Link to="/">
-            <span>Collections</span>
+            <span>{strings['collections']}</span>
             <i className="fa fa-angle-down"></i>
           </Link>
           <div className="sub-menu-content pb-0">
             <ul className="sub-menu-list">
               <li className="sub-menu-item">
-                <Link>meilleurs ventes</Link>
+                <Link>meilleures ventes</Link>
                 <div className="sub-content">
                   <ul>
                     <li>
-                      <a>Produit 1</a>
+                      <Link to="/produit-detail/2/blazer-man">Console PS5</Link>
                     </li>
                     <li>
-                      <a>Produit 2</a>
+                      <Link to="/produit-detail/2/blazer-man">Razer Raptor 27</Link>
                     </li>
                     <li>
-                      <a>Produit 3</a>
+                      <Link to="/produit-detail/2/blazer-man">Logitech G Pro</Link>
                     </li>
                     <li>
-                      <a>Produit 4</a>
+                      <Link to="/produit-detail/2/blazer-man">WC Freeze Maxwell</Link>
                     </li>
                     <li>
-                      <a>Produit 5</a>
+                      <Link to="/produit-detail/2/blazer-man">Hyper X Cloud II </Link>
                     </li>
                     <li>
-                      <a>Produit 6</a>
+                      <Link to="/produit-detail/2/blazer-man">Iron Flame ( Books)</Link>
                     </li>
                   </ul>
                 </div>
               </li>
               <li className="sub-menu-item">
-                <Link>nouvelles arrivages</Link>
+                <Link>Noueaux arrivages</Link>
                 <div className="sub-content">
                   <ul>
                     <li>
-                      <a>Produit 1</a>
+                      <Link to="/produit-detail/2/blazer-man">Lampe UV sèche</Link>
                     </li>
                     <li>
-                      <a>Produit 2</a>
+                      <Link to="/produit-detail/2/blazer-man">Tom Tom GPS</Link>
                     </li>
                     <li>
-                      <a>Produit 3</a>
+                      <Link to="/produit-detail/2/blazer-man">EA Sport FC 24</Link>
                     </li>
                     <li>
-                      <a>Produit 4</a>
+                      <Link to="/produit-detail/2/blazer-man">Samsung Galaxy S9</Link>
                     </li>
                     <li>
-                      <a>Produit 5</a>
+                      <Link to="/produit-detail/2/blazer-man">HP EliteDesk 800 G5 Mini PC</Link>
                     </li>
                     <li>
-                      <a>Produit 6</a>
+                      <Link to="/produit-detail/2/blazer-man">Dell Chromebook 11 3180</Link>
                     </li>
                   </ul>
                 </div>
               </li>
             </ul>
             <div className="mega-menu-img">
-              <img src={process.env.REACT_APP_PUBLIC_URL + `./assets/img/banner/banner-4.png`}  alt="banner" />
+              <img
+                src={
+                  process.env.REACT_APP_PUBLIC_URL +
+                  `./assets/img/banner/banner-4.png`
+                }
+                alt="banner"
+              />
             </div>
           </div>
         </li>
@@ -141,4 +207,4 @@ const MainNav = () => {
   );
 };
 
-export default MainNav;
+export default multilanguage(MainNav);

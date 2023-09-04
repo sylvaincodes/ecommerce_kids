@@ -1,0 +1,38 @@
+.compare-table{
+    border: 1px solid #eee;
+    table{
+
+        tbody{
+            tr{
+                
+                & > td:first-child{
+                    background: #eee;
+                    text-align: center;
+                    font-size: 20px;
+                    text-transform: capitalize;
+                    
+                }
+
+                td{
+                    padding-inline: 50px;
+                    padding-bottom: 30px;
+                    padding-top: 30px;
+                    border: 1px solid #eee;
+                    text-align: center;
+                }
+
+                i{
+                    font-size: 30px;
+                    color: $theme-color;
+                    text-align: center;
+                    margin-bottom: 20px;
+                }
+                .title{
+                    text-transform: capitalize;
+                    font-weight: 600;
+                    margin-block: 20px;
+                }
+            }
+        }
+    }
+}

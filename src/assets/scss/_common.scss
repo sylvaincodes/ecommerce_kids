@@ -96,6 +96,7 @@ button{
 }
 
 label{
+    text-transform: capitalize;
     span{
         margin-left: 20px;
         cursor: pointer;
@@ -105,4 +106,33 @@ label{
 .btn-hover-2{
     background: black;
     color: white;
+}
+
+
+.animated-btn{
+    
+    a{
+        font-size: 12px;
+        line-height: 1;
+        display: inline-block;
+        padding: 15px ;
+        text-transform: uppercase;
+        color: #000000;
+        border: 1px solid #000000;
+        &:hover {
+            color: #fff;
+            border: 1px solid $theme-color;
+        }
+    }   
+}
+
+.fa-star-o {
+    &.yellow{
+        color: $s-theme-color;
+        
+    }
+}
+
+i{
+    cursor: pointer;
 }

@@ -2,8 +2,9 @@ import React, { Fragment } from 'react'
 import Countdown from "react-countdown-now";
 import Renderer from '../../components/countdown/Renderer';
 import { Link } from 'react-router-dom';
+import { multilanguage } from 'redux-multilanguage'
 
-const CountdownNow = ({ dateTime }) => {
+const CountdownNow = ({ dateTime,strings }) => {
   return (
     <Fragment>
         <div className='countdown-area'>
@@ -12,12 +13,12 @@ const CountdownNow = ({ dateTime }) => {
                     <div className='col-12'>
                         <div className='countdown-content'>
                             <h3 className='title'>
-                                offre du jour
+                                {strings['offre_du_jour']}
                             </h3> 
                             <Countdown date={new Date(dateTime)} renderer={Renderer} />                        
                             <div className='custom-btn btn-hover'>
                                 <Link className=' rounden-btn'>
-                                    acheter 
+                                {strings['acheter']} 
                                 </Link>
                             </div>
                         </div>
@@ -34,4 +35,4 @@ const CountdownNow = ({ dateTime }) => {
   )
 }
 
-export default CountdownNow
+export default multilanguage(CountdownNow)

@@ -1,21 +1,20 @@
 import React from "react";
-import SwiperCore, { EffectCoverflow, Pagination } from "swiper";
 import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.min.css";
+import { multilanguage } from "redux-multilanguage";
 
-// SwiperCore.use([EffectCoverflow, Pagination]);
-// if you want to use array
-const slide_img = [
-  {
-    img: "./assets/img/slider/slider-3.png",
-    title: "meilleurs offres",
-    subtitle: "collections automne 2024",
-    action: "acheter",
-  },
-];
+const HeroSlider = ({ strings }) => {
 
-const HeroSlider = () => {
+  const slide_img = [
+    {
+      img: "./assets/img/slider/slider-3.png",
+      title: `${strings["meilleures_offres"]}`,
+      subtitle: `${strings["collections_offres"]}`,
+      action: `${strings["acheter"]}`
+    },
+  ];
+  
   return (
     <div>
       <Swiper
@@ -64,4 +63,4 @@ const HeroSlider = () => {
   );
 };
 
-export default HeroSlider;
+export default multilanguage(HeroSlider);

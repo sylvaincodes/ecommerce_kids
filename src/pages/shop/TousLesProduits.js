@@ -8,8 +8,9 @@ import ShopProduct from "../../wrappers/shop/ShopProduct";
 import Paginator from "react-hooks-paginator";
 import { useSelector } from 'react-redux'
 import { getSortedProducts } from "../../helpers/product";
+import { multilanguage } from 'redux-multilanguage'
 
-const TousLesProduits = () => {
+const TousLesProduits = ({strings}) => {
 
   const products = useSelector(  (state) => state.productData.products );
 
@@ -23,7 +24,6 @@ const TousLesProduits = () => {
   const [filterSortType, setFilterSortType] = useState("");
   const [filterSortValue, setFilterSortValue] = useState("");
   const [sortedProducts, setSortedProducts] = useState([]);
-  const [openSidebar, setOpenSidebar] = useState(false);
 
   const pageCount = Math.ceil(products.length / pageLimit);
 
@@ -77,10 +77,10 @@ const TousLesProduits = () => {
     <Fragment>
       <Helmet>
         <meta charSet="utf-8" />
-        <title> Ecommerce - Tous les produits </title>
+        <title> {process.env.REACT_APP_SITE_NAME} - Boutique </title>
         <meta
           name="description"
-          content="Page d'affichage de tous les produits de la boutique"
+          content={strings['all_products_description']}
         />
       </Helmet>
 
@@ -90,12 +90,12 @@ const TousLesProduits = () => {
           <div className="container-fluid">
             <div className="row">
               <ul className="breadcrumb">
-                <BreadcrumbItem link="/" title="acceuil"></BreadcrumbItem>
+                <BreadcrumbItem link="/" title={strings['home']}></BreadcrumbItem>
                 <BreadcrumbItem link="#" title="/"></BreadcrumbItem>
                 <BreadcrumbItem
                   link="#"
-                  title="tous les produits"
-                ></BreadcrumbItem>
+                  title={strings['all_products']}
+                >{strings['all_products']}</BreadcrumbItem>
               </ul>
             </div>
           </div>
@@ -108,12 +108,12 @@ const TousLesProduits = () => {
             <div className="row">
               {/* sidebar left */}
               <div className="col-lg-3 d-none d-lg-block">
-                <ShopSidebar products={products}/>
+                <ShopSidebar strings={strings} products={products}/>
               </div>
               {/* product content  */}
               <div className="col-lg-9">
-                <ShopTopBar layout={layout} products={products}/>
-                <ShopProduct layout={layout} products={currentData} />
+                <ShopTopBar strings={strings} layout={layout} products={products}/>
+                <ShopProduct strings={strings} layout={layout} products={currentData} />
 
                 <div className="pro-pagination-style">
                   <Paginator
@@ -139,4 +139,4 @@ const TousLesProduits = () => {
   );
 };
 
-export default TousLesProduits;
+export default multilanguage(TousLesProduits);

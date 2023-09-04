@@ -2,26 +2,38 @@ import React, { useState, Fragment } from "react";
 import { Link } from "react-router-dom";
 import ProductModal from "../../wrappers/product/ProductModal";
 import { fetchProduct } from "../../redux/actions/productActions";
-import { useDispatch} from 'react-redux'
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { NumericFormat } from "react-number-format";
 
-const ProductGridSingle = ({product, discountedPrice, sliderClassName }) => {
-
+const ProductGridSingle = ({
+  product,
+  discountedPrice,
+  sliderClassName,
+  strings,
+}) => {
+  const currency = useSelector((state) => state.currencyData);
   const dispatch = useDispatch();
+
   const likeProduct = (e) => {
     e.target.classList.toggle("active");
   };
 
   const [modal, setModalShow] = useState(false);
+  
   const handleProduct = (product) => {
     dispatch(fetchProduct(product));
   };
 
-
-
   return (
     <Fragment>
       <div
-        className={sliderClassName ? sliderClassName : "col-8 col-xl-3 col-md-6 col-lg-4 col-sm-6"} key={product.id}
+        className={
+          sliderClassName
+            ? sliderClassName
+            : "col-8 col-xl-3 col-md-6 col-lg-4 col-sm-6"
+        }
+        key={product.id}
       >
         <div className="wrapper">
           <div className="product-img">
@@ -29,11 +41,14 @@ const ProductGridSingle = ({product, discountedPrice, sliderClassName }) => {
               to={"/produit-detail/" + product.id + "/" + product.slug}
               onClick={() => handleProduct(product)}
             >
-              <img src={ process.env.REACT_APP_PUBLIC_URL + product.image[0]} className="img-fluid" />
+              <img
+                src={process.env.REACT_APP_PUBLIC_URL + product.image[0]}
+                className="img-fluid"
+              />
               {product.image.length > 1 ? (
                 <img
                   className="product-hover-img img-fluid"
-                  src={process.env.REACT_APP_PUBLIC_URL + + product.image[1]}
+                  src={process.env.REACT_APP_PUBLIC_URL + product.image[1]}
                   alt=""
                 />
               ) : (
@@ -45,27 +60,29 @@ const ProductGridSingle = ({product, discountedPrice, sliderClassName }) => {
                 ) : (
                   ""
                 )}
-                <span className="badge bg-danger">{product.new ? "new" : ""}</span>
+                <span className="badge bg-danger">
+                  {product.new ? "new" : ""}
+                </span>
               </div>
             </Link>
             <div className="product-action">
               <div className="pro-same-action pro-wishlist">
-                <button className="active" title="Ajouter aux favoris">
+                <button className="active" title={strings["add_to_whistle"]}>
                   <i className="pe-7s-like" />
                 </button>
               </div>
 
               <div className="pro-same-action pro-cart">
-                <button className="active" title="Ajouter au panier">
+                <button className="active" title={strings["add_to_cart"]}>
                   <i className="pe-7s-cart" />
-                  <span className="title">ajouter </span>
+                  <span className="title"> {strings["add"]} </span>
                 </button>
               </div>
 
               <div className="pro-same-action pro-quickview">
                 <button
                   className="active"
-                  title="Voir"
+                  title={strings["look"]}
                   onClick={() => setModalShow(true)}
                 >
                   <i className="pe-7s-look" />
@@ -81,12 +98,34 @@ const ProductGridSingle = ({product, discountedPrice, sliderClassName }) => {
                 </h3>
                 <div className="gap-2 d-flex justify-content-between">
                   <span>
-                    {" "}
-                    {discountedPrice ? discountedPrice : product.price} XOF{" "}
+                    <NumericFormat
+                      value={discountedPrice ? discountedPrice : product.price}
+                      thousandsGroupStyle="lakh"
+                      thousandSeparator=" "
+                      decimalSeparator="."
+                      decimalScale={0}
+                      fixedDecimalScale
+                      prefix={""}
+                      suffix={" " + currency.currencySymbol}
+                      displayType="text"
+                    />
                   </span>
 
                   {product.discount != 0 ? (
-                    <del className="text-danger"> {product.price} XOF</del>
+                    <del className="text-danger">
+                      {" "}
+                      <NumericFormat
+                        value={product.price}
+                        thousandsGroupStyle="lakh"
+                        thousandSeparator=" "
+                        decimalSeparator="."
+                        decimalScale={0}
+                        fixedDecimalScale
+                        prefix={""}
+                        suffix={" " + currency.currencySymbol}
+                        displayType="text"
+                      />
+                    </del>
                   ) : (
                     ""
                   )}

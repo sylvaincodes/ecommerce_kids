@@ -1,47 +1,62 @@
 import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { changeLanguage } from "redux-multilanguage";
+import { setCurrency } from "../../redux/actions/currencyActions";
+import { multilanguage } from 'redux-multilanguage'
 
-const LanguageCurrency = () => {
+const LanguageCurrency = ({strings}) => {
+
+  const dispatch = useDispatch();
   const changeLanguageTrigger = (e) => {
     const langCode = e.target.value;
-    //Todo
-    //action here
+    dispatch(changeLanguage(langCode));
   };
 
   const changeCurrencyTrigger = (e) => {
     const currencyCode = e.target.value;
-    //Todo
-    //action here
+    dispatch(setCurrency(currencyCode));
   };
 
-  return (
+  const language = useSelector( (state) => state.multilanguage);
+  const currency = useSelector( (state) => state.currencyData);
+
+return (
     <Fragment>
       <div className="language-currency-wrap">
         <div className="same-language-currency">
           <Link className="d-flex gap-2 align-items-center">
-            <span>Français</span>
+            <span>
+            
+            {
+            language.currentLanguageCode == "fr" ? strings['francais']
+            :  language.currentLanguageCode == "en" ? strings['anglais']
+            : ""
+            }
+            
+            </span>
             <i className="fa fa-angle-down" />
           </Link>
 
           <div className="dropdown-content langue">
             <ul>
               <li>
-                <button
-                  className="active"
+                <button value="fr"
+                  className={ language.currentLanguageCode == "fr" ? "active" : "" } 
                   onClick={(e) => {
                     changeLanguageTrigger(e);
                   }}
                 >
-                  français
+                  {strings['francais']}
                 </button>
               </li>
               <li>
-                <button
+                <button value="en"  className={ language.currentLanguageCode == "en" ? "active" : "" } 
                   onClick={(e) => {
                     changeLanguageTrigger(e);
                   }}
                 >
-                  anglais
+                  {strings['anglais']}
                 </button>
               </li>
             </ul>
@@ -50,7 +65,7 @@ const LanguageCurrency = () => {
 
         <div className="same-language-currency">
           <Link className="d-flex gap-2 align-items-center">
-            <span>EUR</span>
+            <span>{currency.currencyName}</span>
             <i className="fa fa-angle-down" />
           </Link>
 
@@ -59,22 +74,32 @@ const LanguageCurrency = () => {
               <li>
                 <button
                   className="active"
-                  value="euro"
+                  value="EUR"
                   onClick={(e) => {
                     changeCurrencyTrigger(e);
                   }}
                 >
-                  euro
+                   {strings['euro']}
                 </button>
               </li>
               <li>
                 <button
-                  value="usd"
+                  value="USD"
                   onClick={(e) => {
                     changeCurrencyTrigger(e);
                   }}
                 >
-                  usd
+                   {strings['usd']}
+                </button>
+              </li>
+              <li>
+                <button
+                  value="XOF"
+                  onClick={(e) => {
+                    changeCurrencyTrigger(e);
+                  }}
+                >
+                   {strings['xof']}
                 </button>
               </li>
             </ul>
@@ -92,4 +117,4 @@ const LanguageCurrency = () => {
   );
 };
 
-export default LanguageCurrency;
+export default multilanguage(LanguageCurrency);

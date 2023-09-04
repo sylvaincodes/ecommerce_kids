@@ -3,8 +3,9 @@ import { Tab, Nav } from "react-bootstrap";
 import { getDiscountPrice } from "../../helpers/product";
 import ProductSingle from "../../components/product/ProductSingle";
 import Carousel from "react-elastic-carousel";
+import { multilanguage } from "redux-multilanguage";
 
-const TabProduct = ({ products,category }) => {
+const TabProduct = ({ products,category, strings }) => {
   const [width, setWidth] = useState(window.innerWidth);
   return (
     <Fragment>
@@ -14,20 +15,21 @@ const TabProduct = ({ products,category }) => {
             <Tab.Container defaultActiveKey="newarrivals">
               <div className="product-top-bar section-border">
                 <div className="section-title">
-                  <h3 className="title">produits populaires</h3>
+                  <h3 className="title"> { strings['produits_populaires'] } </h3>
                 </div>
                 <Nav className="product-list-nav">
                   <Nav.Item>
                     <Nav.Link eventKey="newarrivals">
-                      <h6>nouvelles arrivales</h6>
+                      <h6>{ strings['nouvelles_arrivages'] } </h6>
                     </Nav.Link>
                   </Nav.Item>
                   <Nav.Item>
                     <Nav.Link eventKey="bestsales">
-                      <h6>meilleures ventes</h6>
+                      <h6>{ strings['meilleurs_ventes'] } </h6>
                     </Nav.Link>
                   </Nav.Item>
                 </Nav>
+                
                 {/* <div className="d-flex gap-2">
                   <button className="btn btn-outline-secondary ">
                     <i className="pe-7s-angle-left "></i>
@@ -36,6 +38,7 @@ const TabProduct = ({ products,category }) => {
                     <i className="pe-7s-angle-right"></i>
                   </button>
                 </div> */}
+                
               </div>
 
               <Tab.Content>
@@ -91,4 +94,4 @@ const TabProduct = ({ products,category }) => {
   );
 };
 
-export default TabProduct;
+export default multilanguage(TabProduct);

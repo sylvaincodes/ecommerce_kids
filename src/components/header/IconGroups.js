@@ -1,13 +1,22 @@
 import React from "react";
 import { useRef } from "react";
+import { NumericFormat } from "react-number-format";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { multilanguage } from "redux-multilanguage";
+import { useState } from "react";
+import { useDeferredValue } from "react";
+import { Autocomplete, TextField } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import { fetchProduct } from "../../redux/actions/productActions";
+import { useDispatch } from "react-redux";
 
-const IconGroups = () => {
+const IconGroups = ({ strings }) => {
   const focusSearchInput = useRef();
+  const currency = useSelector((state) => state.currencyData);
 
   const handleClick = (e) => {
     e.currentTarget.nextSibling.classList.toggle("active");
-    focusSearchInput.current.focus();
   };
 
   const handleAccountClick = (e) => {
@@ -18,9 +27,273 @@ const IconGroups = () => {
     e.currentTarget.nextSibling.classList.toggle("active");
   };
 
-  const showMobileMenu = () => {
+  const showMobileMenu = ({ strings }) => {
     document.querySelector(".mobile-menu").classList.add("active");
   };
+
+  const [query, setQuery] = useState("");
+  const deferredQuery = useDeferredValue(query);
+
+  const handleSubmitSearch = (e) => {
+    e.preventDefault();
+    console.log(query);
+  };
+
+  const dispatch = useDispatch();
+
+  const options = [
+    {
+      id: 1,
+      image: [
+        "./assets/img/product/fashion/1.jpg",
+        "./assets/img/product/fashion/2.jpg",
+      ],
+      name: "jacket kid",
+      slug: "jacket-kid",
+      price: "1000",
+      discount: "0",
+      new: true,
+      collection: "bestsales",
+      rating: 3,
+      shortDescription:
+        "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
+      variation: [
+        {
+          color: "white",
+          image: "/assets/img/product/fashion/1.jpg",
+          size: [
+            {
+              name: "x",
+              stock: 3,
+            },
+            {
+              name: "m",
+              stock: 2,
+            },
+            {
+              name: "xl",
+              stock: 5,
+            },
+          ],
+        },
+        {
+          color: "black",
+          image: "/assets/img/product/fashion/8.jpg",
+          size: [
+            {
+              name: "x",
+              stock: 4,
+            },
+            {
+              name: "m",
+              stock: 7,
+            },
+            {
+              name: "xl",
+              stock: 9,
+            },
+            {
+              name: "xxl",
+              stock: 1,
+            },
+          ],
+        },
+        {
+          color: "brown",
+          image: "/assets/img/product/fashion/3.jpg",
+          size: [
+            {
+              name: "x",
+              stock: 1,
+            },
+            {
+              name: "m",
+              stock: 2,
+            },
+            {
+              name: "xl",
+              stock: 4,
+            },
+            {
+              name: "xxl",
+              stock: 0,
+            },
+          ],
+        },
+      ],
+      saleCount: 54,
+      category: "fashion",
+      tag: ["fashion", "men", "jacket", "full sleeve"],
+    },
+    {
+      id: 2,
+      image: [
+        "./assets/img/product/fashion/2.jpg",
+        "./assets/img/product/fashion/1.jpg",
+      ],
+      name: "blazer man",
+      slug: "blazer-man",
+      price: "2000",
+      discount: "10",
+      new: false,
+      collection: "bestsales",
+      rating: 3,
+      shortDescription:
+        "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
+      variation: [
+        {
+          color: "white",
+          image: "/assets/img/product/fashion/1.jpg",
+          size: [
+            {
+              name: "x",
+              stock: 3,
+            },
+            {
+              name: "m",
+              stock: 2,
+            },
+            {
+              name: "xl",
+              stock: 5,
+            },
+          ],
+        },
+        {
+          color: "black",
+          image: "/assets/img/product/fashion/8.jpg",
+          size: [
+            {
+              name: "x",
+              stock: 4,
+            },
+            {
+              name: "m",
+              stock: 7,
+            },
+            {
+              name: "xl",
+              stock: 9,
+            },
+            {
+              name: "xxl",
+              stock: 1,
+            },
+          ],
+        },
+        {
+          color: "brown",
+          image: "/assets/img/product/fashion/3.jpg",
+          size: [
+            {
+              name: "x",
+              stock: 1,
+            },
+            {
+              name: "m",
+              stock: 2,
+            },
+            {
+              name: "xl",
+              stock: 4,
+            },
+            {
+              name: "xxl",
+              stock: 0,
+            },
+          ],
+        },
+      ],
+      saleCount: 54,
+      category: "fashion",
+      tag: ["fashion", "men", "jacket", "full sleeve"],
+    },
+    {
+      id: 3,
+      image: [
+        "./assets/img/product/fashion/3.jpg",
+        "./assets/img/product/fashion/4.jpg",
+      ],
+      name: "dress women",
+      slug: "dress-women",
+      price: "3700",
+      discount: "10",
+      new: true,
+      collection: "newarrivals",
+      rating: 3,
+      shortDescription:
+        "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
+      variation: [
+        {
+          color: "white",
+          image: "/assets/img/product/fashion/1.jpg",
+          size: [
+            {
+              name: "x",
+              stock: 3,
+            },
+            {
+              name: "m",
+              stock: 2,
+            },
+            {
+              name: "xl",
+              stock: 5,
+            },
+          ],
+        },
+        {
+          color: "black",
+          image: "/assets/img/product/fashion/8.jpg",
+          size: [
+            {
+              name: "x",
+              stock: 4,
+            },
+            {
+              name: "m",
+              stock: 7,
+            },
+            {
+              name: "xl",
+              stock: 9,
+            },
+            {
+              name: "xxl",
+              stock: 1,
+            },
+          ],
+        },
+        {
+          color: "brown",
+          image: "/assets/img/product/fashion/3.jpg",
+          size: [
+            {
+              name: "x",
+              stock: 1,
+            },
+            {
+              name: "m",
+              stock: 2,
+            },
+            {
+              name: "xl",
+              stock: 4,
+            },
+            {
+              name: "xxl",
+              stock: 0,
+            },
+          ],
+        },
+      ],
+      saleCount: 54,
+      category: "fashion",
+      tag: ["fashion", "men", "jacket", "full sleeve"],
+    },
+  ];
+
+  const navigate = useNavigate();
 
   return (
     <div className="wrapper">
@@ -29,16 +302,54 @@ const IconGroups = () => {
           <i className="pe-7s-search"></i>
         </button>
         <div className="search-content">
-          <form className="row">
-            <input
-              ref={focusSearchInput}
-              className="search"
-              type="text"
-            ></input>
-            <button className="search-button" title="Rechecher">
+          <form className="row" onSubmit={handleSubmitSearch}>
+            <Autocomplete
+              // filterOptions={(options, state) => {
+              //   const displayOptions = options.filter((option) => {
+              //      option.name.toUpperCase();
+              //   });
+              //   return displayOptions;
+              // }}
+              limitTags={2}
+              loadingText="Loading"
+              autoSelect={true}
+              autoHighlight={true}
+              autoComplete={true}
+              getOptionLabel={(option) => option.name}
+              disablePortal
+              id="combo-box-demo"
+              options={options}
+              sx={{ width: "100%" }}
+              renderInput={(params) => (
+                <TextField
+                  autoFocus
+                  className="text-capitalize search"
+                  {...params}
+                  label={strings["search"]}
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                  fullWidth
+                  required
+                />
+              )}
+              onChange={(event, values) => {
+                dispatch(fetchProduct(values));
+                navigate("/produit-detail/" + values.id + "/" + values.slug);
+                if (event.key === "Enter") {
+                  // Prevent's default 'Enter' behavior.
+                  // alert(event)
+                  event.defaultMuiPrevented = true;
+                  // your handler code
+                }
+              }}
+            />
+
+            {/* <button className="search-button" title={strings["search"]}>
               <i className="pe-7s-search"></i>
-            </button>
+            </button> */}
           </form>
+
+          {/* <SearchResults query={deferredQuery} deferredQuery={deferredQuery} /> */}
         </div>
       </div>
       <div className="same-style header-account d-none d-lg-block">
@@ -48,37 +359,37 @@ const IconGroups = () => {
         <div className="dropdown-content account">
           <ul>
             <li>
-              <Link to="/">
-                <span>Se connecter</span>
+              <Link to="/login">
+                <span>{strings["login"]}</span>
               </Link>
             </li>
             <li>
-              <Link to="/">
-                <span>S'inscrire</span>
+              <Link to="/signup">
+                <span>{strings["signup"]}</span>
               </Link>
             </li>
             <li>
-              <Link to="/">
-                <span>Mon compte</span>
+              <Link to="/myaccount">
+                <span>{strings["account"]}</span>
               </Link>
             </li>
           </ul>
         </div>
       </div>
       <div className="same-style header-compare>">
-        <Link to="/">
+        <Link to="/compare" title={strings["shuffle"]}>
           <i className="pe-7s-shuffle"></i>
           <span className="count-style">0</span>
         </Link>
       </div>
-      <div className="same-style header-wishlist>">
-        <Link to="/">
+      <div className="same-style header-wishlist">
+        <Link to="/wishlist" title={strings["wishlist"]}>
           <i className="pe-7s-like"></i>
           <span className="count-style">0</span>
         </Link>
       </div>
       <div className="same-style header-cart d-none d-lg-block">
-        <Link onClick={(e) => handleCartClick(e)}>
+        <Link onClick={(e) => handleCartClick(e)} title={strings["see_cart"]}>
           <i className="pe-7s-shopbag"></i>
           <span className="count-style">0</span>
         </Link>
@@ -87,7 +398,10 @@ const IconGroups = () => {
             <li className="cart-item">
               <img
                 className="img-fluid"
-                src={ process.env.REACT_APP_PUBLIC_URL + "./assets/img/product/fashion/1.jpg" }
+                src={
+                  process.env.REACT_APP_PUBLIC_URL +
+                  "./assets/img/product/fashion/1.jpg"
+                }
                 alt="produit"
               />
               <div className="cart-item-desc">
@@ -100,7 +414,7 @@ const IconGroups = () => {
                 </ul>
               </div>
               <div className="cart-delete-btn">
-                <button title="supprimer" className="btn-hover-2">
+                <button title={strings["delete"]} className="btn-hover-2">
                   <i className="fa fa-close"></i>
                 </button>
               </div>
@@ -108,7 +422,10 @@ const IconGroups = () => {
             <li className="cart-item">
               <img
                 className="img-fluid"
-                src={ process.env.REACT_APP_PUBLIC_URL + "./assets/img/product/fashion/2.jpg" }
+                src={
+                  process.env.REACT_APP_PUBLIC_URL +
+                  "./assets/img/product/fashion/2.jpg"
+                }
                 alt="produit"
               />
               <div className="cart-item-desc">
@@ -121,7 +438,7 @@ const IconGroups = () => {
                 </ul>
               </div>
               <div className="cart-delete-btn">
-                <button title="supprimer">
+                <button title={strings["delete"]}>
                   <i className="fa fa-close"></i>
                 </button>
               </div>
@@ -129,17 +446,32 @@ const IconGroups = () => {
           </ul>
           <div className="cart-total">
             <ul>
-              <li>total :</li>
-              <li>200 XOF</li>
+              <li>{strings["total"]}</li>
+              <li>
+                <NumericFormat
+                  value={(200 * currency.currencyRate).toFixed(2)}
+                  thousandsGroupStyle="lakh"
+                  thousandSeparator=" "
+                  decimalSeparator="."
+                  decimalScale={0}
+                  fixedDecimalScale
+                  prefix={""}
+                  suffix={" " + currency.currencySymbol}
+                  displayType="text"
+                />
+              </li>
             </ul>
           </div>
           <div className="cart-buttons">
             <div className="d-grid gap-2">
               <Link to="/cart" className="btn btn-outline-dark btn-lg w-100">
-                panier
+                {strings["cart"]}
               </Link>
-              <Link to="/checkout" className="btn btn-outline-dark btn-lg w-100">
-                payer
+              <Link
+                to="/checkout"
+                className="btn btn-outline-dark btn-lg w-100"
+              >
+                {strings["checkout"]}
               </Link>
             </div>
           </div>
@@ -162,4 +494,4 @@ const IconGroups = () => {
   );
 };
 
-export default IconGroups;
+export default multilanguage(IconGroups);

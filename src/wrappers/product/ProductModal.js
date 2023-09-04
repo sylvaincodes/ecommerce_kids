@@ -2,8 +2,13 @@ import React, { useState, useEffect } from "react";
 import { Modal } from "react-bootstrap";
 import Swiper from "react-id-swiper";
 import ProductRating from "../../components/sub-componenets/ProductRating";
+import { NumericFormat } from "react-number-format";
+import { useSelector } from "react-redux";
+import { multilanguage } from "redux-multilanguage";
 
-const ProductModal = ({ product, discountedPrice, show, onHide }) => {
+const ProductModal = ({ product, discountedPrice, show, onHide, strings }) => {
+  const currency = useSelector((state) => state.currencyData);
+
   const [gallerySwiper, getGallerySwiper] = useState(null);
   const [imagePreview, setImagePreview] = useState("");
   const [thumbnailSwiper, getThumbnailSwiper] = useState(null);
@@ -31,12 +36,11 @@ const ProductModal = ({ product, discountedPrice, show, onHide }) => {
     }
   }, [gallerySwiper, thumbnailSwiper]);
 
-
   const gallerySwiperParams = {
     getSwiper: getGallerySwiper,
     spaceBetween: 10,
     loopedSlides: 4,
-    loop: true
+    loop: true,
   };
 
   const thumbnailSwiperParams = {
@@ -64,10 +68,10 @@ const ProductModal = ({ product, discountedPrice, show, onHide }) => {
     ),
   };
 
-  const handleImagePreview = (e) =>{
-     const img = e.target.src;
-     setImagePreview(img);
-  }
+  const handleImagePreview = (e) => {
+    const img = e.target.src;
+    setImagePreview(img);
+  };
 
   return (
     <Modal
@@ -87,7 +91,11 @@ const ProductModal = ({ product, discountedPrice, show, onHide }) => {
                       <div key={key}>
                         <div className="single-image">
                           <img
-                            src={imagePreview ? imagePreview :process.env.REACT_APP_PUBLIC_URL + single}
+                            src={
+                              imagePreview
+                                ? imagePreview
+                                : process.env.REACT_APP_PUBLIC_URL + single
+                            }
                             className="w-100"
                             alt=""
                           />
@@ -104,7 +112,8 @@ const ProductModal = ({ product, discountedPrice, show, onHide }) => {
                     return (
                       <div key={key}>
                         <div className="single-image">
-                          <img onClick={(e) => handleImagePreview(e)}
+                          <img
+                            onClick={(e) => handleImagePreview(e)}
                             src={process.env.REACT_APP_PUBLIC_URL + single}
                             className="img-thumbnail"
                             alt="product"
@@ -117,23 +126,44 @@ const ProductModal = ({ product, discountedPrice, show, onHide }) => {
             </div>
           </div>
           <div className="col-12 col-md-7">
-            
             <div className="product-details-content">
               <h2 className="title">{product.name}</h2>
               <div className="product-details-price">
                 <span className="discount">
-                  {" "}
-                  {discountedPrice ? discountedPrice : product.price} XOF{" "}
+                  <NumericFormat
+                    value={discountedPrice ? discountedPrice : product.price}
+                    thousandsGroupStyle="lakh"
+                    thousandSeparator=" "
+                    decimalSeparator="."
+                    decimalScale={0}
+                    fixedDecimalScale
+                    prefix={""}
+                    suffix={" " + currency.currencySymbol}
+                    displayType="text"
+                  />
                 </span>
 
                 {discountedPrice ? (
-                  <del className="price"> {product.price} XOF</del>
+                  <del className="price">
+                    {" "}
+                    <NumericFormat
+                      value={product.price}
+                      thousandsGroupStyle="lakh"
+                      thousandSeparator=" "
+                      decimalSeparator="."
+                      decimalScale={0}
+                      fixedDecimalScale
+                      prefix={""}
+                      suffix={" " + currency.currencySymbol}
+                      displayType="text"
+                    />
+                  </del>
                 ) : (
                   ""
                 )}
               </div>
             </div>
-            
+
             {product.rating && product.rating > 0 ? (
               <div className="pro-details-rating-wrap">
                 <div className="pro-details-rating">
@@ -150,7 +180,7 @@ const ProductModal = ({ product, discountedPrice, show, onHide }) => {
 
             <div className="pro-details-size-color">
               <div className="col-5 pro-details-color-wrap">
-                <h5 className="title">couleur</h5>
+                <h5 className="title">{strings["couleur"]}</h5>
                 <div className="pro-details-color-content">
                   {product.variation.map((single, key) => {
                     return (
@@ -181,7 +211,7 @@ const ProductModal = ({ product, discountedPrice, show, onHide }) => {
                 </div>
               </div>
               <div className="col-5 pro-details-size">
-                <h5 className="title">taille</h5>
+                <h5 className="title">{strings["size"]}</h5>
                 <div className="pro-details-size-content">
                   {product.variation &&
                     product.variation.map((single) => {
@@ -219,39 +249,49 @@ const ProductModal = ({ product, discountedPrice, show, onHide }) => {
             </div>
 
             <div className="pro-details-quality">
-                <div className="cart-plus-minus">
-                    <button className="dec qtybutton" onClick={ (e) => setQuantityCount( quantityCount > 1 ? quantityCount -1 : 1) }>
-                        -
-                    </button>
-                    <input
-                        className="cart-plus-minus-box"
-                        type="text"
-                        value={quantityCount}
-                        readOnly
-                      />
-                    <button className="inc qtybutton" onClick={ (e) => setQuantityCount( quantityCount < productStock ? quantityCount + 1 : quantityCount ) }>
-                      +
-                    </button>
-                </div>
+              <div className="cart-plus-minus">
+                <button
+                  className="dec qtybutton"
+                  onClick={(e) =>
+                    setQuantityCount(quantityCount > 1 ? quantityCount - 1 : 1)
+                  }
+                >
+                  -
+                </button>
+                <input
+                  className="cart-plus-minus-box"
+                  type="text"
+                  value={quantityCount}
+                  readOnly
+                />
+                <button
+                  className="inc qtybutton"
+                  onClick={(e) =>
+                    setQuantityCount(
+                      quantityCount < productStock
+                        ? quantityCount + 1
+                        : quantityCount
+                    )
+                  }
+                >
+                  +
+                </button>
+              </div>
 
-                <div className="pro-details-cart">
-                    <button className="">
-                        ajouter au panier
-                    </button>
-                </div>
+              <div className="pro-details-cart">
+                <button className="">{strings["add_to_cart"]}</button>
+              </div>
 
-                <div className="pro-details-actions">
-                    <button title="Ajouter aux comparaisons">
-                       <i className="pe-7s-shuffle"></i> 
-                    </button>
-                   
-                    <button title="Ajouter aux favoris">
-                    <i className="pe-7s-like"></i>
-                    </button>
-                </div>
-                
+              <div className="pro-details-actions">
+                <button title={strings["add_to_shuffle"]}>
+                  <i className="pe-7s-shuffle"></i>
+                </button>
+
+                <button title={strings["add_to_whistle"]}>
+                  <i className="pe-7s-like"></i>
+                </button>
+              </div>
             </div>
-
           </div>
         </div>
       </Modal.Body>
@@ -259,4 +299,4 @@ const ProductModal = ({ product, discountedPrice, show, onHide }) => {
   );
 };
 
-export default ProductModal;
+export default multilanguage(ProductModal);

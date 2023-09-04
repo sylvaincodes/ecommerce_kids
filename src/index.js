@@ -11,6 +11,7 @@ import rootReducer from "./redux/reducers/rootReducer";
 import { composeWithDevTools } from "redux-devtools-extension";
 import "./assets/scss/style.scss";
 
+
 // 👇️ IMPORTANT: use correct ID of your root element
 // this is the ID of the div in your index.html file
 const rootElement = document.getElementById("root");
@@ -194,7 +195,7 @@ const products = [
     ],
     name: "dress women",
     slug: "dress-women",
-    price: "3000",
+    price: "3700",
     discount: "10",
     new: true,
     collection: "newarrivals",
@@ -277,7 +278,7 @@ const products = [
     ],
     name: "boy women",
     slug: "boy-women",
-    price: "3500",
+    price: "3900",
     discount: "10",
     new: true,
     collection: "newarrivals",
@@ -360,7 +361,7 @@ const products = [
     ],
     name: "boy women",
     slug: "boy-women",
-    price: "3500",
+    price: "500",
     discount: "10",
     new: true,
     collection: "newarrivals",

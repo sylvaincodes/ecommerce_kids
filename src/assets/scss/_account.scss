@@ -1,0 +1,26 @@
+
+.myaccount-area{
+
+    .group-list{
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+
+        .list-item{
+            border: 1px solid #eee;
+            padding: 10px;
+            cursor: pointer;
+            
+            &:hover{
+                background: rgb(238, 238, 240);
+            }
+
+            .card-title{
+                font-weight: 800;
+                text-transform: capitalize;
+
+            }
+        }
+    }
+
+}

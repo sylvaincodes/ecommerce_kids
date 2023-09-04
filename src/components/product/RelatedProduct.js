@@ -2,8 +2,11 @@ import React from "react";
 import { Swiper } from "swiper/react";
 import SectionTitle from "../section-title/SectionTitle";
 import ProductGrid from "../../wrappers/product/ProductGrid";
+import { multilanguage } from 'redux-multilanguage'
 
-const RelatedProduct = ({ category }) => {
+
+const RelatedProduct = ({ category, strings }) => {
+
   const settings = {
     loop: false,
     slidesPerView: 4,
@@ -31,7 +34,7 @@ const RelatedProduct = ({ category }) => {
     <div className="related-products-area">
       <div className="row">
         <SectionTitle
-          titleText="Produits similaires"
+          titleText={strings['produits_populaires']}
           subtitleText=""
           subtitleColorClass=""
         />
@@ -43,7 +46,7 @@ const RelatedProduct = ({ category }) => {
                 spaceBetween={20}
                 pagination={{ clickable: true }}
 
-                >
+          >
           <ProductGrid
             category={category}
             limit={9}
@@ -55,4 +58,4 @@ const RelatedProduct = ({ category }) => {
   );
 };
 
-export default RelatedProduct;
+export default multilanguage(RelatedProduct);

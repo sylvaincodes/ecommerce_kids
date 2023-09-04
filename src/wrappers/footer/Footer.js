@@ -1,8 +1,9 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import animateScroll from "react-scroll";
+import { multilanguage } from 'redux-multilanguage'
 
-const Footer = () => {
+const Footer = ({strings}) => {
   const [scroll, setScroll] = useState(0);
   const [top, setTop] = useState(0);
 
@@ -39,20 +40,20 @@ const Footer = () => {
                     />
                   </Link>
                   <p>© 2020</p>
-                  <p>Tout droits réservés</p>
+                  <p>{strings['tous_droits_reserves']}</p>
                 </div>
               </div>
               <div className="col-12 ">
                 <div className="footer-widget">
                   <div className="footer-title">
-                    <h3 className="title"> à propos de nous </h3>
+                    <h3 className="title"> {  strings['a_propos_nous']} </h3>
                   </div>
                   <div className="footer-content">
                     <ul>
-                      <Link to="/">about</Link>
-                      <Link to="/">store location</Link>
-                      <Link to="/">contact</Link>
-                      <Link to="/">order tracking</Link>
+                      <Link to="/">{  strings['a_propos']}</Link>
+                      <Link to="/">{  strings['adresse']}</Link>
+                      <Link to="/">{  strings['contact']}</Link>
+                      <Link to="/">{  strings['livraison']}</Link>
                     </ul>
                   </div>
                 </div>
@@ -61,14 +62,14 @@ const Footer = () => {
               <div className="col-12 ">
                 <div className="footer-widget">
                   <div className="footer-title">
-                    <h3 className="title"> useful links </h3>
+                    <h3 className="title"> {  strings['liens_utiles']} </h3>
                   </div>
                   <div className="footer-content">
                     <ul>
-                      <Link to="/">returns</Link>
-                      <Link to="/">support</Link>
-                      <Link to="/">size guide</Link>
-                      <Link to="/">faqs</Link>
+                      <Link to="/">{  strings['remboursement']}</Link>
+                      <Link to="/">{  strings['support']}</Link>
+                      <Link to="/">{  strings['taille']}</Link>
+                      <Link to="/">{  strings['faqs']}</Link>
                     </ul>
                   </div>
                 </div>
@@ -77,7 +78,7 @@ const Footer = () => {
               <div className="col-12 ">
                 <div className="footer-widget">
                   <div className="footer-title">
-                    <h3 className="title"> follow us </h3>
+                    <h3 className="title"> {  strings['reseaux']} </h3>
                   </div>
                   <div className="footer-content">
                     <ul>
@@ -104,4 +105,4 @@ const Footer = () => {
   );
 };
 
-export default Footer;
+export default  multilanguage(Footer);

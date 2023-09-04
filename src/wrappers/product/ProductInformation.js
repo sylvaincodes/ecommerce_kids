@@ -1,8 +1,9 @@
 import React,{ useState} from "react";
 import { Tab, Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { multilanguage } from 'redux-multilanguage'
 
-const ProductInformation = () => {
+const ProductInformation = ({ strings }) => {
 
     const [desctab, setDesctab] = useState("");
 
@@ -30,10 +31,10 @@ const ProductInformation = () => {
         <div className="description-review-wrapper">
           <ul className="description-review-topbar">
             <li eventkey="aditionnalInfo" className="tab-description  active" onClick={e => handleDescActive(e)}>
-              Informations additionnelles
+              { strings['informations_additionnelles']}
             </li>
-            <li eventkey="description" className="tab-description " onClick={e => handleDescActive(e)}>Description</li>
-            <li eventkey="avis" className="tab-description" onClick={e => handleDescActive(e)}>Avis (3)</li>
+            <li eventkey="description" className="tab-description " onClick={e => handleDescActive(e)}>{ strings['description']}</li>
+            <li eventkey="avis" className="tab-description" onClick={e => handleDescActive(e)}>{ strings['avis']} (3)</li>
           </ul>
           <div  className="description-review-content">
             <div className="tab-content aditionnalInfo">
@@ -41,19 +42,19 @@ const ProductInformation = () => {
                 <ul>
                   <li>
                     {" "}
-                    <span>Poids :</span> 400 g{" "}
+                    <span>{ strings['poids']} : </span> 400 g{" "}
                   </li>
                   <li>
                     {" "}
-                    <span>Dimensions :</span> 10 x 10 cm{" "}
+                    <span>{ strings['dimensions']} :</span> 10 x 10 cm{" "}
                   </li>
                   <li>
                     {" "}
-                    <span>Materiels :</span> 60% cotton, 40% polyester{" "}
+                    <span>{ strings['materials']} :</span> 60% cotton, 40% polyester{" "}
                   </li>
                   <li>
                     {" "}
-                    <span>Autres Info :</span> Plus d'informations{" "}
+                    <span>{ strings['infos']} :</span> autres{" "}
                   </li>
                 </ul>
               </div>
@@ -118,7 +119,7 @@ const ProductInformation = () => {
                             </div>
                           </div>
                           <div className="review-left">
-                            <button>répondre</button>
+                            <button> {strings['repondre']} </button>
                           </div>
                         </div>
                         <div className="review-bottom">
@@ -156,7 +157,7 @@ const ProductInformation = () => {
                             </div>
                           </div>
                           <div className="review-left">
-                            <button>répondre</button>
+                            <button>{strings['repondre']}</button>
                           </div>
                         </div>
                         <div className="review-bottom">
@@ -173,11 +174,11 @@ const ProductInformation = () => {
                 </div>
                 <div className="col-lg-5">
                   <div className="ratting-form-wrapper pl-50">
-                    <h3>Ajouter un avis</h3>
+                    <h3>{strings['add_review']}</h3>
                     <div className="ratting-form">
                       <form action="#">
                         <div className="star-box">
-                          <span>Votre note:</span>
+                          <span> {strings['note']} : </span>
                           {/* <div className="ratting-star">
                             <i className="fa fa-star" />
                             <i className="fa fa-star" />
@@ -188,41 +189,42 @@ const ProductInformation = () => {
 
                           <select className="form-control mb-3">
                             <option value="1">
-                                1/5 ( Je déconseille )
+                                1/5 ( {strings['je_deconseille']} )
                             </option>
                             <option value="2">
-                                2/5 ( Laisse à désirer )
+                                2/5 ( {strings['laisse_a_desire']} )
                             </option>
                             <option value="3">
-                                3/5 ( Satisfaisant )
+                                3/5 ( {strings['satisfaisant']} )
                             </option>
                             <option value="4">
-                                4/5 ( Interessant )
+                                4/5 ( {strings['interessant']} )
                             </option>
                             <option value="5">
-                                5/5 (Je recommande)
+                                5/5 ({strings['je_recommande']} )
                             </option>
                           </select>
+                          
                         </div>
                         <div className="row">
                           <div className="col-md-6">
                             <div className="rating-form-style mb-10">
-                              <input placeholder="Nom" type="text" />
+                              <input placeholder={strings['nom']} type="text" />
                             </div>
                           </div>
                           <div className="col-md-6">
                             <div className="rating-form-style mb-10">
-                              <input placeholder="Email" type="email" />
+                              <input placeholder={strings['email']} type="email"/>
                             </div>
                           </div>
                           <div className="col-md-12">
                             <div className="rating-form-style form-submit">
                               <textarea
                                 name="review"
-                                placeholder="Commentaire"
+                                placeholder={strings['commentaire']}
                                 defaultValue={""}
                               />
-                              <input type="submit" defaultValue="Submit" />
+                              <input value={strings['send']} type="submit" defaultValue="Submit"/>
                             </div>
                           </div>
                         </div>
@@ -239,4 +241,4 @@ const ProductInformation = () => {
   );
 };
 
-export default ProductInformation;
+export default multilanguage(ProductInformation);

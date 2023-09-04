@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import {multilanguage} from 'redux-multilanguage'
 
-const ShopCategorie = () => {
+const ShopCategorie = ({strings}) => {
   const setActiveSort = (e) => {
     const allButton = document.querySelectorAll(".sidebar-colors-btn");
     allButton.forEach((element) => {
@@ -23,7 +24,7 @@ const ShopCategorie = () => {
 
   return (
     <div className="sidebar-widget">
-      <h4 className="title">categories</h4>
+      <h4 className="title">{strings['category']}</h4>
       <div className="sidebar-widget-wrapper sidebar-categorie-list">
         <ul>
           <li>
@@ -33,7 +34,7 @@ const ShopCategorie = () => {
             >
               <span className="checkmark"></span>
               <span className="category-title text-capitalize">
-                toutes les catégories
+              {strings['all_categories']}
               </span>
             </button>
           </li>
@@ -59,4 +60,4 @@ const ShopCategorie = () => {
   );
 };
 
-export default ShopCategorie;
+export default multilanguage(ShopCategorie);

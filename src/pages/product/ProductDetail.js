@@ -1,25 +1,23 @@
-import React , { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import BreadcrumbItem from "../../components/breadcrumb/BreadcrumbItem";
 import { Fragment } from "react";
 import Layout from "../../layouts/Layout";
 import { Helmet } from "react-helmet";
 import Swiper from "react-id-swiper";
 import ProductRating from "../../components/sub-componenets/ProductRating";
-import {useSelector} from 'react-redux';
+import { useSelector } from "react-redux";
 import { getDiscountPrice } from "../../helpers/product";
 import { Link } from "react-router-dom";
 import ProductInformation from "../../wrappers/product/ProductInformation";
 import RelatedProduct from "../../components/product/RelatedProduct";
 import ScrollToTop from "../../components/sub-componenets/ScrollToTop";
+import { multilanguage } from "redux-multilanguage";
+import { NumericFormat } from "react-number-format";
 
-
-const ProductDetail = () => {
-
-  const product = useSelector( state => state.productData.product);
-  const discountedPrice = getDiscountPrice(
-    product.price,
-    product.discount
-  );
+const ProductDetail = ({ strings }) => {
+  const currency = useSelector((state) => state.currencyData);
+  const product = useSelector((state) => state.productData.product);
+  const discountedPrice = getDiscountPrice(product.price, product.discount);
 
   const [gallerySwiper, getGallerySwiper] = useState(null);
   const [imagePreview, setImagePreview] = useState("");
@@ -48,13 +46,12 @@ const ProductDetail = () => {
     }
   }, [gallerySwiper, thumbnailSwiper]);
 
-
   const gallerySwiperParams = {
     getSwiper: getGallerySwiper,
     spaceBetween: 10,
     loopedSlides: 4,
     loop: true,
-    effect: "fade"
+    effect: "fade",
   };
 
   const thumbnailSwiperParams = {
@@ -82,16 +79,16 @@ const ProductDetail = () => {
     ),
   };
 
-  const handleImagePreview = (e) =>{
-     const img = e.target.src;
-     setImagePreview(img);
-  }
+  const handleImagePreview = (e) => {
+    const img = e.target.src;
+    setImagePreview(img);
+  };
 
   return (
     <Fragment>
       <Helmet>
         <meta charSet="utf-8" />
-        <title> Ecommerce - Détail d'un produit </title>
+        <title> {process.env.REACT_APP_SITE_NAME} - Détail d'un produit </title>
         <meta
           name="description"
           content="Page d'affichage de tous les produits de la boutique"
@@ -99,19 +96,21 @@ const ProductDetail = () => {
       </Helmet>
 
       <Layout>
-
-        <ScrollToTop/>
+        <ScrollToTop />
         {/* breadcrumb */}
 
         <div className="breadcrumb-area bg-gray-3">
           <div className="container-fluid">
             <div className="row">
               <ul className="breadcrumb">
-                <BreadcrumbItem link="/tous-les-produits" title="boutique"></BreadcrumbItem>
+                <BreadcrumbItem
+                  link="/tous-les-produits"
+                  title={strings["shop"]}
+                ></BreadcrumbItem>
                 <BreadcrumbItem link="#" title="/"></BreadcrumbItem>
                 <BreadcrumbItem
                   link="#"
-                  title="detail du produit"
+                  title={strings["details_produits"]}
                 ></BreadcrumbItem>
               </ul>
             </div>
@@ -122,7 +121,6 @@ const ProductDetail = () => {
 
         <div className="shop-detail-area">
           <div className="container">
-
             <div className="row">
               <div className="col-12 col-md-4">
                 <div className="product-large-image-wrapper">
@@ -153,13 +151,11 @@ const ProductDetail = () => {
                       product.image.map((single, key) => {
                         return (
                           <div key={key}>
-                            <div
-                              className="single-image"   
-                            >
+                            <div className="single-image">
                               <img
                                 src={process.env.REACT_APP_PUBLIC_URL + single}
                                 className="img-thumbnail"
-                                alt="product" 
+                                alt="product"
                                 onClick={(e) => handleImagePreview(e)}
                               />
                             </div>
@@ -175,13 +171,36 @@ const ProductDetail = () => {
                   <div className="product-details-price">
                     <span className="discount">
                       {" "}
-                      {discountedPrice
-                        ? discountedPrice
-                        : product.price} XOF{" "}
+                      <NumericFormat
+                        value={
+                          discountedPrice ? discountedPrice : product.price
+                        }
+                        thousandsGroupStyle="lakh"
+                        thousandSeparator=" "
+                        decimalSeparator="."
+                        decimalScale={0}
+                        fixedDecimalScale
+                        prefix={""}
+                        suffix={" " + currency.currencySymbol}
+                        displayType="text"
+                      />
                     </span>
 
                     {discountedPrice ? (
-                      <del className="price"> {product.price} XOF</del>
+                      <del className="price">
+                        {" "}
+                        <NumericFormat
+                          value={product.price}
+                          thousandsGroupStyle="lakh"
+                          thousandSeparator=" "
+                          decimalSeparator="."
+                          decimalScale={0}
+                          fixedDecimalScale
+                          prefix={""}
+                          suffix={" " + currency.currencySymbol}
+                          displayType="text"
+                        />
+                      </del>
                     ) : (
                       ""
                     )}
@@ -204,7 +223,7 @@ const ProductDetail = () => {
 
                 <div className="pro-details-size-color">
                   <div className="col-5 pro-details-color-wrap">
-                    <h5 className="title">couleur</h5>
+                    <h5 className="title">{strings["couleur"]}</h5>
                     <div className="pro-details-color-content">
                       {product.variation.map((single, key) => {
                         return (
@@ -235,7 +254,7 @@ const ProductDetail = () => {
                     </div>
                   </div>
                   <div className="col-5 pro-details-size">
-                    <h5 className="title">taille</h5>
+                    <h5 className="title">{strings["size"]}</h5>
                     <div className="pro-details-size-content">
                       {product.variation &&
                         product.variation.map((single) => {
@@ -305,71 +324,70 @@ const ProductDetail = () => {
                   </div>
 
                   <div className="pro-details-cart">
-                    <button className="">ajouter au panier</button>
+                    <button className="">{strings["add_to_cart"]}</button>
                   </div>
 
                   <div className="pro-details-actions">
-                    <button title="Ajouter aux comparaisons">
-                      <i className="pe-7s-shuffle"></i>
-                    </button>
+                <button title={strings["add_to_shuffle"]}>
+                  <i className="pe-7s-shuffle"></i>
+                </button>
 
-                    <button title="Ajouter aux favoris">
-                      <i className="pe-7s-like"></i>
-                    </button>
-                  </div>
+                <button title={strings["add_to_whistle"]}>
+                  <i className="pe-7s-like"></i>
+                </button>
+              </div>
                 </div>
-                    
+
                 <div className="pro-details-meta">
-                     <ul>
-                        <li>Catégories : </li>
-                        {
-                          product.category
-                        }
-                     </ul>
-                     <ul>
-                        <li>Tags : </li>
-                        {
-                          product.tag.map((tag,y) =>{
+                  <ul>
+                    <li>
+                      {" "}
+                      <strong>{strings["category"]} :</strong>
+                    </li>
+                    &nbsp; <em> {product.category} </em>
+                  </ul>
+                  <ul>
+                    <li>
+                      <strong>{strings["tags"]} :</strong>
+                    </li>
+                    {product.tag.map((tag, y) => {
+                      return (
+                        <li key={y}>
+                          {" "}
+                          <em> {tag} </em>{" "}
+                        </li>
+                      );
+                    })}
+                  </ul>
 
-                            return (
-                                <li key={y}>{ tag}</li>
-                            )
-                          })
-                        }
-                     </ul>
-                     
-                     <ul >
-                        <li> 
-                          <Link>
-                            <i className="fa fa-facebook"></i> 
-                          </Link>
-                          </li>
-                        <li> 
-                          <Link>
-                            <i className="fa fa-twitter"></i> 
-                          </Link>
-                        </li>
-                        <li>
-                          <Link>
-                            <i className="fa fa-youtube"></i> 
-                          </Link> 
-                        </li>
-                     </ul>
+                  <ul>
+                    <li>
+                      <Link>
+                        <i className="fa fa-facebook"></i>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link>
+                        <i className="fa fa-twitter"></i>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link>
+                        <i className="fa fa-youtube"></i>
+                      </Link>
+                    </li>
+                  </ul>
                 </div>
-
               </div>
             </div>
 
-            <div className="row">  
-              <ProductInformation/>
+            <div className="row">
+              <ProductInformation />
             </div>
 
             <div className="row">
-              <RelatedProduct
-                category={product.category}
-              />
+              <RelatedProduct category={product.category} />
             </div>
-
           </div>
         </div>
       </Layout>
@@ -377,4 +395,4 @@ const ProductDetail = () => {
   );
 };
 
-export default ProductDetail;
+export default multilanguage(ProductDetail);

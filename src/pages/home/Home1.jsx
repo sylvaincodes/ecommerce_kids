@@ -8,8 +8,9 @@ import CountdownNow from '../../wrappers/countdown/CountdownNow';
 import Testimonial from '../../wrappers/testimonial/Testimonial';
 import Newsletter from '../../wrappers/newsletter/Newsletter';
 import { useSelector } from 'react-redux'
+import { multilanguage } from 'redux-multilanguage'
 
-const Home1 = () => {
+const Home1 = ({strings}) => {
 
   const products = useSelector(  (state) => state.productData.products );
 
@@ -18,8 +19,8 @@ const Home1 = () => {
 
       <Helmet>
         <meta charSet="utf-8" />
-        <title> Page d'acceuil </title>
-        <meta name="description" content="Page d'acceuil du site web - Ecommerce - Produits de tout genre" />
+        <title> { process.env.REACT_APP_SITE_NAME }  - Page d'acceuil </title>
+        <meta name="description" content={strings['homepage_description']}/>
       </Helmet>
 
       <Layout>
@@ -35,4 +36,4 @@ const Home1 = () => {
     )
   }
   
-  export default Home1
+  export default multilanguage(Home1)

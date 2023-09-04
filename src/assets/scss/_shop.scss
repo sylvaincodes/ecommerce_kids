@@ -101,7 +101,8 @@
                 border:1px solid silver;
                 button {
                     &.active{
-                        color:$theme-color;
+                        color:$s-theme-color;
+                        font-weight: 900;
                     }
                 }
                 
