@@ -1,8 +1,9 @@
 .swiper-slide{
     // position: relative;
-    background: cornflowerblue;
+    background: #2a2e47;
     .img-fluid{
-        height: 400px;
+        height: auto;
+        width: 400px;
     }
 
     .slider-content{
@@ -10,7 +11,7 @@
         text-transform: capitalize;
         right: 0;
         z-index: 2;
-        top: 100px;
+        top: 233px;
         color: white;
         text-align: center;
         display: flex;

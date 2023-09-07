@@ -126,6 +126,7 @@ const ProductSingle = ({ i, data, discountedPrice, colClass, strings }) => {
           </div>
         </div>
       </div>
+      
       <ProductModal
         show={modal}
         onHide={() => setModalShow(false)}

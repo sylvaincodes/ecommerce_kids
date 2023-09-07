@@ -10,13 +10,23 @@ import { Autocomplete, TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { fetchProduct } from "../../redux/actions/productActions";
 import { useDispatch } from "react-redux";
+import { getDiscountPrice } from "../../helpers/product";
+import { deleteFromCart } from "../../redux/actions/cartActions";
+import toast, { Toaster } from 'react-hot-toast';
 
 const IconGroups = ({ strings }) => {
+  let cartTotalPrice = 0;
+
   const focusSearchInput = useRef();
   const currency = useSelector((state) => state.currencyData);
+  const cart = useSelector((state) => state.cartData.cartItems);
 
   const handleClick = (e) => {
     e.currentTarget.nextSibling.classList.toggle("active");
+  };
+
+  const handleDeleteItem = (product) => {
+    dispatch(deleteFromCart(product,toast,strings));
   };
 
   const handleAccountClick = (e) => {
@@ -36,7 +46,6 @@ const IconGroups = ({ strings }) => {
 
   const handleSubmitSearch = (e) => {
     e.preventDefault();
-    console.log(query);
   };
 
   const dispatch = useDispatch();
@@ -391,65 +400,82 @@ const IconGroups = ({ strings }) => {
       <div className="same-style header-cart d-none d-lg-block">
         <Link onClick={(e) => handleCartClick(e)} title={strings["see_cart"]}>
           <i className="pe-7s-shopbag"></i>
-          <span className="count-style">0</span>
+          <span className="count-style cart-number">{cart.length}</span>
         </Link>
         <div className="cart-content">
           <ul className="cart-list">
-            <li className="cart-item">
-              <img
-                className="img-fluid"
-                src={
-                  process.env.REACT_APP_PUBLIC_URL +
-                  "./assets/img/product/fashion/1.jpg"
-                }
-                alt="produit"
-              />
-              <div className="cart-item-desc">
-                <ul>
-                  <li>Jacket pro</li>
-                  <li>Qté : 1</li>
-                  <li>Prix : 100 XOF</li>
-                  <li>Couleur : Blanc</li>
-                  <li>Taille : X</li>
-                </ul>
-              </div>
-              <div className="cart-delete-btn">
-                <button title={strings["delete"]} className="btn-hover-2">
-                  <i className="fa fa-close"></i>
-                </button>
-              </div>
-            </li>
-            <li className="cart-item">
-              <img
-                className="img-fluid"
-                src={
-                  process.env.REACT_APP_PUBLIC_URL +
-                  "./assets/img/product/fashion/2.jpg"
-                }
-                alt="produit"
-              />
-              <div className="cart-item-desc">
-                <ul>
-                  <li>Jacket pro</li>
-                  <li>Qté : 1</li>
-                  <li>Prix : 100 XOF</li>
-                  <li>Couleur : Blanc</li>
-                  <li>Taille : X</li>
-                </ul>
-              </div>
-              <div className="cart-delete-btn">
-                <button title={strings["delete"]}>
-                  <i className="fa fa-close"></i>
-                </button>
-              </div>
-            </li>
+            {cart &&
+              cart.map((item, key) => {
+                const discountedPrice = getDiscountPrice(
+                  item.product.price,
+                  item.product.discount
+                );
+                const finalProductPrice = (
+                  item.product.price * currency.currencyRate
+                ).toFixed(2);
+                const finalDiscountedPrice = (
+                  discountedPrice * currency.currencyRate
+                ).toFixed(2);
+
+                discountedPrice != null
+                  ? (cartTotalPrice += finalDiscountedPrice * item.quantity)
+                  : (cartTotalPrice += finalProductPrice * item.quantity);
+
+                return (
+                  <li className="cart-item" key={key}>
+                    <img
+                      className="img-fluid"
+                      src={
+                        process.env.REACT_APP_PUBLIC_URL + item.product.image[0]
+                      }
+                      alt="produit"
+                    />
+                    <div className="cart-item-desc">
+                      <ul>
+                        <li>{item.product.name}</li>
+                        <li>
+                          {strings["qte"]} : {item.quantity}
+                        </li>
+                        <li>
+                          {strings["price"]} : &nbsp;
+                          <NumericFormat
+                            value={
+                              discountedPrice
+                                ? finalDiscountedPrice
+                                : finalProductPrice
+                            }
+                            thousandsGroupStyle="lakh"
+                            thousandSeparator=" "
+                            decimalSeparator="."
+                            decimalScale={0}
+                            fixedDecimalScale
+                            prefix={""}
+                            suffix={" " + currency.currencySymbol}
+                            displayType="text"
+                          />
+                        </li>
+                        <li>{strings["color"]} : Blanc</li>
+                        <li>{strings["size"]} : X</li>
+                      </ul>
+                    </div>
+                    <div
+                      className="cart-delete-btn"
+                      onClick={(e) => handleDeleteItem(item.product)}
+                    >
+                      <button title={strings["delete"]} className="btn-hover-2">
+                        <i className="fa fa-close"></i>
+                      </button>
+                    </div>
+                  </li>
+                );
+              })}
           </ul>
           <div className="cart-total">
             <ul>
               <li>{strings["total"]}</li>
               <li>
                 <NumericFormat
-                  value={(200 * currency.currencyRate).toFixed(2)}
+                  value={cartTotalPrice}
                   thousandsGroupStyle="lakh"
                   thousandSeparator=" "
                   decimalSeparator="."

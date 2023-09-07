@@ -1,93 +1,229 @@
 import React from "react";
+import { multilanguage } from "redux-multilanguage";
+import Divider from "@mui/material/Divider";
+import { useFormik } from "formik";
+import { insertUserAdresse } from "../../helpers/auth";
+import toast from 'react-hot-toast';
 
-const Adresse = () => {
+const Adresse = ({ strings }) => {
+
+  const validate = (values) => {
+    const errors = {};
+
+    if (!values.lastname) {
+      errors.lastname = "ce champ est obligatoire";
+    }
+    if (!values.firstname) {
+      errors.firstname = "ce champ est obligatoire";
+    }
+
+    if (!values.phone) {
+      errors.phone = "ce champ est obligatoire";
+    }
+
+    if (!values.city) {
+      errors.city = "ce champ est obligatoire";
+    }
+    if (!values.code_postale) {
+      errors.code_postale = "ce champ est obligatoire";
+    }
+    if (!values.rue) {
+      errors.rue = "ce champ est obligatoire";
+    }
+
+    return errors;
+  };
+
+  const formik = useFormik({
+    initialValues: {
+      gender: "mr",
+      firstname: "",
+      country: "",
+      lastname: "",
+      phone: "",
+      city: "",
+      code_postale: "",
+      rue: "",
+      subscribe_sms: false,
+      subscribe_email: false,
+    },
+    validate,
+    onSubmit: (values) => {
+      insertUserAdresse(values);
+      toast(strings['adresse_added'] , { className:'toast-custom', icon: "👍" });
+      window.location.reload();
+    },
+  });
+
   return (
     <div className="login-area-wrapper">
-      <h4 className="pb-20">Créer un compte</h4>
-      <form>
-        <div className="row mb-6">
-          <div className="col-3 mb-3">
-            <label className="d-flex align-items-center">
-              Monsieur
-              <input name="genre" type="radio" />
-            </label>
-          </div>
-
-          <div className="col-3 mb-3">
-            <label className="d-flex align-items-center">
-              Madame
-              <input name="genre" type="radio" />
-            </label>
+      <h4 className="text-capitalize fw-2"> {strings["adresse_livraison"]} </h4>
+      <Divider component="div" />
+      <form className="pt-30" onSubmit={formik.handleSubmit}>
+        <div className="row mb-3">
+          <div className="col-12 col-md-3">
+            <label>{strings["gender"]}</label>
+            <select
+              name="gender"
+              type="text"
+              id="gender"
+              onChange={formik.handleChange}
+              value={formik.values.gender}
+            >
+              <option value="mr"> Mr </option>
+              <option value="ms"> Ms </option>
+            </select>
           </div>
         </div>
 
         <div className="row mb-6">
           <div className="col-12 col-md-6 mb-3">
-            <label>Nom</label>
-            <input type="text" />
+            <label>{strings["lastname"]}</label>
+            <input
+              name="lastname"
+              type="text"
+              id="lastname"
+              onChange={formik.handleChange}
+              value={formik.values.lastname}
+            />
           </div>
 
           <div className="col-12 col-md-6 mb-3">
-            <label>Prénom</label>
-            <input type="text" />
+            <label>{strings["firstname"]}</label>
+            <input
+              name="firstname"
+              type="text"
+              id="firstname"
+              onChange={formik.handleChange}
+              value={formik.values.firstname}
+            />
+            {formik.errors.firstname ? (
+              <div className="invalid-feedback d-block">
+                {" "}
+                {formik.errors.firstname}{" "}
+              </div>
+            ) : null}
           </div>
         </div>
 
         <div className="row mb-3">
           <div className="col-12 col-md-6">
-            <label>Date de naissance</label>
-            <input type="text" />
+            <label>{strings["phone"]}</label>
+            <input
+              name="phone"
+              type="text"
+              id="phone"
+              onChange={formik.handleChange}
+              value={formik.values.phone}
+            />
+            {formik.errors.phone ? (
+              <div className="invalid-feedback d-block">
+                {" "}
+                {formik.errors.phone}{" "}
+              </div>
+            ) : null}
           </div>
 
-          <div className="col-12 col-md-6">
-            <label>Téléphone</label>
-            <input type="text" />
+          <div className="col-6">
+            <label>{strings["code_postale"]}</label>
+            <input
+              name="code_postale"
+              type="text"
+              id="code_postale"
+              onChange={formik.handleChange}
+              value={formik.values.code_postale}
+            />
+            {formik.errors.code_postale ? (
+              <div className="invalid-feedback d-block">
+                {" "}
+                {formik.errors.code_postale}{" "}
+              </div>
+            ) : null}
           </div>
         </div>
 
         <div className="row mb-3">
           <div className="col-12 col-md-6">
-            <label>Pays</label>
-            <input type="text" />
+            <label>{strings["country"]}</label>
+            <select
+              name="country"
+              type="text"
+              id="country"
+              onChange={formik.handleChange}
+              value={formik.values.country}
+            >
+              <option value="france"> france </option>
+              <option value="england"> england </option>
+            </select>
           </div>
+
           <div className="col-12 col-md-6">
-            <label>Ville</label>
-            <input type="text" />
+            <label>{strings["city"]}</label>
+            <input
+              name="city"
+              type="text"
+              id="city"
+              onChange={formik.handleChange}
+              value={formik.values.city}
+            />
+            {formik.errors.city ? (
+              <div className="invalid-feedback d-block">
+                {" "}
+                {formik.errors.city}{" "}
+              </div>
+            ) : null}
           </div>
         </div>
 
         <div className="row mb-3">
-          <div className="col-4">
-            <label>Code postal</label>
-            <input type="text" />
-          </div>
-
-          <div className="col-8">
-            <label>Numéro et nom de rue</label>
-            <input type="text" />
+          <div className="col-6">
+            <label>{strings["rue"]}</label>
+            <input
+              name="rue"
+              type="text"
+              id="rue"
+              onChange={formik.handleChange}
+              value={formik.values.rue}
+            />
+            {formik.errors.rue ? (
+              <div className="invalid-feedback d-block">
+                {" "}
+                {formik.errors.rue}{" "}
+              </div>
+            ) : null}
           </div>
         </div>
 
-        <div class="d-flex flex-row bd-highlight mb-3">
-          <div class="p-2 bd-highlight">
-            <p>S'abonner et recevoir les bons plans Cdiscount par : </p>
+        <div className="d-flex flex-row bd-highlight mb-3">
+          <div className="p-2 bd-highlight">
+            <p>{strings["subscribe_message"]} : </p>
             <div className="row">
-              
               <label className="col-6 flex-row">
-                <input type="checkbox" name="subscribe_email" className="checkbox"/>
-                <span className="">EMAIL</span>
+                <input
+                  name="subscribe_email"
+                  type="checkbox"
+                  id="subscribe_email"
+                  onChange={formik.handleChange}
+                  value={formik.values.subscribe_email}
+                />
+                <span className="">{strings["email"]}</span>
               </label>
 
               <label className="col-6 flex-row">
-                <input type="checkbox" name="subscribe_sms" className="checkbox"/>
-                <span>SMS</span>
+                <input
+                  name="subscribe_sms"
+                  type="checkbox"
+                  id="subscribe_sms"
+                  onChange={formik.handleChange}
+                  value={formik.values.subscribe_sms}
+                />
+                <span>{strings["sms"]}</span>
               </label>
-
             </div>
           </div>
         </div>
 
-        <button type="submit" class="btn btn-style hover-style-2">
+        <button type="submit" className="btn btn-style hover-style-2">
           Continuer
         </button>
       </form>
@@ -95,4 +231,4 @@ const Adresse = () => {
   );
 };
 
-export default Adresse;
+export default multilanguage(Adresse);

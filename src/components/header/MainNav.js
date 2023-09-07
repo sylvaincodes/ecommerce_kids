@@ -192,13 +192,13 @@ const MainNav = ({strings}) => {
               </li>
             </ul>
             <div className="mega-menu-img">
-              <img
+              {/* <img
                 src={
                   process.env.REACT_APP_PUBLIC_URL +
                   `./assets/img/banner/banner-4.png`
                 }
-                alt="banner"
-              />
+                alt="banner" className="img-fluid"
+              /> */}
             </div>
           </div>
         </li>

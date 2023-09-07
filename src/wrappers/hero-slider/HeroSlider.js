@@ -8,7 +8,7 @@ const HeroSlider = ({ strings }) => {
 
   const slide_img = [
     {
-      img: "./assets/img/slider/slider-3.png",
+      img: "./assets/img/slider/slider-1.png",
       title: `${strings["meilleures_offres"]}`,
       subtitle: `${strings["collections_offres"]}`,
       action: `${strings["acheter"]}`

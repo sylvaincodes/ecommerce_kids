@@ -5,7 +5,7 @@ import Layout from "../../layouts/Layout";
 import { Helmet } from "react-helmet";
 import Swiper from "react-id-swiper";
 import ProductRating from "../../components/sub-componenets/ProductRating";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { getDiscountPrice } from "../../helpers/product";
 import { Link } from "react-router-dom";
 import ProductInformation from "../../wrappers/product/ProductInformation";
@@ -13,11 +13,19 @@ import RelatedProduct from "../../components/product/RelatedProduct";
 import ScrollToTop from "../../components/sub-componenets/ScrollToTop";
 import { multilanguage } from "redux-multilanguage";
 import { NumericFormat } from "react-number-format";
+import { useToasts } from "react-toast-notifications";
+import { addToCart } from "../../redux/actions/cartActions";
+import toast, { Toaster } from 'react-hot-toast';
 
 const ProductDetail = ({ strings }) => {
   const currency = useSelector((state) => state.currencyData);
   const product = useSelector((state) => state.productData.product);
   const discountedPrice = getDiscountPrice(product.price, product.discount);
+
+  const finalProductPrice = (product.price * currency.currencyRate).toFixed(2);
+  const finalDiscountedPrice = (
+    discountedPrice * currency.currencyRate
+  ).toFixed(2);
 
   const [gallerySwiper, getGallerySwiper] = useState(null);
   const [imagePreview, setImagePreview] = useState("");
@@ -33,6 +41,29 @@ const ProductDetail = ({ strings }) => {
     product.variation ? product.variation[0].size[0].stock : product.stock
   );
   const [quantityCount, setQuantityCount] = useState(1);
+
+  const addToast = useToasts();
+
+  const dispatch = useDispatch();
+
+  const addToCartHandle = (product, addToast) => {
+    dispatch(
+      addToCart(
+        product,
+        quantityCount,
+        selectedProductColor,
+        selectedProductSize,
+        toast,
+        strings
+      )
+    );
+
+    document.querySelector(".cart-number").classList.add("animated");
+
+    setTimeout(() => {
+      document.querySelector(".cart-number").classList.remove("animated");
+    }, 2000);
+  };
 
   useEffect(() => {
     if (
@@ -108,10 +139,7 @@ const ProductDetail = ({ strings }) => {
                   title={strings["shop"]}
                 ></BreadcrumbItem>
                 <BreadcrumbItem link="#" title="/"></BreadcrumbItem>
-                <BreadcrumbItem
-                  link="#"
-                  title={strings["details_produits"]}
-                ></BreadcrumbItem>
+                <BreadcrumbItem link="#" title={product.name}></BreadcrumbItem>
               </ul>
             </div>
           </div>
@@ -173,7 +201,9 @@ const ProductDetail = ({ strings }) => {
                       {" "}
                       <NumericFormat
                         value={
-                          discountedPrice ? discountedPrice : product.price
+                          discountedPrice
+                            ? finalDiscountedPrice
+                            : finalProductPrice
                         }
                         thousandsGroupStyle="lakh"
                         thousandSeparator=" "
@@ -190,7 +220,7 @@ const ProductDetail = ({ strings }) => {
                       <del className="price">
                         {" "}
                         <NumericFormat
-                          value={product.price}
+                          value={finalProductPrice}
                           thousandsGroupStyle="lakh"
                           thousandSeparator=" "
                           decimalSeparator="."
@@ -323,19 +353,22 @@ const ProductDetail = ({ strings }) => {
                     </button>
                   </div>
 
-                  <div className="pro-details-cart">
+                  <div
+                    className="pro-details-cart"
+                    onClick={() => addToCartHandle(product, addToast)}
+                  >
                     <button className="">{strings["add_to_cart"]}</button>
                   </div>
 
                   <div className="pro-details-actions">
-                <button title={strings["add_to_shuffle"]}>
-                  <i className="pe-7s-shuffle"></i>
-                </button>
+                    <button title={strings["add_to_shuffle"]}>
+                      <i className="pe-7s-shuffle"></i>
+                    </button>
 
-                <button title={strings["add_to_whistle"]}>
-                  <i className="pe-7s-like"></i>
-                </button>
-              </div>
+                    <button title={strings["add_to_whistle"]}>
+                      <i className="pe-7s-like"></i>
+                    </button>
+                  </div>
                 </div>
 
                 <div className="pro-details-meta">

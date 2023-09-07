@@ -99,9 +99,9 @@ const ProductInformation = ({ strings }) => {
                         <img
                           src={
                             process.env.REACT_APP_PUBLIC_URL +
-                            "/assets/img/testimonial/1.jpg"
+                            "/assets/img/testimonial/1.png"
                           }
-                          alt=""
+                          alt="" className="img-fluid"
                         />
                       </div>
                       <div className="review-content">
@@ -137,9 +137,9 @@ const ProductInformation = ({ strings }) => {
                         <img
                           src={
                             process.env.REACT_APP_PUBLIC_URL +
-                            "/assets/img/testimonial/2.jpg"
+                            "/assets/img/testimonial/1.png"
                           }
-                          alt=""
+                          alt="" className="img-fluid"
                         />
                       </div>
                       <div className="review-content">

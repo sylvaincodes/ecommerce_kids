@@ -123,5 +123,19 @@
     "nummber_order" : "ORDER N°",
     "adresse_desc" : "modify order delivery addresses",
     "whistle" : "whistle",
-    "rating" : "rating"
+    "rating" : "rating",
+    "product_added_to_cart" : "product added to cart",
+    "adresse_livraison"  : "billing adresse",
+    "monsieur" : "Mr",
+    "madame" : "M.",
+    "lastname" : "lastname",
+    "firstname" : "firstname",
+    "birthday" : "birthday",
+    "phone" : "phone",
+    "country" : "country",
+    "code_postale" : "post",
+    "rue" : "rue",
+    "subscribe_message" : "Subscribe",
+    "city" : "city",
+    "sms" : "sms"
 }

@@ -8,16 +8,58 @@ import { useState } from "react";
 import { multilanguage } from "redux-multilanguage";
 import { NumericFormat } from "react-number-format";
 import { useSelector } from "react-redux";
+import { getDiscountPrice } from "../../helpers/product";
+import { useDispatch } from "react-redux";
+import {
+  addToCart,
+  deleteFromCart,
+  deleteAllFromCart,
+} from "../../redux/actions/cartActions";
+import toast from "react-hot-toast";
 
 const Cart = ({ strings }) => {
   const [quantityCount, setQuantityCount] = useState(1);
-  const [productStock, setProductStock] = useState(7);
   const currency = useSelector((state) => state.currencyData);
 
-  const deleteAllFromCart = () => {};
+  const [showEditLink, setShowEditLink] = useState(true);
 
+  const editQuantity = (e) => {
+    e.currentTarget.classList.toggle("d-none");
+    e.currentTarget.nextSibling.classList.remove("d-none");
+  };
 
-  // product.variation ? product.variation[0].size[0].stock : product.stock
+  let cartTotalPrice = 0;
+
+  const cart = useSelector((state) => state.cartData.cartItems);
+
+  const dispatch = useDispatch();
+
+  const handleDeleteItem = (product) => {
+    dispatch(deleteFromCart(product));
+  };
+
+  const handleDeleteAllItem = (toast) => {
+    dispatch(deleteAllFromCart(toast, strings));
+  };
+
+  const addToCartHandle = (
+    product,
+    selectedProductColor,
+    selectedProductSize,
+    toast,
+    strings
+  ) => {
+    dispatch(
+      addToCart(
+        product,
+        quantityCount,
+        selectedProductColor,
+        selectedProductSize,
+        toast,
+        strings
+      )
+    );
+  };
 
   return (
     <Fragment>
@@ -69,120 +111,140 @@ const Cart = ({ strings }) => {
                     </thead>
 
                     <tbody>
-                      <tr>
-                        <td className="product-thumball">
-                          <Link to="/">
-                            <img
-                              className="img-fluid"
-                              src="./assets/img/product/fashion/1.jpg"
-                              alt="image-cart"
-                            />
-                          </Link>
-                        </td>
+                      {cart &&
+                        cart.map((item, key) => {
+                          let cartTotalItem = 0;
 
-                        <td className="product-name">
-                          <Link
-                            to={"/produit-detail/" + 1 + "/" + "jacket-kid"}
-                          >
-                            Consectetur enim id.
-                          </Link>
-                          <div className="cart-item-variation d-grid">
-                            <span>{strings["couleur"]} : blanc</span>
-                            <span>{strings["size"]} : X</span>
-                          </div>
-                        </td>
+                          const discountedPrice = getDiscountPrice(
+                            item.product.price,
+                            item.product.discount
+                          );
+                          const finalProductPrice = (
+                            item.product.price * currency.currencyRate
+                          ).toFixed(2);
+                          const finalDiscountedPrice = (
+                            discountedPrice * currency.currencyRate
+                          ).toFixed(2);
 
-                        <td className="product-price-cart">
-                          <del className="amount old">
-                            <NumericFormat
-                              value={222}
-                              thousandsGroupStyle="lakh"
-                              thousandSeparator=" "
-                              decimalSeparator="."
-                              decimalScale={0}
-                              fixedDecimalScale
-                              prefix={""}
-                              suffix={" " + currency.currencySymbol}
-                              displayType="text"
-                            />
-                          </del>
-                          <span className="amount ">
-                            <NumericFormat
-                              value={222}
-                              thousandsGroupStyle="lakh"
-                              thousandSeparator=" "
-                              decimalSeparator="."
-                              decimalScale={0}
-                              fixedDecimalScale
-                              prefix={""}
-                              suffix={" " + currency.currencySymbol}
-                              displayType="text"
-                            />
-                          </span>
-                        </td>
+                          discountedPrice != null
+                            ? (cartTotalItem =
+                                finalDiscountedPrice * item.quantity)
+                            : (cartTotalItem =
+                                finalProductPrice * item.quantity);
 
-                        <td className="product-quantity">
-                          <div className="pro-details-quality">
-                            <div className="cart-plus-minus">
-                              <button
-                                className="dec qtybutton"
-                                onClick={(e) =>
-                                  setQuantityCount(
-                                    quantityCount > 1 ? quantityCount - 1 : 1
-                                  )
-                                }
-                              >
-                                -
-                              </button>
-                              <input
-                                className="cart-plus-minus-box"
-                                type="text"
-                                value={3}
-                                readOnly
-                              />
-                              <button
-                                className="inc qtybutton"
-                                onClick={(e) =>
-                                  setQuantityCount(
-                                    quantityCount < productStock
-                                      ? quantityCount + 1
-                                      : quantityCount
-                                  )
-                                }
-                              >
-                                +
-                              </button>
-                            </div>
-                          </div>
-                        </td>
+                          discountedPrice != null
+                            ? (cartTotalPrice +=
+                                finalDiscountedPrice * item.quantity)
+                            : (cartTotalPrice +=
+                                finalProductPrice * item.quantity);
 
-                        <td className="product-subtotal">
-                          <span>
-                            <NumericFormat
-                              value={222}
-                              thousandsGroupStyle="lakh"
-                              thousandSeparator=" "
-                              decimalSeparator="."
-                              decimalScale={0}
-                              fixedDecimalScale
-                              prefix={""}
-                              suffix={" " + currency.currencySymbol}
-                              displayType="text"
-                            />
-                          </span>
-                        </td>
+                          return (
+                            <tr>
+                              <td className="product-thumball">
+                                <Link to="/">
+                                  <img
+                                    className="img-fluid"
+                                    src={
+                                      process.env.REACT_APP_PUBLIC_URL +
+                                      item.product.image[0]
+                                    }
+                                    alt="image-cart"
+                                  />
+                                </Link>
+                              </td>
 
-                        <td className="product-remove">
-                          <button
-                            title="Supprimer"
-                            // onClick={() =>
-                            //   deleteFromCart(cartItem, addToast)
-                            // }
-                          >
-                            <i className="fa fa-times"></i>
-                          </button>
-                        </td>
-                      </tr>
+                              <td className="product-name">
+                                <Link
+                                  to={
+                                    "/produit-detail/" + 1 + "/" + "jacket-kid"
+                                  }
+                                >
+                                  {item.product.name}
+                                </Link>
+                                <div className="cart-item-variation d-grid">
+                                  <span>
+                                    {strings["color"]} :{" "}
+                                    {item.selectedProductColor}
+                                  </span>
+                                  <span>
+                                    {strings["size"]} :{" "}
+                                    {item.selectedProductSize}
+                                  </span>
+                                </div>
+                              </td>
+
+                              <td className="product-price-cart">
+                                {item.product.discount != 0 ? (
+                                  <del className="amount old">
+                                    <NumericFormat
+                                      value={finalProductPrice}
+                                      thousandsGroupStyle="lakh"
+                                      thousandSeparator=" "
+                                      decimalSeparator="."
+                                      decimalScale={0}
+                                      fixedDecimalScale
+                                      prefix={""}
+                                      suffix={" " + currency.currencySymbol}
+                                      displayType="text"
+                                    />
+                                  </del>
+                                ) : (
+                                  ""
+                                )}
+                                <span className="amount ">
+                                  <NumericFormat
+                                    value={
+                                      discountedPrice
+                                        ? finalDiscountedPrice
+                                        : finalProductPrice
+                                    }
+                                    thousandsGroupStyle="lakh"
+                                    thousandSeparator=" "
+                                    decimalSeparator="."
+                                    decimalScale={0}
+                                    fixedDecimalScale
+                                    prefix={""}
+                                    suffix={" " + currency.currencySymbol}
+                                    displayType="text"
+                                  />
+                                </span>
+                              </td>
+
+                              <td className="product-quantity">
+                                <div className="pro-details-quality">
+                                  <strong>{item.quantity} </strong>
+                                </div>
+                              </td>
+
+                              <td className="product-subtotal">
+                                <span>
+                                  <NumericFormat
+                                    value={cartTotalItem}
+                                    thousandsGroupStyle="lakh"
+                                    thousandSeparator=" "
+                                    decimalSeparator="."
+                                    decimalScale={0}
+                                    fixedDecimalScale
+                                    prefix={""}
+                                    suffix={" " + currency.currencySymbol}
+                                    displayType="text"
+                                  />
+                                </span>
+                              </td>
+
+                              <td className="product-remove">
+                                <button
+                                  title="Supprimer"
+                                  onClick={(e) =>
+                                    handleDeleteItem(item.product)
+                                  }
+                                >
+                                  <i className="fa fa-times"></i>
+                                </button>
+                              </td>
+                            </tr>
+                          );
+                        })}
                     </tbody>
                   </table>
                 </div>
@@ -205,7 +267,7 @@ const Cart = ({ strings }) => {
                   <div className="cart-clear">
                     <button
                       className="hover-style"
-                      onClick={() => deleteAllFromCart()}
+                      onClick={() => handleDeleteAllItem(toast)}
                     >
                       {strings["vider_panier"]}
                     </button>
@@ -246,7 +308,7 @@ const Cart = ({ strings }) => {
                         {strings["total_products"]}
                         <span className="c">
                           <NumericFormat
-                            value={222}
+                            value={cartTotalPrice}
                             thousandsGroupStyle="lakh"
                             thousandSeparator=" "
                             decimalSeparator="."
@@ -264,7 +326,7 @@ const Cart = ({ strings }) => {
                       {strings["total_grand"]}
                       <span>
                         <NumericFormat
-                          value={222}
+                          value={cartTotalPrice}
                           thousandsGroupStyle="lakh"
                           thousandSeparator=" "
                           decimalSeparator="."
