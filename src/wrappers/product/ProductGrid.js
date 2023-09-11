@@ -4,15 +4,18 @@ import { getDiscountPrice } from "../../helpers/product";
 import { useSelector } from "react-redux";
 import { multilanguage } from 'redux-multilanguage'
 
-const ProductGrid = ({ category, limit, sliderClassName,strings }) => {
+const ProductGrid = ({ category, limit, sliderClassName,strings,products }) => {
   const nbreProducts = useSelector((state) =>
     state.productData.products.slice(0, limit ? limit : products.length)
   );
 
-  const products = nbreProducts.filter(
-    (product) => (product.category = category)
-  );
+  if (category) {
+    const products = nbreProducts.filter(
+      (product) => (product.category = category)
+    );
+  }
 
+console.log(nbreProducts);
 
   return (
     <div className="swiper-wrapper">

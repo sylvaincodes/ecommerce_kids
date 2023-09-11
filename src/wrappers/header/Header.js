@@ -62,7 +62,7 @@ const Header = ({ strings }) => {
             {/* Logo */}
             <div className="col-lg-2 col-4">
               <Logo
-                img={process.env.REACT_APP_PUBLIC_URL + `./assets/img/logo.jpg`}
+                img={process.env.REACT_APP_PUBLIC_URL + `assets/img/logo.jpg`}
                 alt="logo-image"
               />
             </div>

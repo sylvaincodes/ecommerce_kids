@@ -4,7 +4,7 @@ const TestimonialSingle = ({ key, data }) => {
   return (
     <div key={key} className="col-12 wrapper-content">
       <div>
-        <img className="img-fluid" src={data.img} />
+        <img width={100}  height={100} className="img-fluid" src={data.img} />
       </div>
       <p>{data.text}</p>
       <div className="content">

@@ -1,4 +1,8 @@
-import { ADD_TO_CART, DELETE_FROM_CART,DELETE_ALL_FROM_CART } from "../actions/cartActions";
+import {
+  ADD_TO_CART,
+  DELETE_FROM_CART,
+  DELETE_ALL_FROM_CART,
+} from "../actions/cartActions";
 import { v4 as uuidv4 } from "uuid";
 
 const initState = {
@@ -30,7 +34,9 @@ const cartReducer = (state = initState, action) => {
       });
 
       //Message
-      action.params.toast(action.params.strings["added_to_cart"], { className: "toast-custom", icon: "👍" });
+      action.params.toast.success(action.params.strings["added_to_cart"], {
+        className: "toast-custom",
+      });
 
       return {
         ...state,
@@ -47,6 +53,12 @@ const cartReducer = (state = initState, action) => {
               cartItemId: item.cartItemId,
             }
           : item;
+      });
+
+      //Message
+      action.params.toast(action.params.strings["cart_updated"], {
+        className: "toast-custom",
+        icon: "👍",
       });
 
       return {
@@ -68,8 +80,8 @@ const cartReducer = (state = initState, action) => {
   }
 
   if (action.type == DELETE_ALL_FROM_CART) {
-    const newCartItems = cartItems.filter( (item) => {
-        return false;
+    const newCartItems = cartItems.filter((item) => {
+      return false;
     });
 
     return {

@@ -1,18 +1,30 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { changeLanguage } from "redux-multilanguage";
+import { setCurrency } from "../../redux/actions/currencyActions";
+import { multilanguage } from "redux-multilanguage";
+import { Autocomplete, TextField } from "@mui/material";
+import { fetchProduct } from "../../redux/actions/productActions";
 
-const MobileMenu = () => {
+const MobileMenu = ({ strings }) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const language = useSelector((state) => state.multilanguage);
+  const currency = useSelector((state) => state.currencyData);
+  const options = useSelector((state) => state.productData.products);
+
   const changeLanguageTrigger = (e) => {
-    // const langCode = e.target.value;
-    //Todo
-    //action here
+    const langCode = e.target.value;
+    dispatch(changeLanguage(langCode));
   };
 
   const changeCurrencyTrigger = (e) => {
-    // const currencyCode = e.target.value;
-    //Todo
-    //action here
+    const currencyCode = e.target.value;
+    dispatch(setCurrency(currencyCode));
   };
+
+  const [query, setQuery] = useState("");
 
   const hideMobileMenu = () => {
     document.querySelector(".mobile-menu").classList.remove("active");
@@ -27,8 +39,40 @@ const MobileMenu = () => {
           <i className="pe-7s-close"></i>
         </button>
 
-        <div className="mobile-search">
-          <input type="text" placeholder="recherche" />
+        <div className="mobile-search mobile">
+          <Autocomplete
+            limitTags={2}
+            loadingText="Loading"
+            autoSelect={true}
+            autoHighlight={true}
+            autoComplete={true}
+            getOptionLabel={(option) => option.name}
+            disablePortal
+            id="combo-box-demo"
+            options={options}
+            sx={{ width: "100%" }}
+            renderInput={(params) => (
+              <TextField
+                autoFocus
+                className="text-capitalize search"
+                {...params}
+                value={query}
+                onChange={(e) => setQuery(e.target.value) }
+                fullWidth
+                required
+              />
+            )}
+            onChange={(event, values) => {
+              dispatch(fetchProduct(values));
+              navigate("/produit-detail/" + values.id + "/" + values.slug);
+              if (event.key === "Enter") {
+                // Prevent's default 'Enter' behavior.
+                // alert(event)
+                event.defaultMuiPrevented = true;
+                // your handler code
+              }
+            }}
+          />
           <button
             className="btn btn-secondary mobile-button-close"
             type="submit"
@@ -42,11 +86,13 @@ const MobileMenu = () => {
         <nav>
           <ul>
             <li className="menu-item">
-              <Link to={process.env.PUBLIC_URL + "/"}>acceuil</Link>
+              <Link to={process.env.PUBLIC_URL + "/"}>{strings["home"]}</Link>
             </li>
 
             <li className="menu-item-has-children">
-              <Link to={process.env.PUBLIC_URL + "/"}>categories</Link>
+              <Link to={process.env.PUBLIC_URL + "/"}>
+                {strings["categories"]}
+              </Link>
               <span className="menu-expand">
                 <i className="fa fa-plus"></i>
               </span>
@@ -57,7 +103,7 @@ const MobileMenu = () => {
                 <li className="menu-item-has-children">
                   <ul className="sub-menu">
                     <li>
-                      <Link to="/">jeux vidéos & consoles</Link>
+                      <Link to="/">{strings["gaming"]}</Link>
                     </li>
                     <li>
                       <Link to="/">music</Link>
@@ -71,7 +117,9 @@ const MobileMenu = () => {
             </li>
 
             <li className="menu-item-has-children">
-              <Link to={process.env.PUBLIC_URL + "/"}>collections</Link>
+              <Link to={process.env.PUBLIC_URL + "/"}>
+                {strings["collections"]}
+              </Link>
               <span className="menu-expand">
                 <i className="fa fa-plus"></i>
               </span>
@@ -98,30 +146,30 @@ const MobileMenu = () => {
       <div className="mobile-lang">
         <div className="wrapper">
           <div className="lang-widget">
-            <span className="title">selectionner la langue</span>
+            <span className="title">{strings["language"]}</span>
             <select
-              value="fr"
+              value={language.currentLanguageCode}
               onChange={(e) => {
                 changeLanguageTrigger(e);
-                hideMobileMenu();
+                // hideMobileMenu();
               }}
             >
-              <option value="fr">français</option>
-              <option value="fr">anglais</option>
+              <option value="fr">{strings["francais"]}</option>
+              <option value="en">{strings["anglais"]}</option>
             </select>
           </div>
           <div className="lang-widget">
-            <span className="title">selectionner la devise</span>
+            <span className="title">{strings["devise"]}</span>
             <select
-              value="fr"
+              value={currency.currencyName}
               onChange={(e) => {
                 changeCurrencyTrigger(e);
-                hideMobileMenu();
+                // hideMobileMenu();
               }}
             >
-              <option value="usd">usd</option>
-              <option value="xof">cfa</option>
-              <option value="euro">euro</option>
+              <option value="USD">usd</option>
+              <option value="XOF">cfa</option>
+              <option value="EUR">euro</option>
             </select>
           </div>
         </div>
@@ -147,4 +195,4 @@ const MobileMenu = () => {
   );
 };
 
-export default MobileMenu;
+export default multilanguage(MobileMenu);

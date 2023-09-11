@@ -5,6 +5,7 @@ import { fetchProduct } from "../../redux/actions/productActions";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { NumericFormat } from "react-number-format";
+import { toast } from "react-hot-toast";
 
 const ProductGridSingle = ({
   product,
@@ -17,6 +18,7 @@ const ProductGridSingle = ({
 
   const likeProduct = (e) => {
     e.target.classList.toggle("active");
+    toast.success(strings['added_to_wishlist']);
   };
 
   const [modal, setModalShow] = useState(false);
@@ -73,10 +75,10 @@ const ProductGridSingle = ({
               </div>
 
               <div className="pro-same-action pro-cart">
-                <button className="active" title={strings["add_to_cart"]}>
+                <Link className="active" title={strings["add_to_cart"]} to={"/produit-detail/" + product.id + "/" + product.slug}>
                   <i className="pe-7s-cart" />
                   <span className="title"> {strings["add"]} </span>
-                </button>
+                </Link>
               </div>
 
               <div className="pro-same-action pro-quickview">

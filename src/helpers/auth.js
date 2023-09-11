@@ -23,8 +23,21 @@ export const insertUserPayment = (values) => {
     sessionStorage.setItem('Payment', JSON.stringify(newArray));
 }
 
+
 export const getUserAdresse = (values) => {
     const adresse = sessionStorage.getItem('adresse');
     const userAdresse = JSON.parse(adresse);
     return userAdresse;
+}
+
+export const setOrders = (values) => {
+    let array = [];
+    let newArray = array.concat(values);
+    sessionStorage.setItem('orders', JSON.stringify(newArray));
+}
+
+export const getOrders = () => {
+    const orders = sessionStorage.getItem('orders');
+    const all_orders = JSON.parse(orders);
+    return all_orders;
 }

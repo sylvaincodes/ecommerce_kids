@@ -7,7 +7,6 @@ import { useState } from "react";
 import { multilanguage } from "redux-multilanguage";
 import { NumericFormat } from "react-number-format";
 import { useSelector } from "react-redux";
-import ButtonStyle from "../../components/sub-componenets/ButtonStyle";
 import ProductRating from "../../components/sub-componenets/ProductRating";
 
 const Compare = ({ strings }) => {
@@ -53,7 +52,6 @@ const Compare = ({ strings }) => {
                 <div className="compare-table">
                   <table>
                     <tbody>
-                      
                       <tr>
                         <td>{strings["product"]}</td>
                         <td>
@@ -91,8 +89,6 @@ const Compare = ({ strings }) => {
                             </div>
                           </div>
                         </td>
-
-
                       </tr>
 
                       <tr>
@@ -169,7 +165,7 @@ const Compare = ({ strings }) => {
                             velit esse quam nihil molestiae consequatur.
                           </p>
                         </td>
-                        
+
                         <td>
                           <p>
                             Ut enim ad minima veniam, quis nostrum
@@ -179,7 +175,6 @@ const Compare = ({ strings }) => {
                             velit esse quam nihil molestiae consequatur.
                           </p>
                         </td>
-                        
                       </tr>
 
                       <tr className="text-center">
@@ -190,14 +185,13 @@ const Compare = ({ strings }) => {
                             <ProductRating ratingValue={4} />
                           </div>
                         </td>
-                        
-                         <td>
+
+                        <td>
                           <div className="d-flex justify-content-center gap-2">
                             <ProductRating ratingValue={4} />
                           </div>
                         </td>
                       </tr>
-
                     </tbody>
                   </table>
                 </div>

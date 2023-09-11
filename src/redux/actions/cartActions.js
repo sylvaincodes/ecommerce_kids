@@ -29,12 +29,12 @@ export const addToCart = (
 };
 
 export const deleteFromCart = (
-  product, //{ id : 1, name :"example", variation :[ {...}] ,  }
+  product, 
   toast,
   strings
 ) => {
   return (dispatch) => {
-    toast(strings["deleted_from_cart"], { className: "toast-custom", icon: "👍" });
+    toast.success(strings["deleted_from_cart"], { className: "toast-custom"});
     dispatch({
       type: DELETE_FROM_CART,
       payload: {
@@ -50,7 +50,7 @@ export const deleteFromCart = (
 
 export const deleteAllFromCart = (toast,strings) => {
   return (dispatch) => {
-    toast(strings["all_items_deleted"], { className: "toast-custom", icon: "👍" });
+    toast.success(strings["all_items_deleted"], { className: "toast-custom"});
     dispatch({
       type: DELETE_ALL_FROM_CART,
     });

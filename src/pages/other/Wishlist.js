@@ -6,20 +6,36 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { multilanguage } from "redux-multilanguage";
 import { NumericFormat } from "react-number-format";
-import { useSelector } from "react-redux";
-import ButtonStyle from "../../components/sub-componenets/ButtonStyle";
+import { useSelector, useDispatch } from "react-redux";
+import { toast } from "react-hot-toast";
+import {
+  deleteAllFromWishlist,
+  deleteFromWishlist,
+} from "../../redux/actions/wishlistActions";
+import { getDiscountPrice } from "../../helpers/product";
 
 const Wishlist = ({ strings }) => {
+  let wishlistTotalPrice = 0;
 
-  const [quantityCount, setQuantityCount] = useState(1);
-  const [productStock, setProductStock] = useState(7);
+  const dispatch = useDispatch();
+
   const currency = useSelector((state) => state.currencyData);
-  
+
+  const wishlist = useSelector((state) => state.wishlistData.wishlistItems);
+
+  const handleDeleteItem = (product, toast) => {
+    dispatch(deleteFromWishlist(product, toast, strings));
+  };
+
+  const handleDeleteAllItem = (toast, strings) => {
+    dispatch(deleteAllFromWishlist(toast, strings));
+  };
+
   return (
     <Fragment>
       <Helmet>
         <meta charSet="utf-8" />
-        <title> Ecommerce - Liste des comparaisons </title>
+        <title> Ecommerce - Liste des souhaits </title>
         <meta
           name="description"
           content="Page d'affichage des souhaits des articles"
@@ -39,7 +55,7 @@ const Wishlist = ({ strings }) => {
                 <BreadcrumbItem link="#" title="/"></BreadcrumbItem>
                 <BreadcrumbItem
                   link="#"
-                  title={strings["cart"]}
+                  title={strings["wishlist"]}
                 ></BreadcrumbItem>
               </ul>
             </div>
@@ -48,7 +64,7 @@ const Wishlist = ({ strings }) => {
 
         <div className="cart-main-area pt-60 pb-60">
           <div className="container">
-            <h2 className="title">{strings["your_cart"]}</h2>
+            <h2 className="title">{strings["your_wislist"]}</h2>
             <div className="row">
               <div className="col-12">
                 <div className="table-content table-responsive cart-table-content">
@@ -64,73 +80,139 @@ const Wishlist = ({ strings }) => {
                     </thead>
 
                     <tbody>
-                      <tr>
-                        <td className="product-thumball">
-                          <Link to="/">
-                            <img
-                              className="img-fluid"
-                              src="./assets/img/product/fashion/1.jpg"
-                              alt="image-cart"
-                            />
-                          </Link>
-                        </td>
+                      {wishlist &&
+                        wishlist.map((item, key) => {
+                          console.log(item.product.image[0]);
 
-                        <td className="product-name">
-                          <Link
-                            to={"/produit-detail/" + 1 + "/" + "jacket-kid"}
-                          >
-                            Consectetur enim id.
-                          </Link>
-                         
-                        </td>
+                          let wishlistTotalItem = 0;
 
-                        <td className="product-price-cart">
-                          <del className="amount old">
-                            <NumericFormat
-                              value={222}
-                              thousandsGroupStyle="lakh"
-                              thousandSeparator=" "
-                              decimalSeparator="."
-                              decimalScale={0}
-                              fixedDecimalScale
-                              prefix={""}
-                              suffix={" " + currency.currencySymbol}
-                              displayType="text"
-                            />
-                          </del>
-                          <span className="amount ">
-                            <NumericFormat
-                              value={222}
-                              thousandsGroupStyle="lakh"
-                              thousandSeparator=" "
-                              decimalSeparator="."
-                              decimalScale={0}
-                              fixedDecimalScale
-                              prefix={""}
-                              suffix={" " + currency.currencySymbol}
-                              displayType="text"
-                            />
-                          </span>
-                        </td>
+                          const discountedPrice = getDiscountPrice(
+                            item.product.price,
+                            item.product.discount
+                          );
+                          const finalProductPrice = (
+                            item.product.price * currency.currencyRate
+                          ).toFixed(2);
+                          const finalDiscountedPrice = (
+                            discountedPrice * currency.currencyRate
+                          ).toFixed(2);
 
-                        <td className="product-quantity">
-                            <div className="animated-btn btn-hover">
-                                <Link className="rounded-btn" to="/product-detail/1/jacket-kid">
-                                   { strings['add_to_cart']}
+                          discountedPrice != null
+                            ? (wishlistTotalItem =
+                                finalDiscountedPrice * item.quantity)
+                            : (wishlistTotalItem =
+                                finalProductPrice * item.quantity);
+
+                          discountedPrice != null
+                            ? (wishlistTotalPrice +=
+                                finalDiscountedPrice * item.quantity)
+                            : (wishlistTotalPrice +=
+                                finalProductPrice * item.quantity);
+
+                          return (
+                            <tr key={key}>
+                              <td className="product-thumball">
+                                <Link to="/">
+                                  <img
+                                    className="img-fluid"
+                                    src={
+                                      process.env.REACT_APP_PUBLIC_URL +
+                                      item.product.image[0]
+                                    }
+                                    alt="image-cart"
+                                  />
                                 </Link>
-                            </div>
-                        </td>
+                              </td>
 
-                      
+                              <td className="product-name">
+                                <Link
+                                  to={
+                                    "/produit-detail/" +
+                                    item.product.id +
+                                    "/" +
+                                    item.product.slug
+                                  }
+                                >
+                                  {item.product.name}
+                                </Link>
+                                <div className="cart-item-variation d-grid">
+                                  <span>
+                                    {strings["color"]} :{" "}
+                                    {item.selectedProductColor}
+                                  </span>
+                                  <span>
+                                    {strings["size"]} :{" "}
+                                    {item.selectedProductSize}
+                                  </span>
+                                </div>
+                              </td>
 
-                        <td className="product-remove">
-                          <button
-                            title="Supprimer"
-                            >
-                            <i className="fa fa-times"></i>
-                          </button>
-                        </td>
-                      </tr>
+                              <td className="product-price-cart">
+                                {item.product.discount != 0 ? (
+                                  <del className="amount old">
+                                    <NumericFormat
+                                      value={finalProductPrice}
+                                      thousandsGroupStyle="lakh"
+                                      thousandSeparator=" "
+                                      decimalSeparator="."
+                                      decimalScale={0}
+                                      fixedDecimalScale
+                                      prefix={""}
+                                      suffix={" " + currency.currencySymbol}
+                                      displayType="text"
+                                    />
+                                  </del>
+                                ) : (
+                                  ""
+                                )}
+                                <span className="amount ">
+                                  <NumericFormat
+                                    value={
+                                      discountedPrice
+                                        ? finalDiscountedPrice
+                                        : finalProductPrice
+                                    }
+                                    thousandsGroupStyle="lakh"
+                                    thousandSeparator=" "
+                                    decimalSeparator="."
+                                    decimalScale={0}
+                                    fixedDecimalScale
+                                    prefix={""}
+                                    suffix={" " + currency.currencySymbol}
+                                    displayType="text"
+                                  />
+                                </span>
+                              </td>
+
+                              <td className="product-quantity">
+                                <div className="animated-btn btn-hover">
+                                  <Link
+                                    className="rounded-btn"
+                                    to={
+                                      "/produit-detail/" +
+                                      item.product.id +
+                                      "/" +
+                                      item.product.slug
+                                    }
+                                  >
+                                    {strings["add_to_cart"]}
+                                  </Link>
+                                </div>
+                              </td>
+
+                              <td className="product-remove">
+                                <button
+                                  title="Supprimer"
+                                  onClick={() =>
+                                    handleDeleteItem(item.product, toast)
+                                  }
+                                >
+                                  <i className="fa fa-times"></i>
+                                </button>
+                              </td>
+                            </tr>
+                          );
+                        })}
                     </tbody>
                   </table>
                 </div>
@@ -153,14 +235,14 @@ const Wishlist = ({ strings }) => {
                   <div className="cart-clear">
                     <button
                       className="hover-style"
+                      onClick={() => handleDeleteAllItem(toast,strings)}
                     >
-                      {strings["vider_panier"]}
+                      {strings["vider_souhait"]}
                     </button>
                   </div>
                 </div>
               </div>
             </div>
-
           </div>
         </div>
       </Layout>

@@ -79,7 +79,14 @@ const ProductModal = ({ product, discountedPrice, show, onHide, strings }) => {
       onHide={onHide}
       className="product-quickview-modal-wrapper"
     >
-      <Modal.Header closeButton></Modal.Header>
+      <Modal.Header closeButton>
+        <div className="row w-100">
+
+        <h4 className="text-center text-capitalize">
+          {strings["product_info"]}
+        </h4>
+        </div>
+      </Modal.Header>
       <Modal.Body>
         <div className="row">
           <div className="col-12 col-md-4">
@@ -180,7 +187,7 @@ const ProductModal = ({ product, discountedPrice, show, onHide, strings }) => {
 
             <div className="pro-details-size-color">
               <div className="col-5 pro-details-color-wrap">
-                <h5 className="title">{strings["couleur"]}</h5>
+                <h5 className="title">{strings["color"]}</h5>
                 <div className="pro-details-color-content">
                   {product.variation.map((single, key) => {
                     return (

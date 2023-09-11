@@ -5,14 +5,21 @@ import { fetchProduct } from "../../redux/actions/productActions";
 import { useDispatch, useSelector } from "react-redux";
 import { multilanguage } from "redux-multilanguage";
 import { NumericFormat } from "react-number-format";
-
+import { toast } from "react-hot-toast";
+import { addToWishlist } from "../../redux/actions/wishlistActions";
 
 const ProductSingle = ({ i, data, discountedPrice, colClass, strings }) => {
-
   const currency = useSelector((state) => state.currencyData);
   const dispatch = useDispatch();
+
   const likeProduct = (e) => {
-    e.target.classList.toggle("active");
+    
+    e.currentTarget.classList.add("active");
+    document.querySelector(".cart-number").classList.add("animated");
+    setTimeout(() => {
+      document.querySelector(".cart-number").classList.remove("animated");
+    }, 2000);
+    dispatch(addToWishlist(data, toast, strings));
   };
 
   const [modal, setModalShow] = useState(false);
@@ -54,17 +61,27 @@ const ProductSingle = ({ i, data, discountedPrice, colClass, strings }) => {
               </div>
             </Link>
             <div className="product-action">
-              <div className="pro-same-action pro-wishlist">
-                <button className="active" title={strings["add_to_wishlist"]}>
+              <div
+                onClick={(e) => likeProduct(e)}
+                className="pro-same-action pro-wishlist"
+              >
+                <button
+                  className=""
+                  title={strings["add_to_wishlist"]}
+                >
                   <i className="pe-7s-like" />
                 </button>
               </div>
 
               <div className="pro-same-action pro-cart">
-                <button className="active" title={strings["add_to_cart"]}>
+                <Link
+                  className="active"
+                  title={strings["add_to_cart"]}
+                  to={"/produit-detail/" + data.id + "/" + data.slug}
+                >
                   <i className="pe-7s-cart" />
                   <span className="title">{strings["add"]} </span>
-                </button>
+                </Link>
               </div>
 
               <div className="pro-same-action pro-quickview">
@@ -86,7 +103,6 @@ const ProductSingle = ({ i, data, discountedPrice, colClass, strings }) => {
                 </h3>
                 <div className="gap-2 d-flex justify-content-between">
                   <span>
-                  
                     <NumericFormat
                       value={discountedPrice ? discountedPrice : data.price}
                       thousandsGroupStyle="lakh"
@@ -102,31 +118,31 @@ const ProductSingle = ({ i, data, discountedPrice, colClass, strings }) => {
 
                   {data.discount != 0 ? (
                     <del className="text-danger">
-                       <NumericFormat
-                      value={data.price}
-                      thousandsGroupStyle="lakh"
-                      thousandSeparator=" "
-                      decimalSeparator="."
-                      decimalScale={0}
-                      fixedDecimalScale
-                      prefix={""}
-                      suffix={" " + currency.currencySymbol}
-                      displayType="text"
-                    />
+                      <NumericFormat
+                        value={data.price}
+                        thousandsGroupStyle="lakh"
+                        thousandSeparator=" "
+                        decimalSeparator="."
+                        decimalScale={0}
+                        fixedDecimalScale
+                        prefix={""}
+                        suffix={" " + currency.currencySymbol}
+                        displayType="text"
+                      />
                     </del>
                   ) : (
                     ""
                   )}
                 </div>
               </div>
-              <Link to="/" onClick={(e) => likeProduct(e)}>
+              <Link to="/">
                 <i className="pe-7s-like"></i>
               </Link>
             </div>
           </div>
         </div>
       </div>
-      
+
       <ProductModal
         show={modal}
         onHide={() => setModalShow(false)}

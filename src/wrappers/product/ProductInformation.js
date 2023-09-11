@@ -224,7 +224,7 @@ const ProductInformation = ({ strings }) => {
                                 placeholder={strings['commentaire']}
                                 defaultValue={""}
                               />
-                              <input value={strings['send']} type="submit" defaultValue="Submit"/>
+                              <input value={strings['send']} type="submit"/>
                             </div>
                           </div>
                         </div>

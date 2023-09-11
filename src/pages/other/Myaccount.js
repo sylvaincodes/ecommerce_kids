@@ -51,7 +51,7 @@ const Myaccount = ({ strings }) => {
 
               <div className="group-list d-flex">
                 <div class="list-item flex-row col-12 col-md-5">
-                  <Link to="/account/order">
+                  <Link to="/myorders">
                     <img
                       width={100}
                       src={
@@ -63,7 +63,7 @@ const Myaccount = ({ strings }) => {
                     />
                   </Link>
                   <div class="card-body">
-                    <Link to="/account/order">
+                    <Link to="/myorders">
                       <h5 class="card-title">{strings["orders"]}</h5>
                       <p class="card-text">{strings["orders_desc"]}</p>
                     </Link>
@@ -71,7 +71,7 @@ const Myaccount = ({ strings }) => {
                 </div>
 
                 <div class="list-item flex-row col-12 col-md-5">
-                  <Link to="/account/order">
+                  <Link to="/mybillings">
                     <img
                       width={100}
                       src={
@@ -84,7 +84,7 @@ const Myaccount = ({ strings }) => {
                   </Link>
 
                   <div class="card-body">
-                    <Link to="/account/payment">
+                    <Link to="/mybillings">
                       <h5 class="card-title">{strings["payments"]}</h5>
                       <p class="card-text">{strings["payments_desc"]}</p>
                     </Link>
@@ -92,12 +92,12 @@ const Myaccount = ({ strings }) => {
                 </div>
 
                 <div class="list-item flex-row col-12 col-md-5">
-                  <Link to="/account/order">
+                  <Link to="/myadresses">
                     <img
                       width={100}
                       src={
                         process.env.REACT_APP_PUBLIC_URL +
-                        "./assets/img/moncompte/order.png"
+                        "./assets/img/moncompte/adresse.png"
                       }
                       class="img-fluid"
                       alt="..."

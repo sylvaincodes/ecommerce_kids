@@ -17,7 +17,7 @@ const CountdownNow = ({ dateTime,strings }) => {
                             </h3> 
                             <Countdown date={new Date(dateTime)} renderer={Renderer} />                        
                             <div className='custom-btn btn-hover'>
-                                <Link className=' rounden-btn'>
+                                <Link className=' rounden-btn' to="/tous-les-produits">
                                 {strings['acheter']} 
                                 </Link>
                             </div>

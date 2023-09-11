@@ -8,8 +8,8 @@ import { useState } from "react";
 import { multilanguage } from "redux-multilanguage";
 import { NumericFormat } from "react-number-format";
 import { useSelector } from "react-redux";
-import { getDiscountPrice } from "../../helpers/product";
 import { useDispatch } from "react-redux";
+import { getDiscountPrice } from "../../helpers/product";
 import {
   addToCart,
   deleteFromCart,
@@ -255,12 +255,7 @@ const Cart = ({ strings }) => {
               <div className="col-lg-12">
                 <div className="cart-shiping-update-wrapper">
                   <div className="cart-shiping-update">
-                    <Link
-                      className="hover-style"
-                      to={
-                        process.env.REACT_APP_PUBLIC_URL + "tous-les-produits"
-                      }
-                    >
+                    <Link className="hover-style" to={"/tous-les-produits"}>
                       {strings["continuer_achat"]}
                     </Link>
                   </div>
@@ -306,7 +301,7 @@ const Cart = ({ strings }) => {
                     <div className="total-product">
                       <h4>
                         {strings["total_products"]}
-                        <span className="c">
+                        <span className="">
                           <NumericFormat
                             value={cartTotalPrice}
                             thousandsGroupStyle="lakh"

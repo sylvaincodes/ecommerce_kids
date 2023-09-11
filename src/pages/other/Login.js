@@ -8,11 +8,10 @@ import ButtonStyle from "../../components/sub-componenets/ButtonStyle";
 import { useFormik } from "formik";
 import { getToken, setToken } from "../../helpers/auth";
 import { useNavigate } from "react-router-dom";
-import Paiement from "../../components/auth/Paiement";
+import Myaccount from "../../pages/other/Myaccount";
 import { toast } from "react-hot-toast";
 
 const Login = ({ strings }) => {
-  const Navigate = useNavigate();
 
   const validate = (values) => {
     const errors = {};
@@ -41,10 +40,15 @@ const Login = ({ strings }) => {
     validate,
     onSubmit: (values) => {
       setToken(values);
-      toast(strings['connected'] , { className:'toast-custom', icon: "👍" });
+      toast(strings["connected"], { className: "toast-custom", icon: "👍" });
       window.location.reload();
     },
   });
+
+  
+  if(getToken()){
+    return <Myaccount/>
+}
 
   return (
     <Fragment>
@@ -96,6 +100,12 @@ const Login = ({ strings }) => {
                           onChange={formik.handleChange}
                           value={formik.values.email}
                         />
+                        {formik.errors.email ? (
+                          <div className="invalid-feedback d-block">
+                            {" "}
+                            {formik.errors.email}{" "}
+                          </div>
+                        ) : null}
                       </div>
 
                       <div className="col-12 col-md-6 mb-3">
@@ -107,6 +117,13 @@ const Login = ({ strings }) => {
                           onChange={formik.handleChange}
                           value={formik.values.password}
                         />
+
+                        {formik.errors.password ? (
+                          <div className="invalid-feedback d-block">
+                            {" "}
+                            {formik.errors.password}{" "}
+                          </div>
+                        ) : null}
                       </div>
 
                       <ButtonStyle

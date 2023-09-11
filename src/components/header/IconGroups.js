@@ -12,21 +12,25 @@ import { fetchProduct } from "../../redux/actions/productActions";
 import { useDispatch } from "react-redux";
 import { getDiscountPrice } from "../../helpers/product";
 import { deleteFromCart } from "../../redux/actions/cartActions";
-import toast, { Toaster } from 'react-hot-toast';
+import toast from "react-hot-toast";
+import { getToken } from "../../helpers/auth";
 
 const IconGroups = ({ strings }) => {
+  const token = getToken();
+
   let cartTotalPrice = 0;
 
   const focusSearchInput = useRef();
   const currency = useSelector((state) => state.currencyData);
   const cart = useSelector((state) => state.cartData.cartItems);
+  const wishlist = useSelector((state) => state.wishlistData.wishlistItems);
 
   const handleClick = (e) => {
     e.currentTarget.nextSibling.classList.toggle("active");
   };
 
   const handleDeleteItem = (product) => {
-    dispatch(deleteFromCart(product,toast,strings));
+    dispatch(deleteFromCart(product, toast, strings));
   };
 
   const handleAccountClick = (e) => {
@@ -313,12 +317,6 @@ const IconGroups = ({ strings }) => {
         <div className="search-content">
           <form className="row" onSubmit={handleSubmitSearch}>
             <Autocomplete
-              // filterOptions={(options, state) => {
-              //   const displayOptions = options.filter((option) => {
-              //      option.name.toUpperCase();
-              //   });
-              //   return displayOptions;
-              // }}
               limitTags={2}
               loadingText="Loading"
               autoSelect={true}
@@ -373,7 +371,7 @@ const IconGroups = ({ strings }) => {
               </Link>
             </li>
             <li>
-              <Link to="/signup">
+              <Link to="/register">
                 <span>{strings["signup"]}</span>
               </Link>
             </li>
@@ -391,12 +389,14 @@ const IconGroups = ({ strings }) => {
           <span className="count-style">0</span>
         </Link>
       </div>
+
       <div className="same-style header-wishlist">
         <Link to="/wishlist" title={strings["wishlist"]}>
           <i className="pe-7s-like"></i>
-          <span className="count-style">0</span>
+          <span className="count-style cart-number">{wishlist.length}</span>
         </Link>
       </div>
+
       <div className="same-style header-cart d-none d-lg-block">
         <Link onClick={(e) => handleCartClick(e)} title={strings["see_cart"]}>
           <i className="pe-7s-shopbag"></i>
@@ -505,12 +505,11 @@ const IconGroups = ({ strings }) => {
       </div>
 
       <div className="same-style header-cart d-block d-lg-none">
-        <Link to="/">
+        <Link to="/cart">
           <i className="pe-7s-shopbag"></i>
           <span className="count-style">0</span>
         </Link>
       </div>
-
       <div className="same-style header-menu d-lg-none">
         <button onClick={(e) => showMobileMenu(e)}>
           <i className="pe-7s-menu"></i>

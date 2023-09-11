@@ -534,6 +534,15 @@
                                     color: gray;
                                 }
                             }
+                            &.mobile{
+                                .MuiInputBase-root{
+                                    border-radius: none;
+                                }
+                                input{
+                                    height: 33px;
+                                    border-radius: none;
+                                }
+                            }
                         }
                     }
                     

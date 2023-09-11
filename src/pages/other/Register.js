@@ -5,7 +5,8 @@ import Layout from "../../layouts/Layout";
 import BreadcrumbItem from "../../components/breadcrumb/BreadcrumbItem";
 import { Helmet } from "react-helmet";
 import { multilanguage } from "redux-multilanguage";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import Myaccount from "../../pages/other/Myaccount";
 
 function Register({ setModalLogin, strings }) {
   const Navigate = useNavigate();
@@ -46,6 +47,10 @@ function Register({ setModalLogin, strings }) {
     },
   });
 
+  if (getToken()) {
+    return <Myaccount />;
+  }
+
   return (
     <Fragment>
       <Helmet>
@@ -70,7 +75,7 @@ function Register({ setModalLogin, strings }) {
                 <BreadcrumbItem link="#" title="/"></BreadcrumbItem>
                 <BreadcrumbItem
                   link="#"
-                  title={strings["orders"]}
+                  title={strings["signup"]}
                 ></BreadcrumbItem>
               </ul>
             </div>
@@ -142,9 +147,9 @@ function Register({ setModalLogin, strings }) {
 
               <h5>
                 {strings["go_login_text"]} &nbsp;
-                <button onClick={() => setModalLogin(true)}>
+                <Link to="/login">
                   <strong>{strings["here"]}</strong>
-                </button>
+                </Link>
               </h5>
             </form>
           </div>

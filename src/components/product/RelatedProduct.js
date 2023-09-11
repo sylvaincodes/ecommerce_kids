@@ -45,7 +45,6 @@ const RelatedProduct = ({ category, strings }) => {
                 {...settings} 
                 spaceBetween={20}
                 pagination={{ clickable: true }}
-
           >
           <ProductGrid
             category={category}

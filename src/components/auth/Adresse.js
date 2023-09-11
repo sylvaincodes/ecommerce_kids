@@ -20,6 +20,10 @@ const Adresse = ({ strings }) => {
     if (!values.phone) {
       errors.phone = "ce champ est obligatoire";
     }
+    
+    if (!values.country) {
+      errors.country = "ce champ est obligatoire";
+    }
 
     if (!values.city) {
       errors.city = "ce champ est obligatoire";
@@ -152,6 +156,7 @@ const Adresse = ({ strings }) => {
               onChange={formik.handleChange}
               value={formik.values.country}
             >
+              <option value=""> {strings['choose']} </option>
               <option value="france"> france </option>
               <option value="england"> england </option>
             </select>
