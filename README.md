@@ -21,7 +21,9 @@ This app is an ecommerce site made with React js. (https://github.com/facebook/c
 
     3 - Material UI https://mui.com/ 
 
-    4 - Stripe API
+    4 - Stripe API  stripe.com
+
+    5 - React bootstrap  https://react-bootstrap.netlify.app
 
 
 ## Available Scripts
