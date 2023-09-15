@@ -1,5 +1,7 @@
 # Getting Started with the app
 
+![alt text](https://shop-you-me.web.app/assets/img/web/screenshot.png)
+
 This app is an ecommerce site made with React js. (https://github.com/facebook/create-react-app).
 
 `Features` \
