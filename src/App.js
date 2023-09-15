@@ -41,9 +41,9 @@ const App = ({ props }) => {
     <ToastProvider
       placement="bottom-center"
       autoDismiss="true"
-      transitionDuration={100}
+      transitionDuration={3000}
     >
-      {/* <Suspense fallback={<Preloader />}> */}
+      <Suspense fallback={<Preloader />}>
         <BrowserRouter>
           <Routes>
             <Route exact path="/" Component={Home1} />
@@ -63,7 +63,7 @@ const App = ({ props }) => {
           </Routes>
         </BrowserRouter>
         <Toaster />
-      {/* </Suspense> */}
+      </Suspense>
     </ToastProvider>
   );
 };

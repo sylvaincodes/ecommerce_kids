@@ -14,13 +14,13 @@ function Register({ setModalLogin, strings }) {
   const validate = (values) => {
     const errors = {};
     if (!values.password) {
-      errors.password = "Cet champ est obligatoire";
+      errors.password = strings['required'];
     } else if (values.password.length < 8) {
-      errors.password = "Au moins 8 caractères";
+      errors.password = strings['at_least_8_strings'];
     }
 
     if (values.c_password != values.password) {
-      errors.c_password = "Mots de passes inconformes";
+      errors.c_password = strings['passwords_not_confirmed'];
     }
 
     if (!values.email) {

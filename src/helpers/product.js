@@ -7,11 +7,18 @@ export const getDiscountPrice = (price, discount) => {
 //get products based on category
 export const getSortedProducts = (products, sortType, sortValue) => {
     if (products && sortType && sortValue) {
+
       if (sortType === "category") {
-        return products.filter(
-          product => product.category.filter(single => single === sortValue)[0]
+        const filterProducts =  products.filter(
+          product => 
+          Array.isArray(product.category) ? 
+          product.category.filter(single => single === sortValue)[0] :
+          product.category == sortValue
         );
+        return filterProducts;
+
       }
+
       if (sortType === "tag") {
         return products.filter(
           product => product.tag.filter(single => single === sortValue)[0]

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { changeLanguage } from "redux-multilanguage";
@@ -29,8 +29,34 @@ const MobileMenu = ({ strings }) => {
   const hideMobileMenu = () => {
     document.querySelector(".mobile-menu").classList.remove("active");
   };
+
+  useEffect(() => {
+    const offCanvasNav = document.querySelector("#offcanvas-navigation");
+    const offCanvasNavSubMenu = offCanvasNav.querySelectorAll(".sub-menu");
+    const anchorLinks = offCanvasNav.querySelectorAll("a");
+
+    const menuExpand = document.querySelectorAll(".menu-expand");
+    const numMenuExpand = menuExpand.length;
+
+    for (let i = 0; i < numMenuExpand; i++) {
+      menuExpand[i].addEventListener("click", (e) => {
+        sideMenuExpand(e);
+      });
+    }
+
+    for (let i = 0; i < anchorLinks.length; i++) {
+      anchorLinks[i].addEventListener("click", () => {
+        hideMobileMenu();
+      });
+    }
+  });
+
+  const sideMenuExpand = (e) => {
+    e.currentTarget.parentElement.classList.toggle("active");
+  };
+
   return (
-    <div className="mobile-menu">
+    <div className="mobile-menu" id="offcanvas-navigation">
       <div className="mobile-top">
         <button
           className="mobile-button-close"
@@ -57,7 +83,7 @@ const MobileMenu = ({ strings }) => {
                 className="text-capitalize search"
                 {...params}
                 value={query}
-                onChange={(e) => setQuery(e.target.value) }
+                onChange={(e) => setQuery(e.target.value)}
                 fullWidth
                 required
               />
@@ -73,12 +99,12 @@ const MobileMenu = ({ strings }) => {
               }
             }}
           />
-          <button
+          {/* <button
             className="btn btn-secondary mobile-button-close"
             type="submit"
           >
             <i className="fa fa-search" />
-          </button>
+          </button> */}
         </div>
       </div>
 

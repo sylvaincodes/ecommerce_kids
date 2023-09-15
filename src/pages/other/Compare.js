@@ -6,13 +6,29 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { multilanguage } from "redux-multilanguage";
 import { NumericFormat } from "react-number-format";
-import { useSelector } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
 import ProductRating from "../../components/sub-componenets/ProductRating";
+import { getDiscountPrice } from "../../helpers/product";
+import { DELETE_FROM_COMPARE, deleteFromCompare } from "../../redux/actions/compareActions";
+import { toast } from "react-hot-toast";
 
 const Compare = ({ strings }) => {
-  const [quantityCount, setQuantityCount] = useState(1);
-  const [productStock, setProductStock] = useState(7);
   const currency = useSelector((state) => state.currencyData);
+  const compare = useSelector((state) => state.compareData.compareItems);
+  const dispatch = useDispatch();
+
+  const handleDeleteFromCompare = (product, toast, strings) => {
+    dispatch({
+      type: DELETE_FROM_COMPARE,
+      payload: {
+        product: product
+      },
+      params: {
+        toast: toast,
+        strings: strings,
+      },
+    })
+  };
 
   return (
     <Fragment>
@@ -32,13 +48,13 @@ const Compare = ({ strings }) => {
             <div className="row">
               <ul className="breadcrumb">
                 <BreadcrumbItem
-                  link="/"
+                  link="/tous-les-produits"
                   title={strings["shop"]}
                 ></BreadcrumbItem>
                 <BreadcrumbItem link="#" title="/"></BreadcrumbItem>
                 <BreadcrumbItem
                   link="#"
-                  title={strings["whistle"]}
+                  title={strings["compare"]}
                 ></BreadcrumbItem>
               </ul>
             </div>
@@ -48,150 +64,131 @@ const Compare = ({ strings }) => {
         <div className="compare-main-area pt-90 pb-100">
           <div className="container">
             <div className="row">
-              <div className="col-lg-12">
+              <div className="col-lg-12 overflow-auto">
                 <div className="compare-table">
                   <table>
                     <tbody>
                       <tr>
                         <td>{strings["product"]}</td>
-                        <td>
-                          <div className="row p-2">
-                            <i className="fa fa-trash"></i>
-                            <img
-                              src={
-                                process.env.REACT_APP_PUBLIC_URL +
-                                "./assets/img/product/fashion/1.jpg"
-                              }
-                            />
-                            <h4 className="title">jacket kid </h4>
-                            <div className="animated-btn btn-hover">
-                              <Link className="rounden-btn">
-                                {strings["add_to_cart"]}
-                              </Link>
-                            </div>
-                          </div>
-                        </td>
 
-                        <td>
-                          <div className="row p-2">
-                            <i className="fa fa-trash"></i>
-                            <img
-                              src={
-                                process.env.REACT_APP_PUBLIC_URL +
-                                "./assets/img/product/fashion/1.jpg"
-                              }
-                            />
-                            <h4 className="title">jacket kid </h4>
-                            <div className="animated-btn btn-hover">
-                              <Link className="rounden-btn">
-                                {strings["add_to_cart"]}
-                              </Link>
-                            </div>
-                          </div>
-                        </td>
+                        {compare &&
+                          compare.map((item, key) => {
+                            return (
+                              <Fragment key={key}>
+                                <td>
+                                  <div className="row p-2">
+                                    <i
+                                      className="fa fa-trash"
+                                      onClick={(e) =>
+                                        handleDeleteFromCompare(
+                                          item.product,
+                                          toast,
+                                          strings
+                                        )
+                                      }
+                                    ></i>
+                                    <img
+                                      src={
+                                        process.env.REACT_APP_PUBLIC_URL +
+                                        item.product.image[0]
+                                      }
+                                    />
+                                    <h4 className="title">
+                                      {item.product.name}
+                                    </h4>
+                                    <div className="animated-btn btn-hover">
+                                      <Link className="rounden-btn" to={"/produit-detail/" + item.product.id + "/" + item.product.slug}>
+                                        {strings["add_to_cart"]}
+                                      </Link>
+                                    </div>
+                                  </div>
+                                </td>
+                              </Fragment>
+                            );
+                          })}
                       </tr>
 
                       <tr>
                         <td>{strings["price"]}</td>
-                        <td className="product-price-cart gap-2">
-                          <del className="amount old text-muted justify-content-between">
-                            <NumericFormat
-                              value={222}
-                              thousandsGroupStyle="lakh"
-                              thousandSeparator=" "
-                              decimalSeparator="."
-                              decimalScale={0}
-                              fixedDecimalScale
-                              prefix={""}
-                              suffix={" " + currency.currencySymbol}
-                              displayType="text"
-                            />
-                          </del>
-                          &nbsp;
-                          <span className="amount ">
-                            <NumericFormat
-                              value={222}
-                              thousandsGroupStyle="lakh"
-                              thousandSeparator=" "
-                              decimalSeparator="."
-                              decimalScale={0}
-                              fixedDecimalScale
-                              prefix={""}
-                              suffix={" " + currency.currencySymbol}
-                              displayType="text"
-                            />
-                          </span>
-                        </td>
-                        <td className="product-price-cart gap-2">
-                          <del className="amount old text-muted justify-content-between">
-                            <NumericFormat
-                              value={222}
-                              thousandsGroupStyle="lakh"
-                              thousandSeparator=" "
-                              decimalSeparator="."
-                              decimalScale={0}
-                              fixedDecimalScale
-                              prefix={""}
-                              suffix={" " + currency.currencySymbol}
-                              displayType="text"
-                            />
-                          </del>
-                          &nbsp;
-                          <span className="amount ">
-                            <NumericFormat
-                              value={222}
-                              thousandsGroupStyle="lakh"
-                              thousandSeparator=" "
-                              decimalSeparator="."
-                              decimalScale={0}
-                              fixedDecimalScale
-                              prefix={""}
-                              suffix={" " + currency.currencySymbol}
-                              displayType="text"
-                            />
-                          </span>
-                        </td>
-                      </tr>
 
-                      <tr>
-                        <td>{strings["description"]}</td>
+                        {compare &&
+                          compare.map((item, key) => {
+                            let cartTotalItem = 0;
 
-                        <td>
-                          <p>
-                            Ut enim ad minima veniam, quis nostrum
-                            exercitationem ullam corporis suscipit laboriosam,
-                            nisi ut aliquid ex ea commodi consequatur? Quis
-                            autem vel eum iure reprehenderit qui in ea voluptate
-                            velit esse quam nihil molestiae consequatur.
-                          </p>
-                        </td>
+                            const discountedPrice = getDiscountPrice(
+                              item.product.price,
+                              item.product.discount
+                            );
+                            const finalProductPrice = (
+                              item.product.price * currency.currencyRate
+                            ).toFixed(2);
+                            const finalDiscountedPrice = (
+                              discountedPrice * currency.currencyRate
+                            ).toFixed(2);
 
-                        <td>
-                          <p>
-                            Ut enim ad minima veniam, quis nostrum
-                            exercitationem ullam corporis suscipit laboriosam,
-                            nisi ut aliquid ex ea commodi consequatur? Quis
-                            autem vel eum iure reprehenderit qui in ea voluptate
-                            velit esse quam nihil molestiae consequatur.
-                          </p>
-                        </td>
+                            discountedPrice != null
+                              ? (cartTotalItem =
+                                  finalDiscountedPrice * item.quantity)
+                              : (cartTotalItem =
+                                  finalProductPrice * item.quantity);
+
+                            return (
+                              <Fragment key={key}>
+                                <td className="product-price-cart gap-2">
+                                  <del className="amount old text-muted justify-content-between">
+                                    <NumericFormat
+                                      value={finalProductPrice}
+                                      thousandsGroupStyle="lakh"
+                                      thousandSeparator=" "
+                                      decimalSeparator="."
+                                      decimalScale={0}
+                                      fixedDecimalScale
+                                      prefix={""}
+                                      suffix={" " + currency.currencySymbol}
+                                      displayType="text"
+                                    />
+                                  </del>
+                                  &nbsp;
+                                  <span className="amount ">
+                                    <NumericFormat
+                                      value={
+                                        discountedPrice
+                                          ? finalDiscountedPrice
+                                          : finalProductPrice
+                                      }
+                                      thousandsGroupStyle="lakh"
+                                      thousandSeparator=" "
+                                      decimalSeparator="."
+                                      decimalScale={0}
+                                      fixedDecimalScale
+                                      prefix={""}
+                                      suffix={" " + currency.currencySymbol}
+                                      displayType="text"
+                                    />
+                                  </span>
+                                </td>
+                              </Fragment>
+                            );
+                          })}
                       </tr>
 
                       <tr className="text-center">
                         <td>{strings["rating"]}</td>
 
-                        <td>
-                          <div className="d-flex justify-content-center gap-2">
-                            <ProductRating ratingValue={4} />
-                          </div>
-                        </td>
-
-                        <td>
-                          <div className="d-flex justify-content-center gap-2">
-                            <ProductRating ratingValue={4} />
-                          </div>
-                        </td>
+                        {compare &&
+                          compare.map((item, key) => {
+                            return (
+                              <Fragment key={key}>
+                                <td>
+                                  <div className="d-flex justify-content-center gap-2">
+                                    <ProductRating ratingValue={4} />
+                                  </div>
+                                </td>
+                              </Fragment>
+                            );
+                          })}
                       </tr>
+                      
                     </tbody>
                   </table>
                 </div>

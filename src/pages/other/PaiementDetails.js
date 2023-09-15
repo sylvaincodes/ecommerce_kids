@@ -6,8 +6,9 @@ import BreadcrumbItem from "../../components/breadcrumb/BreadcrumbItem";
 import AdresseModal from "../../components/sub-componenets/AdresseModal";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { multilanguage } from "redux-multilanguage";
 
-const PaiementDetails = () => {
+const PaiementDetails = ({strings}) => {
   const [editAdresse, setEditAdresse] = useState(false);
 
   const selectAdresse = () =>{
@@ -48,10 +49,10 @@ const PaiementDetails = () => {
               <div className="col-lg-7">
                 <div className="checkout-details-widget adresse">
                   <h4 className="mb-3">
-                    1 - <strong> Choisir une adresse de livraison </strong>
+                    1 - <strong> {strings['adresse_title']} </strong>
                   </h4>
                   <div className="card row  ms-3">
-                    <div class="card-header">Votre adresse</div>
+                    <div class="card-header">{strings['your_adresse']}</div>
                     <ul className="list-group list-group-flush">
                       <li className="list-group-item">
                         <label className="flex-row">
@@ -108,9 +109,9 @@ const PaiementDetails = () => {
               </div>
               <div className="col-lg-5">
                 <div className="checkout-details-widget adresse">
-                  <h4>1 Choisir une adresse de livraison</h4>
+                  <h4>{strings['adresse_title']}</h4>
                   <div className="row">
-                    <h5>Votre adresse</h5>
+                    <h5>{strings['your_adress']}</h5>
                   </div>
                 </div>
               </div>
@@ -122,4 +123,4 @@ const PaiementDetails = () => {
   );
 };
 
-export default PaiementDetails;
+export default multilanguage(PaiementDetails);

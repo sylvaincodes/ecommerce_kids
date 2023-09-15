@@ -16,6 +16,7 @@ import toast from "react-hot-toast";
 import { getToken } from "../../helpers/auth";
 
 const IconGroups = ({ strings }) => {
+  
   const token = getToken();
 
   let cartTotalPrice = 0;
@@ -24,6 +25,7 @@ const IconGroups = ({ strings }) => {
   const currency = useSelector((state) => state.currencyData);
   const cart = useSelector((state) => state.cartData.cartItems);
   const wishlist = useSelector((state) => state.wishlistData.wishlistItems);
+  const compare = useSelector((state) => state.compareData.compareItems);
 
   const handleClick = (e) => {
     e.currentTarget.nextSibling.classList.toggle("active");
@@ -386,7 +388,7 @@ const IconGroups = ({ strings }) => {
       <div className="same-style header-compare>">
         <Link to="/compare" title={strings["shuffle"]}>
           <i className="pe-7s-shuffle"></i>
-          <span className="count-style">0</span>
+          <span className="count-style">{compare.length}</span>
         </Link>
       </div>
 
@@ -507,7 +509,7 @@ const IconGroups = ({ strings }) => {
       <div className="same-style header-cart d-block d-lg-none">
         <Link to="/cart">
           <i className="pe-7s-shopbag"></i>
-          <span className="count-style">0</span>
+          <span className="count-style">{cart.length}</span>
         </Link>
       </div>
       <div className="same-style header-menu d-lg-none">

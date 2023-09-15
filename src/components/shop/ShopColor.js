@@ -1,42 +1,44 @@
 import React from "react";
+import { multilanguage } from "redux-multilanguage";
 
-const ShopColor = () => {
+const ShopColor = ({getSortParams,strings}) => {
   const setActiveSort = (e) => {
     const allButton = document.querySelectorAll(".sidebar-categorie-btn");
     allButton.forEach((element) => {
       element.classList.remove("active");
     });
     e.currentTarget.classList.add("active");
+    getSortParams("color",e.currentTarget.value);
   };
 
   const colors = [
     {
-      name: "blanc",
+      name: "white",
     },
     {
-      name: "noir",
+      name: "black",
     },
     {
-      name: "bleue",
+      name: "blue",
     },
     {
-      name: "brune",
+      name: "brown",
     },
   ];
 
   return (
     <div className="sidebar-widget">
-      <h4 className="title">couleurs</h4>
+      <h4 className="title">{strings['color']}</h4>
       <div className="sidebar-widget-wrapper sidebar-color-list">
         <ul>
           <li>
-            <button
+            <button value=""
               className="sidebar-categorie-btn active"
               onClick={(e) => setActiveSort(e)}
             >
               <span className="checkmark"></span>
               <span className="category-title text-capitalize">
-                toutes les couleurs
+              {strings['all_colors']}
               </span>
             </button>
           </li>
@@ -44,7 +46,7 @@ const ShopColor = () => {
           {colors.map((color, i) => {
             return (
               <li key={i}>
-                <button
+                <button value={color.name}
                   className="sidebar-categorie-btn"
                   onClick={(e) => setActiveSort(e)}
                 >
@@ -62,4 +64,4 @@ const ShopColor = () => {
   );
 };
 
-export default ShopColor;
+export default multilanguage(ShopColor);

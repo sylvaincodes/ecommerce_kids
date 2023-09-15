@@ -1,24 +1,29 @@
 import React, { useState } from "react";
 import {multilanguage} from 'redux-multilanguage'
 
-const ShopCategorie = ({strings}) => {
+const ShopCategorie = ({strings,getSortParams}) => {
+
   const setActiveSort = (e) => {
-    const allButton = document.querySelectorAll(".sidebar-colors-btn");
+    const allButton = document.querySelectorAll(".sidebar-categories-btn");
     allButton.forEach((element) => {
       element.classList.remove("active");
     });
     e.currentTarget.classList.add("active");
+    getSortParams("category",e.currentTarget.value);
   };
 
   const categories = [
     {
-      name: "jeux vidéos & consoles",
+      name: "gaming",
     },
     {
-      name: "musiques",
+      name: "fashion",
     },
     {
       name: "livres",
+    }, 
+    {
+      name: "computer",
     },
   ];
 
@@ -28,8 +33,8 @@ const ShopCategorie = ({strings}) => {
       <div className="sidebar-widget-wrapper sidebar-categorie-list">
         <ul>
           <li>
-            <button
-              className="sidebar-colors-btn active"
+            <button value=""
+              className="sidebar-categories-btn active"
               onClick={(e) => setActiveSort(e)}
             >
               <span className="checkmark"></span>
@@ -42,8 +47,8 @@ const ShopCategorie = ({strings}) => {
           {categories.map((cat, i) => {
             return (
               <li key={i}>
-                <button
-                  className="sidebar-categorie-btn"
+                <button value={cat.name}
+                  className="sidebar-categories-btn"
                   onClick={(e) => setActiveSort(e)}
                 >
                   <span className="checkmark"></span>

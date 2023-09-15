@@ -16,17 +16,17 @@ const Login = ({ strings }) => {
   const validate = (values) => {
     const errors = {};
     if (!values.password) {
-      errors.password = "Cet champ est obligatoire";
+      errors.password = strings['required'];
     } else if (values.password.length < 8) {
-      errors.password = "Au moins 8 caractères";
+      errors.password = strings['least_8_strings'];
     }
 
     if (!values.email) {
-      errors.email = "Cet champ est obligatoire";
+      errors.email = strings['required'];
     } else if (
       !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
     ) {
-      errors.email = "adrese email invalide";
+      errors.email = strings['invalid_email'];
     }
 
     return errors;

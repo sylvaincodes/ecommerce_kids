@@ -13,7 +13,6 @@ const ProductSingle = ({ i, data, discountedPrice, colClass, strings }) => {
   const dispatch = useDispatch();
 
   const likeProduct = (e) => {
-    
     e.currentTarget.classList.add("active");
     document.querySelector(".cart-number").classList.add("animated");
     setTimeout(() => {
@@ -27,7 +26,17 @@ const ProductSingle = ({ i, data, discountedPrice, colClass, strings }) => {
     dispatch(fetchProduct(product));
   };
 
+  const handleWishlist = (e,product,toast,strings) => {
+    e.currentTarget.classList.add("active");
+    document.querySelector(".cart-number").classList.add("animated");
+    setTimeout(() => {
+      document.querySelector(".cart-number").classList.remove("animated");
+    }, 2000);
+    dispatch(addToWishlist(product, toast, strings));
+  };
+
   return (
+    
     <Fragment>
       <div
         key={i}
@@ -65,10 +74,7 @@ const ProductSingle = ({ i, data, discountedPrice, colClass, strings }) => {
                 onClick={(e) => likeProduct(e)}
                 className="pro-same-action pro-wishlist"
               >
-                <button
-                  className=""
-                  title={strings["add_to_wishlist"]}
-                >
+                <button className="" title={strings["add_to_wishlist"]}>
                   <i className="pe-7s-like" />
                 </button>
               </div>
@@ -135,9 +141,9 @@ const ProductSingle = ({ i, data, discountedPrice, colClass, strings }) => {
                   )}
                 </div>
               </div>
-              <Link to="/">
+              <button onClick={(e) => handleWishlist(e,data,toast,strings)}>
                 <i className="pe-7s-like"></i>
-              </Link>
+              </button>
             </div>
           </div>
         </div>

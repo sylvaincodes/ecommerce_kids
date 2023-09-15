@@ -1,42 +1,48 @@
 import React from "react";
+import { multilanguage } from "redux-multilanguage";
 
-const ShopSize = () => {
+const ShopSize = ({strings,getSortParams}) => {
   const setActiveSort = (e) => {
     const allButton = document.querySelectorAll(".sidebar-size-btn");
     allButton.forEach((element) => {
       element.classList.remove("active");
     });
     e.currentTarget.classList.add("active");
+    getSortParams("size",e.currentTarget.value);
   };
 
   const sizes = [
     {
-      name: "blanc",
+      name: "xmall",
+      slug : "x"
     },
     {
-      name: "noir",
+      name: "medium",
+      slug : "m"
     },
     {
-      name: "bleue",
+      name: "large",
+      slug : "l"
     },
     {
-      name: "brune",
+      name: "extra large",
+      slug : "xl"
     },
   ];
 
   return (
     <div className="sidebar-widget">
-      <h4 className="title">tailles</h4>
+      <h4 className="title">{strings['size']}</h4>
       <div className="sidebar-widget-wrapper sidebar-size-list">
         <ul>
           <li>
-            <button
+            <button value=""
               className="sidebar-size-btn active"
               onClick={(e) => setActiveSort(e)}
             >
               <span className="checkmark"></span>
               <span className="category-title text-capitalize">
-                toutes les couleurs
+              {strings['all_sizes']}
               </span>
             </button>
           </li>
@@ -44,7 +50,7 @@ const ShopSize = () => {
           {sizes.map((size, i) => {
             return (
               <li key={i}>
-                <button
+                <button value={size.slug}
                   className="sidebar-size-btn"
                   onClick={(e) => setActiveSort(e)}
                 >
@@ -62,4 +68,4 @@ const ShopSize = () => {
   );
 };
 
-export default ShopSize;
+export default multilanguage(ShopSize);

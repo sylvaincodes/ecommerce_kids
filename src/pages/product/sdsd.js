@@ -17,7 +17,6 @@ import { useToasts } from "react-toast-notifications";
 import { addToCart } from "../../redux/actions/cartActions";
 import toast, { Toaster } from "react-hot-toast";
 import { addToCompare } from "../../redux/actions/compareActions";
-import { addToWishlist } from "../../redux/actions/wishlistActions";
 
 const ProductDetail = ({ strings }) => {
   const currency = useSelector((state) => state.currencyData);
@@ -67,17 +66,17 @@ const ProductDetail = ({ strings }) => {
     }, 2000);
   };
 
-  const handleWishlist = (e,product,toast,strings) => {
+  const addToWishlist = (e) => {
     e.currentTarget.classList.add("active");
     document.querySelector(".cart-number").classList.add("animated");
     setTimeout(() => {
       document.querySelector(".cart-number").classList.remove("animated");
     }, 2000);
-    dispatch(addToWishlist(product, toast, strings));
+    dispatch(addToWishlist(data, toast, strings));
   };
 
-  const handleCompare = (e,product,toast,strings) => {
-    dispatch(addToCompare(product, toast, strings));
+  const addToCompare = (e) => {
+    dispatch(addToCompare(data, toast, strings));
   };
 
   useEffect(() => {
@@ -378,14 +377,14 @@ const ProductDetail = ({ strings }) => {
                   <div className="pro-details-actions">
                     <button
                       title={strings["add_to_shuffle"]}
-                      onClick={(e) => handleCompare(e,product,toast,strings)}
+                      onClick={(e) => addToCompare(e)}
                     >
                       <i className="pe-7s-shuffle"></i>
                     </button>
 
                     <button
                       title={strings["add_to_whistle"]}
-                      onClick={(e) => handleWishlist(e,product,toast,strings)}
+                      onClick={(e) => addToWishlist(e)}
                     >
                       <i className="pe-7s-like"></i>
                     </button>

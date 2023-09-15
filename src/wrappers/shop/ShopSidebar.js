@@ -6,14 +6,14 @@ import ShopSize from "../../components/shop/ShopSize";
 import ShopTag from "../../components/shop/ShopTag";
 import { multilanguage}  from 'redux-multilanguage'
 
-const ShopSidebar = ({strings}) => {
+const ShopSidebar = ({strings, setCurrentData, getSortParams}) => {
   return (
     <div className="shop-sidebar-area">
-      <ShopSearch strings={strings}/>
-      <ShopCategorie strings={strings} />
-      <ShopColor strings={strings}/>
-      <ShopSize strings={strings}/>
-      <ShopTag strings={strings}/>
+      <ShopSearch strings={strings} setCurrentData={setCurrentData}/>
+      <ShopCategorie getSortParams={getSortParams} strings={strings} />
+      <ShopColor getSortParams={getSortParams} strings={strings}/>
+      <ShopSize getSortParams={getSortParams} strings={strings}/>
+      <ShopTag getSortParams={getSortParams} strings={strings}/>
     </div>
   );
 };

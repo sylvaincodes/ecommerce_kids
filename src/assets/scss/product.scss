@@ -67,7 +67,6 @@
         gap: 20px;
         overflow: auto;
         scroll-snap-type: x mandatory;
-        
         &::-webkit-scrollbar {
             @media  only screen and (min-width : $xs-min-breakpoint) and (max-width : $md-max-breakpoint) {
                 display: none !important;
@@ -195,6 +194,14 @@
                 .price{
                     font-size: 12px;
                     font-weight: 100;
+                }
+
+                & button.active{
+                    i{
+
+                        color: $theme-color;
+                        font-weight: 900;
+                    }
                 }
             }
         }

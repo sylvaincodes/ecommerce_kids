@@ -50,7 +50,7 @@ const Checkout = ({ strings }) => {
         <div className="checkout-area pt-60 pb-60">
           <div className="container">
             <div className="row">
-              <div className="col-lg-12">
+              <div className="col-11 col-lg-12">
                  {
                   getUserAdresse() ?
                   <Paiement/>

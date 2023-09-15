@@ -202,7 +202,7 @@ const Wishlist = ({ strings }) => {
 
                               <td className="product-remove">
                                 <button
-                                  title="Supprimer"
+                                  title={strings['delete']}
                                   onClick={() =>
                                     handleDeleteItem(item.product, toast)
                                   }

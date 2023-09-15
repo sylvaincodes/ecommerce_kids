@@ -66,10 +66,10 @@ const Paiement = ({ strings }) => {
     <Fragment>
       <div className="payment-details-widget adresse pb-30">
         <h4 className="mb-3">
-          1 - <strong> Choisir une adresse de livraison </strong>
+          1 - <strong> {strings['adresse_title']} </strong>
         </h4>
         <div className="card row  ms-3">
-          <div className="card-header">Votre adresse</div>
+          <div className="card-header">{strings['select_adresse']}</div>
           <ul className="list-group list-group-flush">
             {adresses &&
               adresses.map((single, key) => {
@@ -106,10 +106,10 @@ const Paiement = ({ strings }) => {
 
       <div className="payment-details-widget payment pb-30">
         <h4 className="mb-3">
-          2 - <strong> Choisir une méthode de paiement </strong>
+          2 - <strong> {strings['checkout_title']} </strong>
         </h4>
         <div className="card row  ms-3">
-          <div className="card-header">Votre adresse</div>
+          <div className="card-header">{strings['select_pay_method']}</div>
           <ul className="list-group list-group-flush">
             {adresses &&
               payments_methodes.map((single, key) => {

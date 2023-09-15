@@ -1,4 +1,4 @@
-import React, { Fragment , useState, useEffect} from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import { Helmet } from "react-helmet";
 import Layout from "../../layouts/Layout";
 import BreadcrumbItem from "../../components/breadcrumb/BreadcrumbItem";
@@ -6,15 +6,14 @@ import ShopSidebar from "../../wrappers/shop/ShopSidebar";
 import ShopTopBar from "../../wrappers/shop/ShopTopBar";
 import ShopProduct from "../../wrappers/shop/ShopProduct";
 import Paginator from "react-hooks-paginator";
-import { useSelector } from 'react-redux'
+import { useSelector } from "react-redux";
 import { getSortedProducts } from "../../helpers/product";
-import { multilanguage } from 'redux-multilanguage'
+import { multilanguage } from "redux-multilanguage";
 
-const TousLesProduits = ({strings}) => {
+const TousLesProduits = ({ strings }) => {
+  const products = useSelector((state) => state.productData.products);
 
-  const products = useSelector(  (state) => state.productData.products );
-
-  const pageLimit = 4;
+  const pageLimit = 6;
   const [layout, setLayout] = useState("grid three-colmun");
   const [currentData, setCurrentData] = useState([]);
   const [offset, setOffset] = useState(0);
@@ -72,7 +71,6 @@ const TousLesProduits = ({strings}) => {
     setOffset(newOffset);
   };
 
-
   return (
     <Fragment>
       <Helmet>
@@ -80,7 +78,7 @@ const TousLesProduits = ({strings}) => {
         <title> {process.env.REACT_APP_SITE_NAME} - Boutique </title>
         <meta
           name="description"
-          content={strings['all_products_description']}
+          content={strings["all_products_description"]}
         />
       </Helmet>
 
@@ -90,12 +88,14 @@ const TousLesProduits = ({strings}) => {
           <div className="container-fluid">
             <div className="row">
               <ul className="breadcrumb">
-                <BreadcrumbItem link="/" title={strings['home']}></BreadcrumbItem>
-                <BreadcrumbItem link="#" title="/"></BreadcrumbItem>
                 <BreadcrumbItem
-                  link="#"
-                  title={strings['all_products']}
-                >{strings['all_products']}</BreadcrumbItem>
+                  link="/"
+                  title={strings["home"]}
+                ></BreadcrumbItem>
+                <BreadcrumbItem link="#" title="/"></BreadcrumbItem>
+                <BreadcrumbItem link="#" title={strings["all_products"]}>
+                  {strings["all_products"]}
+                </BreadcrumbItem>
               </ul>
             </div>
           </div>
@@ -108,12 +108,28 @@ const TousLesProduits = ({strings}) => {
             <div className="row">
               {/* sidebar left */}
               <div className="col-lg-3 d-none d-lg-block">
-                <ShopSidebar strings={strings} products={products}/>
+                <ShopSidebar
+                  strings={strings}
+                  products={currentData}
+                  setCurrentData={setCurrentData}
+                  getSortParams={getSortParams}
+                />
               </div>
               {/* product content  */}
               <div className="col-lg-9">
-                <ShopTopBar strings={strings} layout={layout} products={products}/>
-                <ShopProduct strings={strings} layout={layout} products={currentData} />
+                <ShopTopBar
+                  productCount={products.length}
+                  productshowing={currentData.length}
+                  strings={strings}
+                  layout={layout}
+                  products={products}
+                  getFilterSortParams={getFilterSortParams}
+                />
+                <ShopProduct
+                  strings={strings}
+                  layout={layout}
+                  products={currentData}
+                />
 
                 <div className="pro-pagination-style">
                   <Paginator
@@ -129,7 +145,6 @@ const TousLesProduits = ({strings}) => {
                     onClick={() => handlePageClick()}
                   />
                 </div>
-
               </div>
             </div>
           </div>

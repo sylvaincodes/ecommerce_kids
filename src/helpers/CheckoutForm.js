@@ -19,7 +19,7 @@ const CheckoutForm = ({ strings }) => {
   const cart = useSelector((state) => state.cartData.cartItems);
   const currency = useSelector((state) => state.currencyData);
 
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
 
   cart.forEach((item) => {
     const discountedPrice = getDiscountPrice(
@@ -44,7 +44,8 @@ const CheckoutForm = ({ strings }) => {
   const [errorMessage, setErrorMessage] = useState(null);
 
   const handleSubmit = async (event) => {
-    setLoading(true);
+    errorMessage != null ? setLoading(false) : setLoading(true);
+
     event.preventDefault();
 
     if (elements == null) {
@@ -111,18 +112,20 @@ const CheckoutForm = ({ strings }) => {
         <ButtonStyle
           type="submit"
           classBtn="btn-style-3 hover-style-2"
-          classCol="col-2"
-          title="payer"
+          classCol="col-11 col-md-5 col-lg-3"
+          title={strings["checkout"]}
           //   icon='<i className="fa fa-lock"></i>'
           disabled={!stripe || !elements}
-        
         />
       </div>
 
       {/* Show error message to your customers */}
 
-      {errorMessage && <div>{errorMessage}</div>}
-      {loading ? toast.loading(`${strings['loading']}...`) : ""}
+      {errorMessage == null ? "" : <div>{errorMessage}</div>}
+
+      {loading && errorMessage == null
+        ? toast.loading(`${strings["loading"]}...`)
+        : ""}
     </form>
   );
 };

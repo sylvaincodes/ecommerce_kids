@@ -11,28 +11,28 @@ const Adresse = ({ strings }) => {
     const errors = {};
 
     if (!values.lastname) {
-      errors.lastname = "ce champ est obligatoire";
+      errors.lastname = strings['required'];
     }
     if (!values.firstname) {
-      errors.firstname = "ce champ est obligatoire";
+      errors.firstname = strings['required'];
     }
 
     if (!values.phone) {
-      errors.phone = "ce champ est obligatoire";
+      errors.phone = strings['required'];
     }
     
     if (!values.country) {
-      errors.country = "ce champ est obligatoire";
+      errors.country = strings['required'];
     }
 
     if (!values.city) {
-      errors.city = "ce champ est obligatoire";
+      errors.city = strings['required'];
     }
     if (!values.code_postale) {
-      errors.code_postale = "ce champ est obligatoire";
+      errors.code_postale = strings['required'];
     }
     if (!values.rue) {
-      errors.rue = "ce champ est obligatoire";
+      errors.rue = strings['required'];
     }
 
     return errors;
@@ -229,7 +229,7 @@ const Adresse = ({ strings }) => {
         </div>
 
         <button type="submit" className="btn btn-style hover-style-2">
-          Continuer
+          {strings['continuer']}
         </button>
       </form>
     </div>

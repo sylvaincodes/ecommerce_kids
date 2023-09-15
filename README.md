@@ -1,6 +1,21 @@
-# Getting Started with Create React App
+# Getting Started with the projet
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is an ecommerce site made with React js. (https://github.com/facebook/create-react-app).
+
+Features  :
+    1 - Multi pages : Home, Products list, Product description, Cart, Wishlist, Compare list, Checkout with stripe, orders list
+    2 - Redux 
+    3 - Multi Languages
+    4 - Multi currencies with real times exchange rate API
+    5 - Mobile responsive
+
+Stacks 
+    0 - React 18.2.0  https://react.dev/
+    1 - Bootsrap SCSS https://getbootstrap.com/docs/5.0/customize/sass/
+    2 - Swipper  https://swiperjs.com/
+    3 - Material UI https://mui.com/
+    4 - Stripe API
+
 
 ## Available Scripts
 

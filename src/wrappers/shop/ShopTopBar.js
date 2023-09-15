@@ -1,13 +1,12 @@
 import React from "react";
 import { multilanguage } from "redux-multilanguage";
 
-const ShopTopBar = ({ strings }) => {
+const ShopTopBar = ({ strings, getFilterSortParams,productshowing ,productCount }) => {
   const handleActiveButton = (e) => {
+    const allButtons = document.querySelectorAll(".shop-tabs  .btn");
 
-    const allButtons = document.querySelectorAll('.shop-tabs  .btn');
-
-    allButtons.forEach(element => {
-      element.classList.remove('active');
+    allButtons.forEach((element) => {
+      element.classList.remove("active");
     });
 
     e.currentTarget.classList.add("active");
@@ -17,9 +16,13 @@ const ShopTopBar = ({ strings }) => {
     <div className="shop-top-area">
       <div className="row">
         <div className="wrapper">
-          <select className="shop-select col-12 col-sm-6">
-            <option>{strings["price_max_min"]}</option>
-            <option>{strings["price_min_max"]}</option>
+          <select
+            className="shop-select col-12 col-sm-6"
+            onChange={(e) => getFilterSortParams("filterSort",e.target.value)}
+          >
+            <option value="default">{strings['choose']}</option>
+            <option value="priceHighToLow">{strings["price_max_min"]}</option>
+            <option value="priceLowToHigh">{strings["price_min_max"]}</option>
           </select>
 
           {/* <div className="shop-tabs col-sm-4 ms-auto">
@@ -38,7 +41,7 @@ const ShopTopBar = ({ strings }) => {
           </div> */}
 
           <p className="col-sm-12">
-            {strings["affichage_resultat"]} 10 {strings["sur"]} 100{" "}
+            {strings["affichage_resultat"]} {productshowing} {strings["on"]} {productCount} {" "}
             {strings["resultat"]}
           </p>
         </div>

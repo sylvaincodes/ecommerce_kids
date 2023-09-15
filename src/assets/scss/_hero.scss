@@ -20,6 +20,9 @@
         align-items: center;
         gap: 25px;
         padding-right: 20px;
+        @media  only screen and (min-width : $xs-min-breakpoint)  and ( max-width : $xs-max-breakpoint) {
+            right: 10px;
+        }
         .title{
             color: $bg-white;
             text-shadow: 1px 1px black;
